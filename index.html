@@ -41,7 +41,7 @@
 
   --text:   #F2F3F5;
   --text-2: #A6AAAF;
-  --text-3: #6C7177;
+  --text-3: #7E838A;   /* lightened from #6C7177, which failed WCAG AA (4.0:1) on small labels */
 
   --live:   #3FD98A;
 
@@ -338,8 +338,16 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   animation:sheen 7s var(--ez) infinite}
 @keyframes sheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(430%)}}
 
-/* odometer digits on the live count */
+/* odometer digits on the live count.
+   Each column holds 0-9, so the visual digits are hidden from assistive tech and
+   the real value is carried by a visually-hidden span — otherwise a screen reader
+   reads "0123456789..." and copying the number returns the same garbage. */
 .odo{display:inline-flex;align-items:flex-end;line-height:1}
+.odo-v{display:inline-flex;align-items:flex-end;user-select:none;-webkit-user-select:none}
+/* if the count can't be fetched at all, drop the clause rather than print nonsense */
+:root[data-live="off"] .cnt{display:none}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .odo .dg{display:inline-block;height:1em;overflow:hidden}
 .odo .col{display:flex;flex-direction:column;transition:transform .8s var(--ez)}
 .odo .col b{display:block;height:1em;line-height:1;font-weight:inherit}
@@ -381,7 +389,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
     <div class="wrap hero-in">
       <a class="badge up" style="animation-delay:.05s" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
         <span class="pdot" id="hdot"></span>
-        <span>Steal A Seed —&nbsp;</span><b id="hccu">live</b><span>&nbsp;playing</span>
+        <span>Steal A Seed</span><span class="cnt">&nbsp;—&nbsp;<b id="hccu">—</b>&nbsp;playing</span>
         <span class="ar">↗</span>
       </a>
 
@@ -597,7 +605,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
       </div>
     </div>
     <div class="f-base">
-      <span class="status"><span class="pdot" id="fdot"></span>Steal A Seed —&nbsp;<b id="fccu">live</b>&nbsp;playing</span>
+      <span class="status"><span class="pdot" id="fdot"></span>Steal A Seed<span class="cnt">&nbsp;—&nbsp;<b id="fccu">—</b>&nbsp;playing</span></span>
       <small>© 2026 hamza</small>
     </div>
   </div>
@@ -688,6 +696,18 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   function isDigit(c){ return c >= '0' && c <= '9'; }
   function buildOdo(el, text){
     el.innerHTML = '';
+
+    // the real value, for screen readers and for copy/paste
+    var sr = document.createElement('span');
+    sr.className = 'sr';
+    sr.textContent = text;
+    el.appendChild(sr);
+
+    // the rolling digits are decorative — each column holds 0-9
+    var vis = document.createElement('span');
+    vis.className = 'odo-v';
+    vis.setAttribute('aria-hidden', 'true');
+
     for (var i = 0; i < text.length; i++){
       var ch = text.charAt(i);
       if (isDigit(ch)){
@@ -699,19 +719,21 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
         }
         col.style.transform = 'translateY(-' + (+ch) * 10 + '%)';
         dg.appendChild(col);
-        el.appendChild(dg);
+        vis.appendChild(dg);
       } else {
         var sp = document.createElement('span'); sp.textContent = ch;
-        el.appendChild(sp);
+        vis.appendChild(sp);
       }
     }
+    el.appendChild(vis);
     el.dataset.odo = text;
   }
   function setOdo(el, text){
     if (!el) return;
     if (reduce){ el.textContent = text; el.dataset.odo = text; return; }
     var prev = el.dataset.odo || '';
-    var cols = el.querySelectorAll('.dg .col');
+    var cols = el.querySelectorAll('.odo-v .dg .col');
+    var srEl = el.querySelector('.sr');
     var sameShape = prev.length === text.length && cols.length > 0;
     if (sameShape){
       for (var i = 0; i < text.length; i++){
@@ -724,6 +746,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
       var c = text.charAt(j);
       if (isDigit(c)){ cols[ci].style.transform = 'translateY(-' + (+c) * 10 + '%)'; ci++; }
     }
+    if (srEl) srEl.textContent = text;   // keep the accessible value in step
     el.dataset.odo = text;
   }
 
@@ -757,17 +780,21 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
         if (!g || typeof g.playing !== 'number') throw 0;
         last = g.playing;
         var t = comma(g.playing);
+        document.documentElement.removeAttribute('data-live');
         setOdo(odo, t);
         setPlain(t);
         dots.forEach(function(d){ if (d) d.classList.add('on'); });
         pollEl.textContent = new Date().toLocaleTimeString('en-GB');
       })
       .catch(function(){
+        // a later failure keeps the last known figure; only a cold failure degrades,
+        // and then the count clause is dropped instead of printing something false
         if (last === null){
-          setOdo(odo, 'unavailable');
-          setPlain('unavailable');
+          document.documentElement.setAttribute('data-live', 'off');
+          setOdo(odo, 'offline');
+          setPlain('—');
           dots.forEach(function(d){ if (d) d.classList.remove('on'); });
-          pollEl.textContent = 'no connection';
+          pollEl.textContent = 'unavailable';
         }
       })
       .then(function(){ clearTimeout(to); });
