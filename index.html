@@ -120,8 +120,10 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .65s var(--ez),transf
 .hero .sub{margin:22px auto 0;max-width:60ch;color:var(--text-2);font-size:clamp(15px,1.7vw,17.5px);line-height:1.62}
 .hero .sub b{color:var(--text);font-weight:500}
 .hero-cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
-.avail-note{display:flex;align-items:center;justify-content:center;gap:9px;margin:22px 0 0;
+/* inline flow, so the dot rides the first line instead of floating beside a wrapped block */
+.avail-note{display:block;margin:22px auto 0;max-width:34ch;
   font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);text-align:center}
+.avail-note .pdot{display:inline-block;vertical-align:middle;margin-right:8px}
 
 .up{animation:up .8s var(--ez) both}
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -145,7 +147,8 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .65s var(--ez),transf
 @keyframes fl{0%{opacity:.35}100%{opacity:1}}
 .cell .ck{margin-top:11px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
 .cell .cn{margin-top:7px;font-size:13px;color:var(--text-2);line-height:1.5}
-.cell.livecell .cv{display:flex;align-items:center;gap:10px}
+/* the live cell holds the odometer — no flex gap, or the digits fly apart */
+.cell.livecell .cv{display:inline-flex;align-items:flex-end;gap:0}
 
 /* ───────── sections ───────── */
 .sec{padding-block:clamp(60px,9vw,108px);border-top:1px solid var(--line);scroll-margin-top:calc(var(--nav) + 10px)}
@@ -239,8 +242,15 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity .65s var(--ez),transf
 /* ───────── footer ───────── */
 footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
 .f-cols{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:32px 24px}
-@media (max-width:760px){.f-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:420px){.f-cols{grid-template-columns:1fr}}
+/* on phones the bio spans the full width and the link lists pair up, so the footer stays compact */
+@media (max-width:760px){
+  .f-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .f-about{grid-column:1/-1}
+}
+@media (max-width:340px){
+  .f-cols{grid-template-columns:1fr}
+  .f-about{grid-column:auto}
+}
 .f-col h4{margin:0 0 14px;font-family:var(--f-dis);font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
 .f-col a{font-size:13.5px;color:var(--text-2);transition:color .2s var(--ez)}
