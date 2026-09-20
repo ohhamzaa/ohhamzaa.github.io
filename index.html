@@ -254,14 +254,68 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
 .status b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
 .f-base small{font-size:12.5px;color:var(--text-3)}
 
+/* ───────── motion layer ───────── */
+
+/* film grain */
+.grain{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* scroll progress on the nav's bottom edge */
+.nav{position:sticky}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;z-index:2;
+  background:linear-gradient(90deg,var(--line-3),var(--text));transition:width .12s linear}
+
+/* word-by-word reveal */
+.wr{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.04em}
+html.js .wr > span{display:inline-block;transform:translateY(108%);opacity:0;
+  transition:transform .9s var(--ez),opacity .6s var(--ez)}
+html.js .wr.go > span{transform:none;opacity:1}
+
+/* staggered children */
+html.js .stg > *{opacity:0;transform:translateY(18px)}
+html.js .stg.in > *{opacity:1;transform:none;
+  transition:opacity .6s var(--ez),transform .7s var(--ez)}
+html.js .stg.in > *:nth-child(2){transition-delay:.07s}
+html.js .stg.in > *:nth-child(3){transition-delay:.14s}
+html.js .stg.in > *:nth-child(4){transition-delay:.21s}
+html.js .stg.in > *:nth-child(5){transition-delay:.28s}
+html.js .stg.in > *:nth-child(6){transition-delay:.35s}
+
+/* cursor-tracking glow inside cards and rows */
+.card,.rec{--mx:50%;--my:50%}
+.card::before,.rec::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;z-index:0;
+  background:radial-gradient(400px circle at var(--mx) var(--my),rgba(255,255,255,.075),transparent 68%);
+  transition:opacity .35s var(--ez)}
+.card:hover::before,.rec:hover::before{opacity:1}
+.card{position:relative}
+.card > *,.rec > *{position:relative;z-index:1}
+
+/* light sweeping the live board's top edge */
+.board{position:relative}
+.board::after{content:"";position:absolute;top:0;left:0;height:1px;width:32%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:sheen 7s var(--ez) infinite}
+@keyframes sheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(430%)}}
+
+/* odometer digits on the live count */
+.odo{display:inline-flex;align-items:flex-end;line-height:1}
+.odo .dg{display:inline-block;height:1em;overflow:hidden}
+.odo .col{display:flex;flex-direction:column;transition:transform .8s var(--ez)}
+.odo .col b{display:block;height:1em;line-height:1;font-weight:inherit}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   html.js .rv{opacity:1;transform:none}
-  .mq-run{animation:none}
+  html.js .stg > *{opacity:1;transform:none}
+  html.js .wr > span{transform:none;opacity:1}
+  .mq-run,.board::after{animation:none}
+  .grain{display:none}
 }
 </style>
 
 <script>document.documentElement.classList.add('js');</script>
+
+<div class="grain" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -273,6 +327,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
     </nav>
     <a class="btn btn-p" href="#contact">Work with me</a>
   </div>
+  <div class="prog" id="prog"></div>
 </header>
 
 <main id="top">
@@ -316,9 +371,9 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
         <span class="lbl">steal a seed · live</span>
         <span class="poll">last poll <span id="polltime">—</span></span>
       </div>
-      <div class="b-cells">
+      <div class="b-cells stg">
         <div class="cell livecell">
-          <div class="cv" id="bccu">—</div>
+          <div class="cv odo" id="bccu">—</div>
           <div class="ck">players in game</div>
           <div class="cn">Live from the Roblox API, refreshed every minute.</div>
         </div>
@@ -352,7 +407,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
         <p>Two servers I founded and grew myself, and the game I'm testing against today.</p>
       </div>
 
-      <div class="recs rv">
+      <div class="recs stg">
         <a class="rec" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">
           <div>
             <div class="rec-h"><h3>SAB Middleman</h3><span class="tagx">founder</span></div>
@@ -397,7 +452,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
         <p>Six things I'm actually good at, built over years of running communities people trust with real value.</p>
       </div>
 
-      <div class="cards rv">
+      <div class="cards stg">
         <div class="card">
           <div class="ic">01</div>
           <h3>Community growth</h3>
@@ -440,7 +495,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
         <p>I'm actively looking for more exploit QA work. Both of my servers are open to anyone.</p>
       </div>
 
-      <div class="talk rv">
+      <div class="talk stg">
         <div class="cta-box">
           <div class="glow"></div>
           <span class="avail"><span class="pdot on"></span>Available for work</span>
@@ -509,45 +564,148 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var $  = function(s){ return document.querySelector(s); };
-  var $$ = function(s){ return [].slice.call(document.querySelectorAll(s)); };
+  var canHover = matchMedia('(hover:hover)').matches;
+  var $  = function(s, c){ return (c || document).querySelector(s); };
+  var $$ = function(s, c){ return [].slice.call((c || document).querySelectorAll(s)); };
 
-  /* ───── nav border on scroll ───── */
-  var nav = $('#nav');
-  function onScroll(){ nav.classList.toggle('stuck', scrollY > 10); }
-  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+  /* ═══ nav state, scroll progress, grid parallax ═══ */
+  var nav = $('#nav'), prog = $('#prog'), gridBg = $('.grid-bg');
+  function onScroll(){
+    nav.classList.toggle('stuck', scrollY > 10);
+    var max = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (max > 0 ? Math.min(scrollY / max, 1) * 100 : 0) + '%';
+    if (gridBg && !reduce) gridBg.style.transform = 'translateY(' + (scrollY * 0.16) + 'px)';
+  }
+  onScroll();
+  addEventListener('scroll', onScroll, {passive:true});
 
-  /* ───── marquee ───── */
+  /* ═══ marquee ═══ */
   var feed = ['70,000 members grown','$1,000,000+ middlemanned','SAB Market — 20,000',
               'Discord bot developer','Exploit QA — Steal A Seed','Vibecoder','Trusted middleman',
               'Steal a Brainrot values','Available for exploit QA','discord.gg/sabmiddleman',
               'discord.gg/sabvalue','@ohhamza'];
-  var mh = feed.map(function(t){ return '<span>'+t+'</span>'; }).join('');
+  var mh = feed.map(function(t){ return '<span>' + t + '</span>'; }).join('');
   $('#run').innerHTML = mh + mh;
 
-  /* ───── live CCU, via roproxy ─────
-     Roblox's own API refuses browser requests, so this goes through roproxy.
-     On a published Artifact the page's CSP blocks all outbound fetches, so the
-     counters stay on their "unavailable" label instead of showing a stale number.
-     Host this file anywhere else (Pages/Vercel/Netlify) and it goes live. */
+  /* ═══ word-by-word heading reveal ═══ */
+  function splitWords(el){
+    if (el.dataset.split) return;
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = '';
+    words.forEach(function(w, i){
+      var outer = document.createElement('span'); outer.className = 'wr';
+      var inner = document.createElement('span'); inner.textContent = w;
+      outer.appendChild(inner);
+      el.appendChild(outer);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    el.dataset.split = '1';
+  }
+  function playWords(el, base){
+    $$('.wr', el).forEach(function(w, i){
+      w.firstChild.style.transitionDelay = (base + i * 0.055).toFixed(3) + 's';
+      w.classList.add('go');
+    });
+  }
+
+  var h1 = $('.hero h1');
+  if (h1 && !reduce){
+    h1.classList.remove('up');
+    h1.style.animationDelay = '';
+    splitWords(h1);
+    requestAnimationFrame(function(){ playWords(h1, 0.18); });
+  }
+  var heads = $$('.sh h2');
+  if (!reduce) heads.forEach(splitWords);
+
+  /* ═══ reveal + stagger ═══ */
+  var targets = $$('.rv, .stg');
+  function show(el){
+    el.classList.add('in');
+    if (!reduce && el.className.indexOf('sh') !== -1){
+      var h = $('h2', el);
+      if (h) playWords(h, 0.05);
+    }
+  }
+  function showAll(){
+    targets.forEach(show);
+    if (!reduce) heads.forEach(function(h){ playWords(h, 0); });
+  }
+  if (reduce || !('IntersectionObserver' in window)) showAll();
+  else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting){ show(e.target); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    targets.forEach(function(e){ io.observe(e); });
+    setTimeout(showAll, 2800);
+  }
+
+  /* ═══ odometer for the live count ═══ */
+  function isDigit(c){ return c >= '0' && c <= '9'; }
+  function buildOdo(el, text){
+    el.innerHTML = '';
+    for (var i = 0; i < text.length; i++){
+      var ch = text.charAt(i);
+      if (isDigit(ch)){
+        var dg = document.createElement('span'); dg.className = 'dg';
+        var col = document.createElement('span'); col.className = 'col';
+        for (var d = 0; d < 10; d++){
+          var b = document.createElement('b'); b.textContent = d;
+          col.appendChild(b);
+        }
+        col.style.transform = 'translateY(-' + (+ch) * 10 + '%)';
+        dg.appendChild(col);
+        el.appendChild(dg);
+      } else {
+        var sp = document.createElement('span'); sp.textContent = ch;
+        el.appendChild(sp);
+      }
+    }
+    el.dataset.odo = text;
+  }
+  function setOdo(el, text){
+    if (!el) return;
+    if (reduce){ el.textContent = text; el.dataset.odo = text; return; }
+    var prev = el.dataset.odo || '';
+    var cols = el.querySelectorAll('.dg .col');
+    var sameShape = prev.length === text.length && cols.length > 0;
+    if (sameShape){
+      for (var i = 0; i < text.length; i++){
+        if (isDigit(text.charAt(i)) !== isDigit(prev.charAt(i))){ sameShape = false; break; }
+      }
+    }
+    if (!sameShape){ buildOdo(el, text); return; }
+    var ci = 0;
+    for (var j = 0; j < text.length; j++){
+      var c = text.charAt(j);
+      if (isDigit(c)){ cols[ci].style.transform = 'translateY(-' + (+c) * 10 + '%)'; ci++; }
+    }
+    el.dataset.odo = text;
+  }
+
+  /* ═══ live Steal A Seed count, through roproxy ═══
+     Roblox refuses direct browser calls, so the request goes via roproxy.
+     If it fails the counters say so rather than showing a stale number. */
   var API = 'https://games.roproxy.com/v1/games?universeIds=10764328008';
-  var ccuEls = ['#hccu','#bccu','#recccu','#fccu'].map($);
-  var dots   = ['#hdot','#bdot','#fdot'].map($);
+  var odo = $('#bccu');
+  var plain = ['#hccu','#recccu','#fccu'].map(function(s){ return $(s); });
+  var dots  = ['#hdot','#bdot','#fdot'].map(function(s){ return $(s); });
   var pollEl = $('#polltime');
   var last = null;
 
   function comma(n){ return n.toLocaleString('en-US'); }
-  function setCcu(text, live){
-    ccuEls.forEach(function(el){
+  function setPlain(text){
+    plain.forEach(function(el){
       if (!el) return;
-      var span = el.querySelector('span');       // keep the "members/playing now" caption
+      var cap = $('span', el);          // keep the "playing now" caption
       el.textContent = text;
-      if (span) el.appendChild(span);
+      if (cap) el.appendChild(cap);
     });
-    dots.forEach(function(d){ if (d) d.classList.toggle('on', !!live); });
   }
   function pull(){
-    if (!('fetch' in window)){ setCcu('unavailable', false); return; }
+    if (!('fetch' in window)){ setOdo(odo, 'unavailable'); setPlain('unavailable'); return; }
     var ctl = ('AbortController' in window) ? new AbortController() : null;
     var to = setTimeout(function(){ if (ctl) ctl.abort(); }, 9000);
     fetch(API, {signal: ctl ? ctl.signal : undefined, cache:'no-store'})
@@ -555,17 +713,20 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
       .then(function(j){
         var g = j && j.data && j.data[0];
         if (!g || typeof g.playing !== 'number') throw 0;
-        var changed = last !== null && last !== g.playing;
         last = g.playing;
-        setCcu(comma(g.playing), true);
+        var t = comma(g.playing);
+        setOdo(odo, t);
+        setPlain(t);
+        dots.forEach(function(d){ if (d) d.classList.add('on'); });
         pollEl.textContent = new Date().toLocaleTimeString('en-GB');
-        if (changed && !reduce){
-          var c = $('#bccu');
-          c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
-        }
       })
       .catch(function(){
-        if (last === null){ setCcu('unavailable', false); pollEl.textContent = 'no connection'; }
+        if (last === null){
+          setOdo(odo, 'unavailable');
+          setPlain('unavailable');
+          dots.forEach(function(d){ if (d) d.classList.remove('on'); });
+          pollEl.textContent = 'no connection';
+        }
       })
       .then(function(){ clearTimeout(to); });
   }
@@ -573,35 +734,20 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
   setInterval(function(){ if (!document.hidden) pull(); }, 60000);
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) pull(); });
 
-  /* ───── reveal ───── */
-  var rvs = $$('.rv');
-  var showAll = function(){ rvs.forEach(function(e){ e.classList.add('in'); }); };
-  if (reduce || !('IntersectionObserver' in window)) showAll();
-  else {
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
-    rvs.forEach(function(e){ io.observe(e); });
-    setTimeout(showAll, 2800);
-  }
-
-  /* ───── count up ───── */
+  /* ═══ count up ═══ */
   function fmt(v, kind){
-    if (kind === 'k') return (v >= 1000 ? Math.round(v/1000) + 'K' : Math.round(v).toString());
-    if (kind === 'money'){
-      if (v >= 1e6) return '$' + (v/1e6).toFixed(v >= 1e6 ? 0 : 1) + 'M+';
-      return '$' + Math.round(v/1000) + 'K';
-    }
+    if (kind === 'k') return v >= 1000 ? Math.round(v / 1000) + 'K' : Math.round(v).toString();
+    if (kind === 'money') return v >= 1e6 ? '$' + Math.round(v / 1e6) + 'M+' : '$' + Math.round(v / 1000) + 'K';
     return comma(Math.round(v));
   }
   function countUp(el){
     var to = parseFloat(el.dataset.to), kind = el.dataset.fmt;
     if (reduce){ el.textContent = fmt(to, kind); return; }
-    var dur = 1300, t0 = null;
+    var dur = 1400, t0 = null;
     function step(t){
       if (t0 === null) t0 = t;
-      var p = Math.min((t-t0)/dur, 1), e = 1 - Math.pow(1-p, 3);
-      el.textContent = fmt(to*e, kind);
+      var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * e, kind);
       if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to, kind);
     }
     requestAnimationFrame(step);
@@ -610,26 +756,61 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
   if (!('IntersectionObserver' in window)) nums.forEach(countUp);
   else {
     var io2 = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); io2.unobserve(e.target); } });
-    }, {threshold:.4});
+      es.forEach(function(e){
+        if (e.isIntersecting){ countUp(e.target); io2.unobserve(e.target); }
+      });
+    }, {threshold:0.4});
     nums.forEach(function(e){ io2.observe(e); });
   }
 
-  /* ───── copy handle / user id ───── */
+  /* ═══ pointer-reactive surfaces ═══ */
+  if (canHover && !reduce){
+    $$('.card, .rec').forEach(function(el){
+      el.addEventListener('mousemove', function(e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+    $$('.btn').forEach(function(b){
+      b.addEventListener('mousemove', function(e){
+        var r = b.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        b.style.transform = 'translate(' + (x * 6).toFixed(2) + 'px,' + (y * 4 - 1).toFixed(2) + 'px)';
+      });
+      b.addEventListener('mouseleave', function(){ b.style.transform = ''; });
+    });
+    var spot = $('#spot'), hero = $('.hero');
+    if (spot && hero){
+      hero.addEventListener('mousemove', function(e){
+        var r = hero.getBoundingClientRect();
+        spot.style.left = (e.clientX - r.left) + 'px';
+        spot.style.top  = (e.clientY - r.top) + 'px';
+      });
+    }
+  }
+
+  /* ═══ copy handle / user id ═══ */
   function legacyCopy(v, done){
     try{
       var t = document.createElement('textarea');
-      t.value = v; t.setAttribute('readonly','');
+      t.value = v;
+      t.setAttribute('readonly', '');
       t.style.position = 'fixed'; t.style.top = '0'; t.style.opacity = '0';
-      document.body.appendChild(t); t.select();
-      document.execCommand('copy'); document.body.removeChild(t); done();
-    } catch(e){ /* clipboard unavailable — the value is on screen to select */ }
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+      done();
+    } catch(e){ /* clipboard unavailable — the value stays on screen to select */ }
   }
   $$('.chipbtn[data-copy]').forEach(function(b){
     b.addEventListener('click', function(){
-      var v = b.dataset.copy, ci = b.querySelector('.ci'), was = ci.textContent;
+      var v = b.dataset.copy, ci = $('.ci', b), was = ci.textContent;
       function done(){
-        b.classList.add('done'); ci.textContent = 'copied';
+        b.classList.add('done');
+        ci.textContent = 'copied';
         setTimeout(function(){ b.classList.remove('done'); ci.textContent = was; }, 1500);
       }
       if (navigator.clipboard && navigator.clipboard.writeText){
@@ -637,15 +818,5 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
       } else legacyCopy(v, done);
     });
   });
-
-  /* ───── hero spotlight follows the cursor ───── */
-  var spot = $('#spot'), hero = document.querySelector('.hero');
-  if (spot && hero && !reduce && matchMedia('(hover:hover)').matches){
-    hero.addEventListener('mousemove', function(e){
-      var r = hero.getBoundingClientRect();
-      spot.style.left = (e.clientX - r.left) + 'px';
-      spot.style.top  = (e.clientY - r.top) + 'px';
-    });
-  }
 })();
 </script>
