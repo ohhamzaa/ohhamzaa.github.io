@@ -1,0 +1,651 @@
+<title>hamza.exe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+
+  /* cool near-black, monochrome — colour only on the live dot */
+  --bg:      #0A0B0D;
+  --surface: #0E1013;
+  --raised:  #131519;
+  --line:    #1C1F24;
+  --line-2:  #282C33;
+  --line-3:  #383D45;
+
+  --text:   #F2F3F5;
+  --text-2: #A6AAAF;
+  --text-3: #6C7177;
+
+  --live:   #3FD98A;
+
+  --f-dis:  'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --ez: cubic-bezier(.22,.8,.3,1);
+  --gut: clamp(18px, 5vw, 32px);
+  --r: 10px;
+  --nav: 62px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--f-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+::selection{background:#F2F3F5;color:#0A0B0D}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:4px}
+
+.wrap{width:100%;max-width:1080px;margin-inline:auto;padding-inline:var(--gut)}
+.narrow{max-width:760px;margin-inline:auto}
+
+h1,h2,h3{font-family:var(--f-dis);margin:0;letter-spacing:-.028em;text-wrap:balance;font-weight:500}
+
+/* ───────── nav ───────── */
+.nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+  height:var(--nav);display:flex;align-items:center;
+  background:rgba(10,11,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ez),background .3s var(--ez);
+}
+.nav.stuck{border-bottom-color:var(--line);background:rgba(10,11,13,.9)}
+.nav-in{display:flex;align-items:center;gap:8px;width:100%}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;font-family:var(--f-dis);font-weight:600;font-size:15.5px;letter-spacing:-.02em}
+.glyph{width:26px;height:26px;border-radius:7px;border:1px solid var(--line-2);background:var(--raised);
+  display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);
+  transition:border-color .3s var(--ez),color .3s var(--ez)}
+.brand:hover .glyph{border-color:var(--line-3);color:var(--text)}
+.nlinks{display:flex;gap:2px;margin-right:10px}
+.nlinks a{padding:8px 12px;border-radius:8px;font-size:14px;color:var(--text-2);transition:color .2s var(--ez),background .2s var(--ez)}
+.nlinks a:hover{color:var(--text);background:var(--raised)}
+@media (max-width:760px){.nlinks{display:none}}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;
+  font-family:var(--f-dis);font-weight:600;font-size:14.5px;letter-spacing:-.01em;
+  padding:11px 18px;border-radius:9px;border:1px solid transparent;position:relative;overflow:hidden;
+  transition:transform .25s var(--ez),background .25s var(--ez),border-color .25s var(--ez),color .25s var(--ez);
+}
+.btn-p{background:#F4F5F7;color:#0A0B0D}
+.btn-p::after{content:"";position:absolute;top:0;bottom:0;width:38%;left:-45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-18deg)}
+.btn-p:hover{background:#fff;transform:translateY(-1px)}
+.btn-p:hover::after{animation:shine .7s var(--ez)}
+@keyframes shine{to{left:118%}}
+.btn-g{background:var(--raised);color:var(--text);border-color:var(--line-2)}
+.btn-g:hover{border-color:var(--line-3);background:#171A1E;transform:translateY(-1px)}
+.btn .ar{transition:transform .25s var(--ez);opacity:.6}
+.btn:hover .ar{transform:translateX(2px);opacity:1}
+.nav .btn{padding:9px 15px;font-size:13.5px}
+
+/* ───────── reveal ───────── */
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(14px)}
+html.js .rv.in{opacity:1;transform:none;transition:opacity .65s var(--ez),transform .65s var(--ez)}
+
+/* ───────── hero ───────── */
+.hero{position:relative;overflow:hidden;padding-block:clamp(64px,10vw,124px) clamp(44px,6vw,64px);text-align:center}
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 72% 58% at 50% 34%,#000,transparent 74%);
+  mask-image:radial-gradient(ellipse 72% 58% at 50% 34%,#000,transparent 74%);
+}
+.spot{position:absolute;width:520px;height:520px;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.045),transparent 62%);
+  transform:translate(-50%,-50%);left:50%;top:26%;transition:left .5s var(--ez),top .5s var(--ez)}
+.hero-in{position:relative;z-index:3}
+
+.badge{
+  display:inline-flex;align-items:center;gap:9px;padding:6px 13px 6px 10px;border-radius:999px;
+  border:1px solid var(--line-2);background:var(--raised);
+  font-size:12.5px;color:var(--text-2);transition:border-color .3s var(--ez),background .3s var(--ez)}
+.badge:hover{border-color:var(--line-3);background:#171A1E}
+.badge b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+.badge .ar{opacity:.5;font-size:11px}
+.pdot{width:7px;height:7px;border-radius:50%;background:var(--text-3);flex:none;transition:background .3s var(--ez)}
+.pdot.on{background:var(--live);box-shadow:0 0 0 0 rgba(63,217,138,.5);animation:rip 2.4s var(--ez) infinite}
+@keyframes rip{0%{box-shadow:0 0 0 0 rgba(63,217,138,.45)}70%{box-shadow:0 0 0 7px rgba(63,217,138,0)}100%{box-shadow:0 0 0 0 rgba(63,217,138,0)}}
+
+.hero h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06;margin-top:26px;max-width:16ch;margin-inline:auto}
+.hero .sub{margin:22px auto 0;max-width:60ch;color:var(--text-2);font-size:clamp(15px,1.7vw,17.5px);line-height:1.62}
+.hero .sub b{color:var(--text);font-weight:500}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
+.avail-note{display:flex;align-items:center;justify-content:center;gap:9px;margin:22px 0 0;
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);text-align:center}
+
+.up{animation:up .8s var(--ez) both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ───────── live board ───────── */
+.board{
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);
+  box-shadow:0 30px 70px -50px #000;
+}
+.b-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--raised)}
+.b-top .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--text-2)}
+.b-top .poll{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.b-cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line)}
+@media (max-width:860px){.b-cells{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.b-cells{grid-template-columns:1fr}}
+.cell{background:var(--surface);padding:22px 20px 20px;transition:background .3s var(--ez)}
+.cell:hover{background:var(--raised)}
+.cell .cv{font-family:var(--f-dis);font-weight:600;font-size:clamp(26px,3.3vw,34px);line-height:1;
+  letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.cell .cv.flash{animation:fl .6s var(--ez)}
+@keyframes fl{0%{opacity:.35}100%{opacity:1}}
+.cell .ck{margin-top:11px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
+.cell .cn{margin-top:7px;font-size:13px;color:var(--text-2);line-height:1.5}
+.cell.livecell .cv{display:flex;align-items:center;gap:10px}
+
+/* ───────── sections ───────── */
+.sec{padding-block:clamp(60px,9vw,108px);border-top:1px solid var(--line);scroll-margin-top:calc(var(--nav) + 10px)}
+.sh{text-align:center;margin-bottom:clamp(34px,5vw,54px)}
+.sh h2{font-size:clamp(26px,4.2vw,42px);line-height:1.1}
+.sh p{margin:16px auto 0;max-width:56ch;color:var(--text-2);font-size:clamp(14.5px,1.6vw,16.5px)}
+
+/* ───────── record ───────── */
+.recs{display:flex;flex-direction:column;gap:12px}
+.rec{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;
+  padding:22px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+  transition:border-color .3s var(--ez),background .3s var(--ez),transform .3s var(--ez);
+}
+.rec:hover{border-color:var(--line-3);background:var(--raised);transform:translateY(-2px)}
+@media (max-width:640px){.rec{grid-template-columns:1fr;gap:14px}}
+.rec-h{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.rec-h h3{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.tagx{font-family:var(--f-mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 8px;border-radius:5px;border:1px solid var(--line-2);color:var(--text-3)}
+.rec p{margin:8px 0 0;color:var(--text-2);font-size:14px;line-height:1.55;max-width:56ch}
+.rec p code{font-family:var(--f-mono);font-size:12.5px;color:var(--text)}
+.rec-r{display:flex;align-items:center;gap:20px;justify-self:end}
+@media (max-width:640px){.rec-r{justify-self:start}}
+.rec-n{text-align:right;font-family:var(--f-dis);font-weight:600;font-size:22px;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.rec-n{text-align:left}}
+.rec-n span{display:block;margin-top:4px;font-family:var(--f-mono);font-size:10px;font-weight:400;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--text-3)}
+.rec-go{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;
+  color:var(--text-3);flex:none;transition:border-color .3s var(--ez),color .3s var(--ez),transform .3s var(--ez)}
+.rec:hover .rec-go{border-color:var(--line-3);color:var(--text);transform:translate(2px,-2px)}
+
+/* ───────── cards ───────── */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:880px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+.card{
+  padding:26px 22px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+  transition:border-color .3s var(--ez),background .3s var(--ez),transform .3s var(--ez);
+}
+.card:hover{border-color:var(--line-3);background:var(--raised);transform:translateY(-3px)}
+.card .ic{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);background:var(--raised);
+  display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);margin-bottom:16px;
+  transition:border-color .3s var(--ez),color .3s var(--ez)}
+.card:hover .ic{border-color:var(--line-3);color:var(--text)}
+.card h3{font-size:16.5px;font-weight:600;letter-spacing:-.02em}
+.card p{margin:9px 0 0;font-size:13.8px;line-height:1.6;color:var(--text-2)}
+
+/* ───────── marquee ───────── */
+.mq{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding-block:13px;position:relative}
+.mq::before,.mq::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.mq::before{left:0;background:linear-gradient(90deg,var(--surface),transparent)}
+.mq::after{right:0;background:linear-gradient(270deg,var(--surface),transparent)}
+.mq-run{display:flex;width:max-content;animation:run 46s linear infinite}
+.mq:hover .mq-run{animation-play-state:paused}
+@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-run span{display:flex;align-items:center;gap:22px;padding-inline:22px;white-space:nowrap;
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-3)}
+.mq-run span::after{content:"";width:3px;height:3px;border-radius:50%;background:var(--line-3)}
+
+/* ───────── contact ───────── */
+.talk{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:stretch}
+@media (max-width:880px){.talk{grid-template-columns:1fr}}
+.cta-box{
+  border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:clamp(28px,4vw,40px);position:relative;overflow:hidden;display:flex;flex-direction:column;
+  transition:border-color .3s var(--ez),background .3s var(--ez);
+}
+.cta-box:hover{border-color:var(--line-3)}
+.cta-box .glow{position:absolute;left:50%;top:-55%;width:min(620px,150%);aspect-ratio:1;transform:translateX(-50%);
+  pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.055),transparent 62%)}
+.cta-box > *{position:relative;z-index:2}
+.cta-box h3{font-size:clamp(21px,2.9vw,29px);font-weight:600;letter-spacing:-.03em;margin-top:15px}
+.cta-box p{margin:12px 0 0;max-width:44ch;color:var(--text-2);font-size:15px;line-height:1.6}
+.avail{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;padding:6px 12px;border-radius:999px;
+  border:1px solid var(--line-2);background:var(--raised);font-size:12px;color:var(--text-2)}
+.cta-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:26px}
+.dm{margin-top:14px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  font-size:13.5px;color:var(--text-3)}
+.chipbtn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:9px;
+  padding:7px 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--raised);
+  font-family:var(--f-mono);font-size:12.5px;color:var(--text);max-width:100%;
+  transition:border-color .25s var(--ez),background .25s var(--ez)}
+.chipbtn:hover{border-color:var(--line-3);background:#171A1E}
+.chipbtn .ci{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);
+  flex:none;transition:color .25s var(--ez)}
+.chipbtn.done{border-color:rgba(63,217,138,.45)}
+.chipbtn.done .ci{color:var(--live)}
+.chipbtn .val{overflow:hidden;text-overflow:ellipsis}
+
+/* ───────── footer ───────── */
+footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
+.f-cols{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:32px 24px}
+@media (max-width:760px){.f-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.f-cols{grid-template-columns:1fr}}
+.f-col h4{margin:0 0 14px;font-family:var(--f-dis);font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.f-col a{font-size:13.5px;color:var(--text-2);transition:color .2s var(--ez)}
+.f-col a:hover{color:var(--text)}
+.f-about p{margin:0;max-width:34ch;font-size:13.5px;color:var(--text-2);line-height:1.6}
+.f-about .brand{margin:0 0 14px}
+.f-base{margin-top:clamp(32px,5vw,48px);padding-top:22px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.status{display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;
+  border:1px solid var(--line-2);background:var(--raised);font-size:12.5px;color:var(--text-2)}
+.status b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+.f-base small{font-size:12.5px;color:var(--text-3)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html.js .rv{opacity:1;transform:none}
+  .mq-run{animation:none}
+}
+</style>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="glyph">H</span>hamza</a>
+    <nav class="nlinks">
+      <a href="#record">Record</a>
+      <a href="#work">What I do</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-p" href="#contact">Work with me</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ───── hero ───── -->
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="spot" id="spot"></div>
+    <div class="wrap hero-in">
+      <a class="badge up" style="animation-delay:.05s" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
+        <span class="pdot" id="hdot"></span>
+        <span>Steal A Seed —&nbsp;</span><b id="hccu">live</b><span>&nbsp;playing</span>
+        <span class="ar">↗</span>
+      </a>
+
+      <h1 class="up" style="animation-delay:.13s">I build the servers. Then I break the games.</h1>
+
+      <p class="sub up" style="animation-delay:.21s">
+        I grew my own Roblox trading server to <b>70,000 members</b> and middlemanned
+        <b>over $1,000,000</b> through it. I run <b>SAB Market</b> for Steal a Brainrot values,
+        write my own <b>Discord bots</b>, vibecode my own tools, and I do exploit
+        <b>QA</b> — on Steal A Seed right now, and taking on more games.
+      </p>
+
+      <div class="hero-cta up" style="animation-delay:.29s">
+        <a class="btn btn-p" href="#contact">Work with me <span class="ar">↓</span></a>
+        <a class="btn btn-g" href="#record">See the record</a>
+      </div>
+
+      <p class="avail-note up" style="animation-delay:.36s">
+        <span class="pdot on"></span>Available for exploit QA — any game, any build
+      </p>
+    </div>
+  </section>
+
+  <!-- ───── live board ───── -->
+  <section class="wrap" style="padding-bottom:clamp(56px,8vw,88px)">
+    <div class="board rv">
+      <div class="b-top">
+        <span class="pdot" id="bdot"></span>
+        <span class="lbl">steal a seed · live</span>
+        <span class="poll">last poll <span id="polltime">—</span></span>
+      </div>
+      <div class="b-cells">
+        <div class="cell livecell">
+          <div class="cv" id="bccu">—</div>
+          <div class="ck">players in game</div>
+          <div class="cn">Live from the Roblox API, refreshed every minute.</div>
+        </div>
+        <div class="cell">
+          <div class="cv num" data-to="70000" data-fmt="k">70K</div>
+          <div class="ck">members grown</div>
+          <div class="cn">My trading server, built from an empty one.</div>
+        </div>
+        <div class="cell">
+          <div class="cv num" data-to="1000000" data-fmt="money">$1M+</div>
+          <div class="ck">middlemanned</div>
+          <div class="cn">Player-to-player value that passed through me.</div>
+        </div>
+        <div class="cell">
+          <div class="cv num" data-to="20000" data-fmt="k">20K</div>
+          <div class="ck">sab market</div>
+          <div class="cn">Steal a Brainrot values, kept current.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── marquee ───── -->
+  <div class="mq" aria-hidden="true"><div class="mq-run" id="run"></div></div>
+
+  <!-- ───── record ───── -->
+  <section class="sec" id="record" style="border-top:0">
+    <div class="wrap">
+      <div class="sh rv">
+        <h2>Everything here is mine.</h2>
+        <p>Two servers I founded and grew myself, and the game I'm testing against today.</p>
+      </div>
+
+      <div class="recs rv">
+        <a class="rec" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">
+          <div>
+            <div class="rec-h"><h3>SAB Middleman</h3><span class="tagx">founder</span></div>
+            <p>Grew it from an empty server to 70K. The middleman desk inside it moved over $1,000,000 in player-to-player value — <code>discord.gg/sabmiddleman</code></p>
+          </div>
+          <div class="rec-r">
+            <div class="rec-n">70,000<span>members</span></div>
+            <div class="rec-go">↗</div>
+          </div>
+        </a>
+
+        <a class="rec" href="https://discord.gg/sabvalue" target="_blank" rel="noopener">
+          <div>
+            <div class="rec-h"><h3>SAB Market</h3><span class="tagx">founder</span></div>
+            <p>Steal a Brainrot values, kept current through every update — <code>discord.gg/sabvalue</code></p>
+          </div>
+          <div class="rec-r">
+            <div class="rec-n">20,000<span>members</span></div>
+            <div class="rec-go">↗</div>
+          </div>
+        </a>
+
+        <a class="rec" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
+          <div>
+            <div class="rec-h"><h3>Steal A Seed</h3><span class="tagx">live</span></div>
+            <p>Out now on Roblox, and the game I'm doing exploit QA against today — finding what breaks and writing it down. Looking to do the same on more games.</p>
+          </div>
+          <div class="rec-r">
+            <div class="rec-n" id="recccu">—<span>playing now</span></div>
+            <div class="rec-go">↗</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── what I do ───── -->
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sh rv">
+        <h2>What I do.</h2>
+        <p>Six things I'm actually good at, built over years of running communities people trust with real value.</p>
+      </div>
+
+      <div class="cards rv">
+        <div class="card">
+          <div class="ic">01</div>
+          <h3>Community growth</h3>
+          <p>Zero to 70,000 on my own server, plus the structure that keeps a community that size alive.</p>
+        </div>
+        <div class="card">
+          <div class="ic">02</div>
+          <h3>Middleman</h3>
+          <p>Neutral party on high-value trades. Over $1,000,000 has gone through my hands.</p>
+        </div>
+        <div class="card">
+          <div class="ic">03</div>
+          <h3>Moderation &amp; anti-scam</h3>
+          <p>Automod, raid response and scammer bans across both of the servers I run.</p>
+        </div>
+        <div class="card">
+          <div class="ic">04</div>
+          <h3>Discord bots</h3>
+          <p>I write my own — tickets, automation, value lists and moderation tooling.</p>
+        </div>
+        <div class="card">
+          <div class="ic">05</div>
+          <h3>Vibecoding</h3>
+          <p>Decent, not a pro. I get my own tools built and working.</p>
+        </div>
+        <div class="card">
+          <div class="ic">06</div>
+          <h3>Exploit QA</h3>
+          <p>Reproducing what breaks and reporting it before it ships. Steal A Seed now — open to more games.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── contact ───── -->
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="sh rv">
+        <h2>Let's talk.</h2>
+        <p>I'm actively looking for more exploit QA work. Both of my servers are open to anyone.</p>
+      </div>
+
+      <div class="talk rv">
+        <div class="cta-box">
+          <div class="glow"></div>
+          <span class="avail"><span class="pdot on"></span>Available for work</span>
+          <h3>Need an exploit QA?</h3>
+          <p>Steal A Seed is what I'm testing now, and I'm taking on more games. Tell me what you're building and I'll go break it before your users do.</p>
+          <div class="cta-btns">
+            <a class="btn btn-p" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">DM me on Discord <span class="ar">↗</span></a>
+          </div>
+          <div class="dm">
+            <button class="chipbtn" type="button" data-copy="ohhamza"><span class="val">@ohhamza</span><span class="ci">copy</span></button>
+            <button class="chipbtn" type="button" data-copy="801691377796120577"><span class="val">801691377796120577</span><span class="ci">user id</span></button>
+          </div>
+        </div>
+
+        <div class="cta-box">
+          <h3>Or join a server.</h3>
+          <p>Trading and middleman in one, Steal a Brainrot values in the other. Both free to join.</p>
+          <div class="cta-btns">
+            <a class="btn btn-g" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">discord.gg/sabmiddleman <span class="ar">↗</span></a>
+            <a class="btn btn-g" href="https://discord.gg/sabvalue" target="_blank" rel="noopener">discord.gg/sabvalue <span class="ar">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-col f-about">
+        <div class="brand"><span class="glyph">H</span>hamza</div>
+        <p>Roblox community operator, Discord bot developer, and exploit QA tester — available for QA work on any game.</p>
+      </div>
+      <div class="f-col">
+        <h4>Communities</h4>
+        <ul>
+          <li><a href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">SAB Middleman</a></li>
+          <li><a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">SAB Market</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="#record">Record</a></li>
+          <li><a href="#work">What I do</a></li>
+          <li><a href="#contact">Availability</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">@ohhamza</a></li>
+          <li><a href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">Steal A Seed</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-base">
+      <span class="status"><span class="pdot" id="fdot"></span>Steal A Seed —&nbsp;<b id="fccu">live</b>&nbsp;playing</span>
+      <small>© 2026 hamza</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $  = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return [].slice.call(document.querySelectorAll(s)); };
+
+  /* ───── nav border on scroll ───── */
+  var nav = $('#nav');
+  function onScroll(){ nav.classList.toggle('stuck', scrollY > 10); }
+  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+  /* ───── marquee ───── */
+  var feed = ['70,000 members grown','$1,000,000+ middlemanned','SAB Market — 20,000',
+              'Discord bot developer','Exploit QA — Steal A Seed','Vibecoder','Trusted middleman',
+              'Steal a Brainrot values','Available for exploit QA','discord.gg/sabmiddleman',
+              'discord.gg/sabvalue','@ohhamza'];
+  var mh = feed.map(function(t){ return '<span>'+t+'</span>'; }).join('');
+  $('#run').innerHTML = mh + mh;
+
+  /* ───── live CCU, via roproxy ─────
+     Roblox's own API refuses browser requests, so this goes through roproxy.
+     On a published Artifact the page's CSP blocks all outbound fetches, so the
+     counters stay on their "unavailable" label instead of showing a stale number.
+     Host this file anywhere else (Pages/Vercel/Netlify) and it goes live. */
+  var API = 'https://games.roproxy.com/v1/games?universeIds=10764328008';
+  var ccuEls = ['#hccu','#bccu','#recccu','#fccu'].map($);
+  var dots   = ['#hdot','#bdot','#fdot'].map($);
+  var pollEl = $('#polltime');
+  var last = null;
+
+  function comma(n){ return n.toLocaleString('en-US'); }
+  function setCcu(text, live){
+    ccuEls.forEach(function(el){
+      if (!el) return;
+      var span = el.querySelector('span');       // keep the "members/playing now" caption
+      el.textContent = text;
+      if (span) el.appendChild(span);
+    });
+    dots.forEach(function(d){ if (d) d.classList.toggle('on', !!live); });
+  }
+  function pull(){
+    if (!('fetch' in window)){ setCcu('unavailable', false); return; }
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var to = setTimeout(function(){ if (ctl) ctl.abort(); }, 9000);
+    fetch(API, {signal: ctl ? ctl.signal : undefined, cache:'no-store'})
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        var g = j && j.data && j.data[0];
+        if (!g || typeof g.playing !== 'number') throw 0;
+        var changed = last !== null && last !== g.playing;
+        last = g.playing;
+        setCcu(comma(g.playing), true);
+        pollEl.textContent = new Date().toLocaleTimeString('en-GB');
+        if (changed && !reduce){
+          var c = $('#bccu');
+          c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+        }
+      })
+      .catch(function(){
+        if (last === null){ setCcu('unavailable', false); pollEl.textContent = 'no connection'; }
+      })
+      .then(function(){ clearTimeout(to); });
+  }
+  pull();
+  setInterval(function(){ if (!document.hidden) pull(); }, 60000);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) pull(); });
+
+  /* ───── reveal ───── */
+  var rvs = $$('.rv');
+  var showAll = function(){ rvs.forEach(function(e){ e.classList.add('in'); }); };
+  if (reduce || !('IntersectionObserver' in window)) showAll();
+  else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
+    rvs.forEach(function(e){ io.observe(e); });
+    setTimeout(showAll, 2800);
+  }
+
+  /* ───── count up ───── */
+  function fmt(v, kind){
+    if (kind === 'k') return (v >= 1000 ? Math.round(v/1000) + 'K' : Math.round(v).toString());
+    if (kind === 'money'){
+      if (v >= 1e6) return '$' + (v/1e6).toFixed(v >= 1e6 ? 0 : 1) + 'M+';
+      return '$' + Math.round(v/1000) + 'K';
+    }
+    return comma(Math.round(v));
+  }
+  function countUp(el){
+    var to = parseFloat(el.dataset.to), kind = el.dataset.fmt;
+    if (reduce){ el.textContent = fmt(to, kind); return; }
+    var dur = 1300, t0 = null;
+    function step(t){
+      if (t0 === null) t0 = t;
+      var p = Math.min((t-t0)/dur, 1), e = 1 - Math.pow(1-p, 3);
+      el.textContent = fmt(to*e, kind);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to, kind);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = $$('.num[data-to]');
+  if (!('IntersectionObserver' in window)) nums.forEach(countUp);
+  else {
+    var io2 = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); io2.unobserve(e.target); } });
+    }, {threshold:.4});
+    nums.forEach(function(e){ io2.observe(e); });
+  }
+
+  /* ───── copy handle / user id ───── */
+  function legacyCopy(v, done){
+    try{
+      var t = document.createElement('textarea');
+      t.value = v; t.setAttribute('readonly','');
+      t.style.position = 'fixed'; t.style.top = '0'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      document.execCommand('copy'); document.body.removeChild(t); done();
+    } catch(e){ /* clipboard unavailable — the value is on screen to select */ }
+  }
+  $$('.chipbtn[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var v = b.dataset.copy, ci = b.querySelector('.ci'), was = ci.textContent;
+      function done(){
+        b.classList.add('done'); ci.textContent = 'copied';
+        setTimeout(function(){ b.classList.remove('done'); ci.textContent = was; }, 1500);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(v).then(done, function(){ legacyCopy(v, done); });
+      } else legacyCopy(v, done);
+    });
+  });
+
+  /* ───── hero spotlight follows the cursor ───── */
+  var spot = $('#spot'), hero = document.querySelector('.hero');
+  if (spot && hero && !reduce && matchMedia('(hover:hover)').matches){
+    hero.addEventListener('mousemove', function(e){
+      var r = hero.getBoundingClientRect();
+      spot.style.left = (e.clientX - r.left) + 'px';
+      spot.style.top  = (e.clientY - r.top) + 'px';
+    });
+  }
+})();
+</script>
