@@ -429,7 +429,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
         </div>
         <div class="cell">
           <div class="cv num" data-to="70000" data-fmt="k" data-count="mm" data-cfmt="k">70K</div>
-          <div class="ck">members grown</div>
+          <div class="ck">members</div>
           <div class="cn">Ry's Middleman Services, which I co-own.</div>
         </div>
         <div class="cell">
@@ -506,7 +506,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
         <div class="card">
           <div class="ic">01</div>
           <h3>Community growth</h3>
-          <p>Zero to <span data-count="mm">70,000</span> on my own server, plus the structure that keeps a community that size alive.</p>
+          <p>Grew a server past <span data-count="mm">70,000</span> members, plus the structure that keeps a community that size alive.</p>
         </div>
         <div class="card">
           <div class="ic">02</div>
@@ -847,23 +847,30 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
     if (kind === 'money') return v >= 1e6 ? '$' + Math.round(v / 1e6) + 'M+' : '$' + Math.round(v / 1000) + 'K';
     return comma(Math.round(v));
   }
+  function finalizeCount(el){
+    // resting value must always be the real figure (data-to may have been
+    // updated by a live fetch after the animation captured its start value)
+    var kind = el.dataset.fmt;
+    el.textContent = fmt(parseFloat(el.dataset.to) || 0, kind);
+    el.dataset.counted = '1';
+  }
   function countUp(el){
+    if (el.dataset.counted === '1') return;
     var to = parseFloat(el.dataset.to), kind = el.dataset.fmt;
-    if (reduce){ el.textContent = fmt(to, kind); return; }
+    if (reduce){ finalizeCount(el); return; }
     var dur = 1400, t0 = null;
     function step(t){
+      if (el.dataset.counted === '1') return;   // finalized elsewhere
       if (t0 === null) t0 = t;
       var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
       el.textContent = fmt(to * e, kind);
       if (p < 1) requestAnimationFrame(step);
-      else {
-        // re-read: a live count may have landed while this was animating,
-        // and `to` was captured before it arrived
-        el.textContent = fmt(parseFloat(el.dataset.to) || to, kind);
-        el.dataset.counted = '1';
-      }
+      else finalizeCount(el);
     }
     requestAnimationFrame(step);
+    // rAF is paused while the tab is backgrounded, which would freeze the
+    // count mid-way; setTimeout still fires, so it guarantees the final value
+    setTimeout(function(){ if (el.dataset.counted !== '1') finalizeCount(el); }, dur + 400);
   }
   var nums = $$('.num[data-to]');
   if (!('IntersectionObserver' in window)) nums.forEach(countUp);
