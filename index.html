@@ -1,4 +1,29 @@
-<title>hamza.exe</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>hamza — exploit QA &amp; Roblox community operator</title>
+<meta name="description" content="Roblox community operator, Discord bot developer and exploit QA tester. Grew my own trading server to 70,000 members and middlemanned over $1,000,000 through it. Available for exploit QA on any game.">
+<meta name="theme-color" content="#0A0B0D">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://ohhamza.vercel.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%230A0B0D'/%3E%3Crect%20x='.5'%20y='.5'%20width='31'%20height='31'%20rx='7.5'%20fill='none'%20stroke='%23282C33'/%3E%3Ctext%20x='16'%20y='22'%20font-family='system-ui,sans-serif'%20font-size='16'%20font-weight='600'%20fill='%23F2F3F5'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hamza">
+<meta property="og:url" content="https://ohhamza.vercel.app/">
+<meta property="og:title" content="hamza — exploit QA &amp; Roblox community operator">
+<meta property="og:description" content="Roblox community operator, Discord bot developer and exploit QA tester. Grew my own trading server to 70,000 members and middlemanned over $1,000,000 through it. Available for exploit QA on any game.">
+<meta property="og:image" content="https://ohhamza.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="hamza — I build the servers. Then I break the games.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hamza — exploit QA &amp; Roblox community operator">
+<meta name="twitter:description" content="Roblox community operator, Discord bot developer and exploit QA tester. Grew my own trading server to 70,000 members and middlemanned over $1,000,000 through it. Available for exploit QA on any game.">
+<meta name="twitter:image" content="https://ohhamza.vercel.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -58,7 +83,8 @@ h1,h2,h3{font-family:var(--f-dis);margin:0;letter-spacing:-.028em;text-wrap:bala
 }
 .nav.stuck{border-bottom-color:var(--line);background:rgba(10,11,13,.9)}
 .nav-in{display:flex;align-items:center;gap:8px;width:100%}
-.brand{display:flex;align-items:center;gap:10px;margin-right:auto;font-family:var(--f-dis);font-weight:600;font-size:15.5px;letter-spacing:-.02em}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;padding-block:8px;
+  font-family:var(--f-dis);font-weight:600;font-size:15.5px;letter-spacing:-.02em}
 .glyph{width:26px;height:26px;border-radius:7px;border:1px solid var(--line-2);background:var(--raised);
   display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);
   transition:border-color .3s var(--ez),color .3s var(--ez)}
@@ -252,8 +278,10 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
   .f-about{grid-column:auto}
 }
 .f-col h4{margin:0 0 14px;font-family:var(--f-dis);font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
-.f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
-.f-col a{font-size:13.5px;color:var(--text-2);transition:color .2s var(--ez)}
+.f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+/* padded so each link is a comfortable tap target on a phone, not a 16px sliver */
+.f-col a{display:inline-block;padding-block:10px;font-size:13.5px;color:var(--text-2);
+  transition:color .2s var(--ez)}
 .f-col a:hover{color:var(--text)}
 .f-about p{margin:0;max-width:34ch;font-size:13.5px;color:var(--text-2);line-height:1.6}
 .f-about .brand{margin:0 0 14px}
@@ -276,7 +304,10 @@ footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
   background:linear-gradient(90deg,var(--line-3),var(--text));transition:width .12s linear}
 
 /* word-by-word reveal */
-.wr{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.04em}
+/* the mask needs room for descenders (g, y, p) or overflow:hidden slices them;
+   the negative margin keeps the extra padding out of the line box */
+.wr{display:inline-block;overflow:hidden;vertical-align:bottom;
+  padding-bottom:.2em;margin-bottom:-.2em}
 html.js .wr > span{display:inline-block;transform:translateY(108%);opacity:0;
   transition:transform .9s var(--ez),opacity .6s var(--ez)}
 html.js .wr.go > span{transform:none;opacity:1}
@@ -322,7 +353,8 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   .grain{display:none}
 }
 </style>
-
+</head>
+<body>
 <script>document.documentElement.classList.add('js');</script>
 
 <div class="grain" aria-hidden="true"></div>
@@ -830,3 +862,5 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   });
 })();
 </script>
+</body>
+</html>
