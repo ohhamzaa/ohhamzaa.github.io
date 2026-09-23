@@ -232,11 +232,92 @@ a{color:inherit;text-decoration:none}
 .views svg{width:13px;height:13px;flex:none}
 .views #views{font-variant-numeric:tabular-nums;color:var(--text-2)}
 
+.foot a{color:var(--text-2);text-decoration:underline;text-underline-offset:3px}
+.foot a:hover{color:#fff}
 .foot{margin-top:24px;font-family:var(--f-mono);font-size:10.5px;color:var(--text-3);letter-spacing:.04em}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* ── contact CTA ── */
+.cta-row{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta-main{position:relative;display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:0;
+  font-family:var(--f-dis);font-weight:700;font-size:15px;letter-spacing:-.01em;color:#0a0a12;
+  padding:12px 22px;border-radius:999px;background:#fff;overflow:hidden;
+  box-shadow:0 10px 34px -10px rgba(124,92,255,.9),0 0 0 1px rgba(255,255,255,.4) inset;
+  transition:transform .2s var(--ez),box-shadow .2s var(--ez)}
+.cta-main::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(124,92,255,.35),transparent);animation:sweep 3.2s var(--ez) infinite}
+@keyframes sweep{0%,55%{left:-60%}100%{left:130%}}
+.cta-main:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 40px -10px rgba(124,92,255,1)}
+.cta-main svg{width:17px;height:17px}
+.cta-main.small{padding:10px 18px;font-size:14px}
+.cta-ghost{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14.5px;
+  color:#fff;background:rgba(88,101,242,.22);border:1px solid rgba(88,101,242,.55);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s var(--ez),background .2s var(--ez)}
+.cta-ghost:hover{transform:translateY(-2px);background:rgba(88,101,242,.4)}
+.cta-ghost svg{width:17px;height:17px}
+
+/* ── contact sheet ── */
+.sheet-back{position:fixed;inset:0;z-index:40;background:rgba(4,3,10,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .3s var(--ez)}
+.sheet-back.on{opacity:1}
+.sheet{position:fixed;z-index:41;left:50%;bottom:0;width:min(520px,100%);max-height:92vh;overflow:auto;
+  transform:translate(-50%,105%);transition:transform .45s var(--ez);text-align:left;
+  padding:14px 20px calc(20px + env(safe-area-inset-bottom,0px));border-radius:22px 22px 0 0;
+  background:rgba(18,15,34,.86);border:1px solid var(--stroke-2)}
+.sheet.on{transform:translate(-50%,0)}
+@media (min-width:640px){
+  .sheet{bottom:auto;top:50%;border-radius:22px;transform:translate(-50%,-44%) scale(.96);opacity:0;
+    transition:transform .4s var(--ez),opacity .3s var(--ez);padding:22px 24px 24px}
+  .sheet.on{transform:translate(-50%,-50%) scale(1);opacity:1}
+  .sheet-grip{display:none}
+}
+.sheet-grip{width:42px;height:5px;border-radius:3px;background:var(--stroke-2);margin:0 auto 10px}
+.sheet-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:var(--glass);border:1px solid var(--stroke);color:var(--text-2)}
+.sheet-x:hover{color:#fff;background:var(--glass-2)}
+.sheet-x svg{width:16px;height:16px}
+.sheet h2{margin:4px 0 0;font-size:24px;letter-spacing:-.03em}
+.sheet-sub{margin:6px 0 0;font-size:13.5px;color:var(--text-2);line-height:1.5;padding-right:30px}
+.quick{margin-top:16px;display:grid;gap:8px}
+.q{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;color:var(--text);font:inherit;
+  padding:12px 14px;border-radius:14px;background:var(--glass);border:1px solid var(--stroke);
+  transition:border-color .2s var(--ez),background .2s var(--ez),transform .2s var(--ez)}
+.q:hover{background:var(--glass-2);border-color:var(--stroke-2);transform:translateX(2px)}
+.q svg{width:20px;height:20px;flex:none;color:var(--text-2)}
+.q span{display:flex;flex-direction:column;gap:1px;min-width:0}
+.q b{font-size:14px;font-weight:600}
+.q small{font-family:var(--f-mono);font-size:11px;color:var(--text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.q-dc{background:rgba(88,101,242,.18);border-color:rgba(88,101,242,.45)}
+.q-dc svg{color:#A5B0FF}
+.q.done{border-color:rgba(74,222,128,.5)} .q.done small{color:var(--on)}
+.or{display:flex;align-items:center;gap:10px;margin:18px 0 12px;font-family:var(--f-mono);font-size:11px;color:var(--text-3);
+  text-transform:uppercase;letter-spacing:.08em}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--stroke)}
+.cform{display:grid;gap:10px}
+.cform .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.cform .row2{grid-template-columns:1fr}}
+.cform label{display:grid;gap:5px}
+.cform label span{font-family:var(--f-mono);font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
+.cform input,.cform textarea{width:100%;font:inherit;font-size:14.5px;color:var(--text);resize:vertical;
+  padding:11px 12px;border-radius:12px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);outline:none;
+  transition:border-color .2s var(--ez),box-shadow .2s var(--ez)}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--text-3)}
+.cform input:focus,.cform textarea:focus{border-color:var(--a1);box-shadow:0 0 0 3px rgba(124,92,255,.25)}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cform-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:2px}
+.cstatus{font-size:12.5px;color:var(--text-2);line-height:1.4}
+.cstatus.ok{color:var(--on)} .cstatus.err{color:#FCA5A5}
+.cstatus a{color:#A5B0FF;text-decoration:underline}
+.cta-main[disabled]{opacity:.6;cursor:default}
+body.sheet-open{overflow:hidden}
+
+/* ── cursor sparkle trail (desktop) ── */
+.sp{position:fixed;z-index:60;width:6px;height:6px;margin:-3px 0 0 -3px;pointer-events:none;border-radius:50%;
+  background:#fff;box-shadow:0 0 8px 2px var(--c,rgba(201,184,255,.9));animation:sp .75s var(--ez) forwards}
+@keyframes sp{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
 </style>
 </head>
 <body>
@@ -263,6 +344,14 @@ a{color:inherit;text-decoration:none}
       <span class="pill live"><span class="d g"></span>Open to work</span>
       <span class="pill">exploit QA &middot; community operator</span>
       <span class="pill views" id="views-pill" title="profile views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span id="views">&mdash;</span></span>
+    </div>
+
+    <div class="cta-row">
+      <button class="cta-main" id="open-contact" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>
+        Contact me
+      </button>
+      <a class="cta-ghost" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a14.6 14.6 0 0 1 4.3 2.2A16.6 16.6 0 0 0 4.5 5.7 14.6 14.6 0 0 1 8.8 3.5L8.6 3a19.8 19.8 0 0 0-4.9 1.4A20.7 20.7 0 0 0 .5 19a19.9 19.9 0 0 0 6 3l.7-1a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.4 0l.5.4a13 13 0 0 1-2 1l.7 1a19.9 19.9 0 0 0 6-3 20.7 20.7 0 0 0-3.2-14.6ZM8.3 15.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>DM</a>
     </div>
 
     <!-- discord presence (live via Lanyard) -->
@@ -331,8 +420,40 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
-    <div class="foot">ohhamza &middot; available for exploit QA on any game</div>
+    <div class="foot">&copy; 2026 Hamza &middot; available for exploit QA on any game &middot; <a href="/portfolio">full portfolio &rarr;</a></div>
   </div>
+</div>
+
+<div class="sheet-back" id="sheet-back" hidden></div>
+<div class="sheet glass" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-grip" aria-hidden="true"></div>
+  <button class="sheet-x" id="close-contact" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <h2 id="sheet-title">Get in touch</h2>
+  <p class="sheet-sub">QA work, middleman, bots or anything else &mdash; the fastest way is Discord.</p>
+
+  <div class="quick">
+    <a class="q q-dc" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a14.6 14.6 0 0 1 4.3 2.2A16.6 16.6 0 0 0 4.5 5.7 14.6 14.6 0 0 1 8.8 3.5L8.6 3a19.8 19.8 0 0 0-4.9 1.4A20.7 20.7 0 0 0 .5 19a19.9 19.9 0 0 0 6 3l.7-1a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.4 0l.5.4a13 13 0 0 1-2 1l.7 1a19.9 19.9 0 0 0 6-3 20.7 20.7 0 0 0-3.2-14.6ZM8.3 15.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg><span><b>DM on Discord</b><small>opens my profile</small></span></a>
+    <button class="q" type="button" data-copy="ohhamza"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><b>@ohhamza</b><small class="ql">copy username</small></span></button>
+    <button class="q" type="button" data-copy="801691377796120577"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span><b>User ID</b><small class="ql">copy 801691377796120577</small></span></button>
+  </div>
+
+  <div class="or"><span>or leave a message</span></div>
+
+  <form class="cform" id="cform" novalidate>
+    <div class="row2">
+      <label><span>Name</span><input id="c-name" name="name" maxlength="60" autocomplete="name" placeholder="optional"></label>
+      <label><span>Your Discord / email</span><input id="c-contact" name="contact" maxlength="80" placeholder="so I can reply"></label>
+    </div>
+    <label><span>Message</span><textarea id="c-msg" name="message" maxlength="1500" rows="4" required placeholder="What do you need tested, traded or built?"></textarea></label>
+    <input class="hp" id="c-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="cform-foot">
+      <span class="cstatus" id="cstatus" role="status"></span>
+      <button class="cta-main small" id="csend" type="submit">Send
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </form>
 </div>
 
 <script>
@@ -345,9 +466,15 @@ a{color:inherit;text-decoration:none}
     var i=0; (function tick(){ el.textContent=text.slice(0,++i); if(i<text.length) setTimeout(tick,speed); else if(done) done(); })();
   }
   var typedEl=document.getElementById('typed'), bioEl=document.getElementById('bio');
-  type(typedEl,'Hamza',110,function(){
-    type(bioEl,"breaking builds before your users do.",30);
-  });
+  var LINES=["breaking builds before your users do.","exploit QA on any game.","69K members. $1M+ traded.","I write my own Discord bots."];
+  function erase(el,done){ (function tick(){ var t=el.textContent; if(!t.length){done();return;} el.textContent=t.slice(0,-1); setTimeout(tick,16); })(); }
+  function cycle(i){
+    type(bioEl,LINES[i],30,function(){
+      if(reduce) return;
+      setTimeout(function(){ erase(bioEl,function(){ cycle((i+1)%LINES.length); }); },2600);
+    });
+  }
+  type(typedEl,'Hamza',110,function(){ cycle(0); });
 
   /* ── night sky: nebula, milky way, crescent moon, twinkling stars,
         shooting stars and parallax mountain ridges — all drawn, no images ── */
@@ -600,6 +727,79 @@ a{color:inherit;text-decoration:none}
     if(!ready||!yt.getDuration)return; var d=yt.getDuration(); if(!d)return;
     var r=bar.getBoundingClientRect(); yt.seekTo(((e.clientX-r.left)/r.width)*d,true); tickUI();
   });
+
+  /* ── contact sheet ── */
+  var sheet=document.getElementById('sheet'), back=document.getElementById('sheet-back'),
+      openBtn=document.getElementById('open-contact'), closeBtn=document.getElementById('close-contact'),
+      form=document.getElementById('cform'), cstatus=document.getElementById('cstatus'),
+      csend=document.getElementById('csend'), lastFocus=null, openedAt=0;
+  function openSheet(){
+    lastFocus=document.activeElement; openedAt=Date.now();
+    sheet.hidden=false; back.hidden=false; document.body.classList.add('sheet-open');
+    requestAnimationFrame(function(){ sheet.classList.add('on'); back.classList.add('on'); });
+    setTimeout(function(){ var q=sheet.querySelector('.q'); if(q) q.focus(); },60);
+  }
+  function closeSheet(){
+    sheet.classList.remove('on'); back.classList.remove('on'); document.body.classList.remove('sheet-open');
+    setTimeout(function(){ sheet.hidden=true; back.hidden=true; },420);
+    if(lastFocus&&lastFocus.focus) lastFocus.focus();
+  }
+  openBtn.addEventListener('click',openSheet);
+  closeBtn.addEventListener('click',closeSheet);
+  back.addEventListener('click',closeSheet);
+  document.addEventListener('keydown',function(e){
+    if(sheet.hidden) return;
+    if(e.key==='Escape'){ closeSheet(); return; }
+    if(e.key==='Tab'){ // keep focus inside the sheet
+      var f=[].slice.call(sheet.querySelectorAll('a[href],button:not([disabled]),input:not(.hp),textarea')).filter(function(x){return x.offsetParent!==null;});
+      if(!f.length) return; var a=f[0], z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){ z.focus(); e.preventDefault(); }
+      else if(!e.shiftKey&&document.activeElement===z){ a.focus(); e.preventDefault(); }
+    }
+  });
+  // copy buttons
+  [].forEach.call(sheet.querySelectorAll('[data-copy]'),function(b){
+    b.addEventListener('click',function(){
+      var v=b.dataset.copy, lab=b.querySelector('.ql'), was=lab.textContent;
+      function done(){ b.classList.add('done'); lab.textContent='copied!'; setTimeout(function(){ b.classList.remove('done'); lab.textContent=was; },1500); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done,function(){});
+      else { try{ var t=document.createElement('textarea'); t.value=v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); done(); }catch(e){} }
+    });
+  });
+  // message form → /api/contact → Discord webhook
+  var DM='<a href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">DM me on Discord</a>';
+  function say(html,cls){ cstatus.className='cstatus'+(cls?' '+cls:''); cstatus.innerHTML=html; }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=document.getElementById('c-msg').value.trim();
+    if(msg.length<5){ say('Write a little more first.','err'); document.getElementById('c-msg').focus(); return; }
+    csend.disabled=true; say('Sending&hellip;');
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:document.getElementById('c-name').value,contact:document.getElementById('c-contact').value,
+        message:msg,company:document.getElementById('c-company').value,t:openedAt})})
+      .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ return {ok:r.ok,status:r.status,j:j}; }); })
+      .then(function(res){
+        if(res.ok){ say('Sent &mdash; I\'ll get back to you soon.','ok'); form.reset(); return; }
+        if(res.status===429) say('Too many messages &mdash; try again later or '+DM+'.','err');
+        else say('Couldn\'t send right now &mdash; '+DM+' instead.','err');
+      })
+      .catch(function(){ say('Couldn\'t send right now &mdash; '+DM+' instead.','err'); })
+      .then(function(){ csend.disabled=false; });
+  });
+
+  /* ── cursor sparkle trail (mouse only) ── */
+  if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var lastSp=0, COLS=['rgba(201,184,255,.95)','rgba(158,231,255,.95)','rgba(244,114,182,.9)','rgba(74,222,128,.85)'];
+    addEventListener('mousemove',function(e){
+      var now=performance.now(); if(now-lastSp<32) return; lastSp=now;
+      var d=document.createElement('span'); d.className='sp';
+      d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
+      d.style.setProperty('--dx',(Math.random()*24-12).toFixed(1)+'px');
+      d.style.setProperty('--dy',(Math.random()*18+6).toFixed(1)+'px');
+      d.style.setProperty('--c',COLS[(Math.random()*COLS.length)|0]);
+      document.body.appendChild(d); setTimeout(function(){ d.remove(); },760);
+    },{passive:true});
+  }
 
   /* 3D tilt that follows the pointer */
   var card=document.querySelector('.card');
