@@ -158,6 +158,9 @@ a{color:inherit;text-decoration:none}
 .presence .pact{margin-top:5px;font-family:var(--f-mono);font-size:11.5px;color:var(--text-2);
   display:flex;align-items:center;gap:7px}
 .presence .pact .rd{width:7px;height:7px;border-radius:2px;background:var(--on);flex:none;box-shadow:0 0 8px var(--on)}
+.presence .pact.st-offline .rd{background:var(--text-3);box-shadow:none}
+.presence .pact.st-idle .rd{background:var(--idle);box-shadow:0 0 8px var(--idle)}
+.presence .pact.st-dnd .rd{background:#F04747;box-shadow:0 0 8px #F04747}
 .presence .pact b{color:var(--text);font-weight:500}
 
 /* ── socials ── */
@@ -630,6 +633,7 @@ body.sheet-open{overflow:hidden}
       if(!j||!j.success||!j.data) return;
       var d=j.data, u=d.discord_user||{}, st=d.discord_status;
       setStatus(st);
+      var pactEl=document.getElementById('pact'); pactEl.className='pact st-'+(st||'offline');
 
       // name
       if(u.global_name||u.username) pname.textContent = u.global_name||u.username;
