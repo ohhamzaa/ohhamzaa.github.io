@@ -29,9 +29,11 @@ module.exports = async function handler(req, res) {
   // honeypot: bots fill every field; pretend success so they move on
   if (body.company) return res.status(200).json({ ok: true });
 
-  // submitted within ~2s of opening the form = almost certainly a bot
+  // `t` is when the form was opened. Under ~2s is almost certainly a bot, and a
+  // value that is missing, in the future or hours old is a replayed/forged one.
   const openedAt = Number(body.t) || 0;
-  if (!openedAt || Date.now() - openedAt < 2000) return res.status(400).json({ error: 'too_fast' });
+  const age = Date.now() - openedAt;
+  if (!openedAt || age < 2000 || age > 6 * 60 * 60 * 1000) return res.status(400).json({ error: 'too_fast' });
 
   const name = clean(body.name, 60);
   const contact = clean(body.contact, 80);

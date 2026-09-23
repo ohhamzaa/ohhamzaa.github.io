@@ -780,7 +780,10 @@ body.sheet-open{overflow:hidden}
       .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ return {ok:r.ok,status:r.status,j:j}; }); })
       .then(function(res){
         if(res.ok){ say('Sent &mdash; I\'ll get back to you soon.','ok'); form.reset(); return; }
+        var code=res.j&&res.j.error;
         if(res.status===429) say('Too many messages &mdash; try again later or '+DM+'.','err');
+        else if(code==='too_fast') say('Give it a second, then hit Send again.','err');
+        else if(code==='too_short') say('Write a little more first.','err');
         else say('Couldn\'t send right now &mdash; '+DM+' instead.','err');
       })
       .catch(function(){ say('Couldn\'t send right now &mdash; '+DM+' instead.','err'); })
