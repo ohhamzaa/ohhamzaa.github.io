@@ -68,7 +68,7 @@ a{color:inherit;text-decoration:none}
 @keyframes drift2{to{transform:translate(-12vmax,-8vmax) scale(1.1)}}
 @keyframes drift3{to{transform:translate(10vmax,-10vmax) scale(1.2)}}
 @keyframes drift4{to{transform:translate(-10vmax,12vmax) scale(1.05)}}
-#stars{position:absolute;inset:0;width:100%;height:100%}
+#sky{position:absolute;inset:0;width:100%;height:100%;display:block}
 .bg::after{content:"";position:absolute;inset:0;
   background:radial-gradient(ellipse 90% 70% at 50% 40%,transparent 40%,rgba(6,6,10,.55) 100%),
              linear-gradient(180deg,rgba(6,6,10,.3),transparent 20%,transparent 70%,rgba(6,6,10,.6))}
@@ -97,8 +97,6 @@ a{color:inherit;text-decoration:none}
 .spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;pointer-events:none;box-shadow:0 0 10px 2px rgba(201,184,255,.9);opacity:0;animation:twinkle 3.2s var(--ez) infinite}
 .spark.s1{top:4px;left:-8px}.spark.s2{top:18px;right:-12px;animation-delay:.8s}.spark.s3{bottom:6px;left:-14px;animation-delay:1.6s}.spark.s4{bottom:-4px;right:-4px;animation-delay:2.4s}
 @keyframes twinkle{0%,100%{opacity:0;transform:scale(.3)}40%{opacity:1;transform:scale(1)}60%{opacity:.8}}
-#ytplayer{background:linear-gradient(110deg,#0d0d16 30%,#1c1a2e 50%,#0d0d16 70%);background-size:300% 100%;animation:load 1.6s linear infinite}
-@keyframes load{from{background-position:100% 0}to{background-position:-100% 0}}
 .card{transform-style:preserve-3d;will-change:transform;transition:transform .5s var(--ez)}
 .ava-glow{position:absolute;inset:-14px;border-radius:50%;z-index:-1;
   background:radial-gradient(circle,rgba(124,92,255,.5),transparent 70%);animation:breathe 4s var(--ez) infinite}
@@ -215,12 +213,24 @@ a{color:inherit;text-decoration:none}
 .playing .eq span:nth-child(3){animation-delay:.3s}
 .playing .eq span:nth-child(4){animation-delay:.45s}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
-.ytwrap{margin-top:10px;padding:7px;overflow:hidden;position:relative;
-  background:linear-gradient(var(--glass),var(--glass)) padding-box,linear-gradient(130deg,var(--a1),var(--a2),var(--a3),var(--a4)) border-box;border:1px solid transparent;
-  box-shadow:0 0 40px -10px rgba(124,92,255,.6);transition:max-height .4s var(--ez),opacity .3s var(--ez);max-height:0;opacity:0}
-.ytwrap.open{max-height:280px;opacity:1}
-#ytplayer{width:100%;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#000}
-#ytplayer iframe{width:100%;height:100%;border:0;display:block}
+.music{flex-direction:column;align-items:stretch;padding:10px;gap:4px;
+  background:linear-gradient(rgba(16,14,30,.72),rgba(16,14,30,.72)) padding-box,
+             linear-gradient(130deg,var(--a1),var(--a2),var(--a3),var(--a4)) border-box;
+  border:1px solid transparent;box-shadow:0 0 44px -14px rgba(124,92,255,.7)}
+.yt-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+  background:#0b0b12 center/cover no-repeat;transition:box-shadow .3s var(--ez)}
+.yt-frame #ytplayer,.yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.yt-frame.pulse{box-shadow:0 0 0 2px var(--a4),0 0 32px -4px var(--a4);animation:pulse2 1s var(--ez) 3}
+@keyframes pulse2{50%{box-shadow:0 0 0 3px var(--a1),0 0 40px 0 var(--a1)}}
+.tap-hint{position:absolute;left:50%;bottom:12px;transform:translate(-50%,6px);opacity:0;pointer-events:none;z-index:3;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.03em;padding:6px 11px;border-radius:999px;white-space:nowrap;
+  background:rgba(10,10,18,.85);border:1px solid var(--stroke-2);color:#fff;transition:opacity .25s var(--ez),transform .25s var(--ez)}
+.tap-hint.show{opacity:1;transform:translate(-50%,0)}
+.np{display:flex;align-items:center;gap:12px;padding:8px 5px 4px}
+.pl-sub .eq{display:inline-flex;height:10px;margin-right:7px;vertical-align:-1px}
+.pl-bar{cursor:pointer}
+.views svg{width:13px;height:13px;flex:none}
+.views #views{font-variant-numeric:tabular-nums;color:var(--text-2)}
 
 .foot{margin-top:24px;font-family:var(--f-mono);font-size:10.5px;color:var(--text-3);letter-spacing:.04em}
 
@@ -230,10 +240,7 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true">
-  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
-  <canvas id="stars"></canvas>
-</div>
+<div class="bg" aria-hidden="true"><canvas id="sky"></canvas></div>
 <div class="grain" aria-hidden="true"></div>
 
 <div class="stage">
@@ -255,6 +262,7 @@ a{color:inherit;text-decoration:none}
     <div class="meta">
       <span class="pill live"><span class="d g"></span>Open to work</span>
       <span class="pill">exploit QA &middot; community operator</span>
+      <span class="pill views" id="views-pill" title="profile views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span id="views">&mdash;</span></span>
     </div>
 
     <!-- discord presence (live via Lanyard) -->
@@ -303,21 +311,25 @@ a{color:inherit;text-decoration:none}
       <div class="glass stat"><span class="v">$1M+</span><span class="k">traded</span></div>
     </div>
 
-    <!-- music player (official YouTube embed drives the real track) -->
-    <div class="glass player" id="player">
-      <div class="art" style="background-image:url('https://i.ytimg.com/vi/dzVbKrWvI9Y/hqdefault.jpg')">
-        <span class="eq"><span></span><span></span><span></span><span></span></span>
+    <!-- music: YouTube's own player sits in view as the cover — tapping it always
+         works on iPhone; the controls below stay in sync with it -->
+    <div class="glass player music" id="player">
+      <div class="yt-frame" id="ytframe" style="background-image:url('https://i.ytimg.com/vi/dzVbKrWvI9Y/maxresdefault.jpg')">
+        <div id="ytplayer"></div>
+        <span class="tap-hint" id="taphint">tap the cover to play</span>
       </div>
-      <div class="pl-main">
-        <div class="pl-top"><span class="pl-t">Incredible</span><span class="pl-time"><span id="cur">0:00</span> / <span id="dur">—</span></span></div>
-        <div class="pl-sub">Sauce ft. Dave</div>
-        <div class="pl-bar" id="bar"><div class="pl-fill" id="fill"></div></div>
+      <div class="np">
+        <div class="art" style="background-image:url('https://i.ytimg.com/vi/dzVbKrWvI9Y/hqdefault.jpg')"></div>
+        <div class="pl-main">
+          <div class="pl-top"><span class="pl-t">Incredible</span><span class="pl-time"><span id="cur">0:00</span> / <span id="dur">&mdash;</span></span></div>
+          <div class="pl-sub"><span class="eq"><span></span><span></span><span></span><span></span></span>Sauce ft. Dave</div>
+          <div class="pl-bar" id="bar"><div class="pl-fill" id="fill"></div></div>
+        </div>
+        <button class="pl-btn" id="playbtn" aria-label="Play / pause">
+          <svg id="pi" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
       </div>
-      <button class="pl-btn" id="playbtn" aria-label="Play / pause">
-        <svg id="pi" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
     </div>
-    <div class="glass ytwrap" id="ytwrap" hidden><div id="ytplayer"></div></div>
 
     <div class="foot">ohhamza &middot; available for exploit QA on any game</div>
   </div>
@@ -337,23 +349,101 @@ a{color:inherit;text-decoration:none}
     type(bioEl,"breaking builds before your users do.",30);
   });
 
-  /* ── starfield ── */
-  var cv=document.getElementById('stars');
-  if(cv && !reduce){
-    var cx=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,2),ps=[];
-    function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);}
-    function init(){ps=[];for(var i=0;i<70;i++)ps.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,a:Math.random()*.5+.2,v:Math.random()*.25+.05,tw:Math.random()*6});}
-    var raf;
-    function draw(){
-      cx.clearRect(0,0,W,H);
-      for(var i=0;i<ps.length;i++){var p=ps[i];p.tw+=.03;var tw=(Math.sin(p.tw)*.3+.7);
-        cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fillStyle='rgba(255,255,255,'+(p.a*tw)+')';cx.fill();
-        p.y-=p.v;if(p.y<-2){p.y=H+2;p.x=Math.random()*W;}}
+  /* ── night sky: nebula, milky way, crescent moon, twinkling stars,
+        shooting stars and parallax mountain ridges — all drawn, no images ── */
+  var sky=document.getElementById('sky');
+  if(sky){
+    var g=sky.getContext('2d'), W=0, H=0, dpr=Math.min(devicePixelRatio||1,2);
+    var base=null, far=null, near=null, stars=[], shoots=[], mx=0, my=0, tx=0, ty=0, raf=0, nextShoot=0;
+    function rnd(a,b){return a+Math.random()*(b-a);}
+    function layer(w,h){var c=document.createElement('canvas');c.width=Math.ceil(w*dpr);c.height=Math.ceil(h*dpr);var x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);return [c,x];}
+
+    function buildBase(){
+      var L=layer(W,H), c=L[0], b=L[1];
+      var sk=b.createLinearGradient(0,0,0,H);
+      sk.addColorStop(0,'#04030a'); sk.addColorStop(.42,'#0c0922'); sk.addColorStop(.7,'#1e1140');
+      sk.addColorStop(.86,'#361744'); sk.addColorStop(1,'#10091c');
+      b.fillStyle=sk; b.fillRect(0,0,W,H);
+      // nebula clouds
+      [[.18,.26,.55,'124,92,255',.20],[.82,.18,.42,'59,130,246',.15],[.62,.5,.5,'244,114,182',.11],[.3,.6,.38,'52,211,153',.07]]
+      .forEach(function(n){var r=Math.max(W,H)*n[2],gr=b.createRadialGradient(W*n[0],H*n[1],0,W*n[0],H*n[1],r);
+        gr.addColorStop(0,'rgba('+n[3]+','+n[4]+')');gr.addColorStop(1,'rgba('+n[3]+',0)');b.fillStyle=gr;b.fillRect(0,0,W,H);});
+      // milky way band
+      b.save(); b.translate(W*.5,H*.38); b.rotate(-.52);
+      var bw=H*.16, band=b.createLinearGradient(0,-bw,0,bw);
+      band.addColorStop(0,'rgba(210,200,255,0)');band.addColorStop(.5,'rgba(210,200,255,.075)');band.addColorStop(1,'rgba(210,200,255,0)');
+      b.fillStyle=band; b.fillRect(-W*1.6,-bw,W*3.2,bw*2);
+      var dust=Math.min(2600,Math.round(W*H/700));
+      for(var i=0;i<dust;i++){var by=(Math.random()+Math.random()+Math.random()-1.5)*bw*.9;
+        b.fillStyle='rgba(255,255,255,'+rnd(.05,.32)+')';b.fillRect(rnd(-W*1.3,W*1.3),by,rnd(.4,1.2),rnd(.4,1.2));}
+      b.restore();
+      // crescent moon with halo
+      var mxp=W*.82, myp=H*.13, mr=Math.max(16,Math.min(W,H)*.042);
+      var halo=b.createRadialGradient(mxp,myp,mr*.4,mxp,myp,mr*7);
+      halo.addColorStop(0,'rgba(230,224,255,.20)');halo.addColorStop(1,'rgba(230,224,255,0)');b.fillStyle=halo;b.fillRect(0,0,W,H);
+      var M=layer(mr*2+4,mr*2+4), mc=M[1];
+      var mg=mc.createRadialGradient(mr*.8,mr*.8,mr*.2,mr+2,mr+2,mr);mg.addColorStop(0,'#FFFFFF');mg.addColorStop(1,'#CFC8F2');
+      mc.fillStyle=mg;mc.beginPath();mc.arc(mr+2,mr+2,mr,0,6.283);mc.fill();
+      mc.globalCompositeOperation='destination-out';mc.beginPath();mc.arc(mr+2+mr*.52,mr+2-mr*.22,mr*.92,0,6.283);mc.fill();
+      b.drawImage(M[0],mxp-mr-2,myp-mr-2,mr*2+4,mr*2+4);
+      // horizon glow
+      var hg=b.createLinearGradient(0,H*.58,0,H);hg.addColorStop(0,'rgba(244,114,182,0)');
+      hg.addColorStop(.65,'rgba(244,114,182,.15)');hg.addColorStop(1,'rgba(124,92,255,.06)');b.fillStyle=hg;b.fillRect(0,H*.58,W,H*.42);
+      return c;
+    }
+    function ridge(yFrac,amp,top,bottom,rim){
+      var w=W+80, L=layer(w,H), x=L[1];
+      var p1=rnd(0,6),p2=rnd(0,6),p3=rnd(0,6),f1=rnd(.0035,.006),f2=rnd(.01,.016),f3=rnd(.03,.045);
+      function yAt(i){return H*yFrac-(Math.sin(i*f1+p1)*amp+Math.sin(i*f2+p2)*amp*.45+Math.sin(i*f3+p3)*amp*.14);}
+      x.beginPath();x.moveTo(0,H);for(var i=0;i<=w;i+=4)x.lineTo(i,yAt(i));x.lineTo(w,H);x.closePath();
+      var gr=x.createLinearGradient(0,H*yFrac-amp*1.6,0,H);gr.addColorStop(0,top);gr.addColorStop(1,bottom);x.fillStyle=gr;x.fill();
+      if(rim){x.beginPath();for(var k=0;k<=w;k+=4){k?x.lineTo(k,yAt(k)):x.moveTo(k,yAt(k));}
+        x.strokeStyle=rim;x.lineWidth=1.2;x.stroke();}
+      return L[0];
+    }
+    function buildStars(){
+      stars=[];var n=Math.min(460,Math.round(W*H/4200));
+      for(var i=0;i<n;i++){var tint=Math.random();
+        stars.push({x:Math.random()*W,y:Math.pow(Math.random(),1.25)*H*.8,r:Math.random()<.08?rnd(1.3,2.1):rnd(.35,1.15),
+          a:rnd(.35,1),tw:rnd(0,6.28),sp:rnd(.008,.035),d:rnd(.2,1),
+          c:tint<.12?'180,200,255':tint<.2?'255,200,230':'255,255,255'});}
+    }
+    function build(){
+      W=innerWidth;H=innerHeight;sky.width=Math.ceil(W*dpr);sky.height=Math.ceil(H*dpr);
+      base=buildBase();
+      far=ridge(.84,H*.07,'#211545','#0d0a1e','rgba(190,160,255,.18)');
+      near=ridge(.93,H*.05,'#0d0a1c','#050409',null);
+      buildStars();
+    }
+    function draw(ts){
+      tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
+      g.setTransform(dpr,0,0,dpr,0,0);
+      g.drawImage(base,0,0,W,H);
+      for(var i=0;i<stars.length;i++){var s=stars[i];s.tw+=s.sp;
+        var al=s.a*(.55+.45*Math.sin(s.tw)),sx=s.x-tx*14*s.d,sy=s.y-ty*9*s.d;
+        g.fillStyle='rgba('+s.c+','+al.toFixed(3)+')';
+        if(s.r>1.2){g.beginPath();g.arc(sx,sy,s.r,0,6.283);g.fill();
+          g.fillStyle='rgba('+s.c+','+(al*.18).toFixed(3)+')';g.beginPath();g.arc(sx,sy,s.r*3.2,0,6.283);g.fill();}
+        else g.fillRect(sx,sy,s.r*1.6,s.r*1.6);}
+      if(ts>nextShoot){nextShoot=ts+rnd(2600,6500);
+        var dir=Math.random()<.5?-1:1;shoots.push({x:rnd(W*.15,W*.85),y:rnd(H*.04,H*.34),vx:dir*rnd(7,11),vy:rnd(2.6,4.4),life:1});}
+      for(var k=shoots.length-1;k>=0;k--){var sh=shoots[k];sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=.018;
+        if(sh.life<=0){shoots.splice(k,1);continue;}
+        var tl=g.createLinearGradient(sh.x,sh.y,sh.x-sh.vx*9,sh.y-sh.vy*9);
+        tl.addColorStop(0,'rgba(255,255,255,'+(sh.life*.95).toFixed(3)+')');tl.addColorStop(1,'rgba(201,184,255,0)');
+        g.strokeStyle=tl;g.lineWidth=1.6;g.lineCap='round';g.beginPath();g.moveTo(sh.x,sh.y);g.lineTo(sh.x-sh.vx*9,sh.y-sh.vy*9);g.stroke();}
+      g.drawImage(far,-40-tx*16,ty*5,W+80,H);
+      g.drawImage(near,-40-tx*30,ty*8,W+80,H);
       raf=requestAnimationFrame(draw);
     }
-    size();init();draw();
-    addEventListener('resize',function(){size();init();});
-    document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(raf);else raf=requestAnimationFrame(draw);});
+    build();
+    if(reduce){ draw(0); cancelAnimationFrame(raf); }
+    else{
+      raf=requestAnimationFrame(draw);
+      addEventListener('mousemove',function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5;},{passive:true});
+      document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(raf);else raf=requestAnimationFrame(draw);});
+    }
+    var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){build();if(reduce)draw(0);},150);});
   }
 
   /* ── live Steal A Seed players (roproxy) ── */
@@ -363,6 +453,25 @@ a{color:inherit;text-decoration:none}
     .then(function(r){if(!r.ok)throw 0;return r.json();})
     .then(function(j){var g=j&&j.data&&j.data[0];if(g&&typeof g.playing==='number')ccu.textContent=comma(g.playing);})
     .catch(function(){ccu.textContent='live';});
+
+  /* ── view counter: counted once per visitor per day (abacus, CORS-open) ── */
+  (function(){
+    var el=document.getElementById('views'), pill=document.getElementById('views-pill');
+    if(!el) return;
+    var day=new Date().toISOString().slice(0,10), seen=false;
+    try{ seen=localStorage.getItem('ohz-view-day')===day; }catch(e){}
+    fetch('https://abacus.jasoncameron.dev/'+(seen?'get':'hit')+'/ohhamza-portfolio/site-views',{cache:'no-store'})
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(j){
+        if(typeof j.value!=='number') throw 0;
+        if(!seen){ try{ localStorage.setItem('ohz-view-day',day); }catch(e){} }
+        var to=j.value, t0=null;
+        if(reduce){ el.textContent=comma(to); return; }
+        (function step(ts){ if(t0===null)t0=ts; var p=Math.min((ts-t0)/900,1);
+          el.textContent=comma(Math.round(to*(1-Math.pow(1-p,3)))); if(p<1)requestAnimationFrame(step); })(performance.now());
+      })
+      .catch(function(){ pill.hidden=true; });
+  })();
 
   /* ── live Discord member count ── */
   fetch('https://discord.com/api/v10/invites/sabmiddleman?with_counts=true',{cache:'no-store'})
@@ -433,68 +542,64 @@ a{color:inherit;text-decoration:none}
     })
     .catch(function(){ /* fallback card already shown */ });
 
-  /* ── music player ──
-     Plays the real track through YouTube's official IFrame player (the licensed
-     way to stream it on a site — the audio is never copied or self-hosted).
-     If YouTube can't load (e.g. blocked by a strict CSP), the card falls back to
-     a visual "now playing" so it never looks broken. */
+  /* ── music ──
+     YouTube's official player (visible, tappable) streams the track; the audio is
+     never copied or self-hosted. iPhone only lets a cross-origin player start from
+     a tap on the player itself, so if the custom button's request is ignored, a
+     hint points at the cover. */
   var VIDEO_ID='dzVbKrWvI9Y';
   var player=document.getElementById('player'), btn=document.getElementById('playbtn'),
       pi=document.getElementById('pi'), fill=document.getElementById('fill'),
       cur=document.getElementById('cur'), dur=document.getElementById('dur'),
-      bar=document.getElementById('bar'), ytwrap=document.getElementById('ytwrap');
+      bar=document.getElementById('bar'), frame=document.getElementById('ytframe'),
+      hintEl=document.getElementById('taphint');
   var PLAY='<path d="M8 5v14l11-7z"/>', PAUSE='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
-  function fmt(s){s=s||0;var m=Math.floor(s/60),ss=Math.floor(s%60);return m+':'+(ss<10?'0':'')+ss;}
+  function fmt(x){x=x||0;var m=Math.floor(x/60),ss=Math.floor(x%60);return m+':'+(ss<10?'0':'')+ss;}
+  var yt=null, ready=false, failed=false, poll=null, hintT=null;
 
-  var yt=null, ytReady=false, poll=null, visualTimer=null, vDUR=210, vt=0, wantPlay=false;
   function setBtn(on){ pi.innerHTML=on?PAUSE:PLAY; player.classList.toggle('playing',on); }
-
-  /* visual fallback */
-  function visual(on){
-    clearInterval(visualTimer);
-    setBtn(on);
-    if(on && !reduce){ visualTimer=setInterval(function(){ vt=(vt+.25)%vDUR; fill.style.width=(vt/vDUR*100)+'%'; cur.textContent=fmt(vt); },250); }
+  function hint(on){
+    clearTimeout(hintT); hintEl.classList.toggle('show',on); frame.classList.toggle('pulse',on);
+    if(on) hintT=setTimeout(function(){hint(false);},4000);
   }
+  function tickUI(){ if(!yt||!yt.getDuration)return; var d=yt.getDuration(),c=yt.getCurrentTime();
+    if(d){ dur.textContent=fmt(d); fill.style.width=(c/d*100)+'%'; cur.textContent=fmt(c); } }
+  function startPoll(){ clearInterval(poll); poll=setInterval(tickUI,250); }
+  function stopPoll(){ clearInterval(poll); tickUI(); }
 
-  /* YouTube */
-  function startPoll(){ clearInterval(poll); poll=setInterval(function(){
-    if(!yt||!yt.getDuration)return; var d=yt.getDuration(), c=yt.getCurrentTime();
-    if(d){ dur.textContent=fmt(d); fill.style.width=(c/d*100)+'%'; cur.textContent=fmt(c); }
-  },250); }
   function makePlayer(){
-    yt=new YT.Player('ytplayer',{videoId:VIDEO_ID,
+    yt=new YT.Player('ytplayer',{videoId:VIDEO_ID,width:'100%',height:'100%',
       playerVars:{playsinline:1,rel:0,modestbranding:1},
       events:{
-        onReady:function(){ ytReady=true; try{ var d=yt.getDuration(); if(d) dur.textContent=fmt(d); }catch(e){} if(wantPlay){ ytwrap.hidden=false; requestAnimationFrame(function(){ytwrap.classList.add('open');}); yt.playVideo(); } },
+        onReady:function(){ ready=true; frame.classList.add('ready'); tickUI(); },
         onStateChange:function(e){
-          if(e.data===1){ setBtn(true); startPoll(); }        // playing
-          else if(e.data===2){ setBtn(false); clearInterval(poll); } // paused
-          else if(e.data===0){ setBtn(false); clearInterval(poll); fill.style.width='0%'; cur.textContent='0:00'; } // ended
-        }
+          if(e.data===1){ setBtn(true); hint(false); startPoll(); }
+          else if(e.data===2){ setBtn(false); stopPoll(); }
+          else if(e.data===0){ setBtn(false); stopPoll(); fill.style.width='0%'; cur.textContent='0:00'; }
+        },
+        onError:function(){ failed=true; }
       }});
   }
-  var ytFailed=false;
-  function loadYT(){
+  (function loadYT(){
     if(window.YT&&window.YT.Player){ makePlayer(); return; }
     var t=document.createElement('script'); t.src='https://www.youtube.com/iframe_api';
-    t.onerror=function(){ ytFailed=true; visual(true); };
+    t.onerror=function(){ failed=true; };
     window.onYouTubeIframeAPIReady=makePlayer;
     document.head.appendChild(t);
-    // if the API never initialises (CSP), fall back
-    setTimeout(function(){ if(!ytReady && !yt){ ytFailed=true; if(wantPlay) visual(true); } },3500);
-  }
+    setTimeout(function(){ if(!ready) failed=true; },8000);
+  })();
 
-  var on=false;
   btn.addEventListener('click',function(){
-    on=!on; wantPlay=on;
-    if(ytFailed){ visual(on); return; }
-    if(!ytReady){ setBtn(on); return; }   // will play/pause once ready (onReady honours wantPlay)
-    if(on){ ytwrap.hidden=false; requestAnimationFrame(function(){ytwrap.classList.add('open');}); yt.playVideo(); }
-    else { yt.pauseVideo(); }
+    if(failed||!ready){ if(failed){ window.open('https://youtu.be/'+VIDEO_ID,'_blank','noopener'); } else { hint(true); } return; }
+    var st=yt.getPlayerState();
+    if(st===1||st===3){ yt.pauseVideo(); return; }
+    yt.playVideo();
+    setTimeout(function(){ var s=yt.getPlayerState(); if(s!==1&&s!==3) hint(true); },1400);
   });
-
-  // pre-load the player so the first tap plays without waiting on the API
-  loadYT();
+  bar.addEventListener('click',function(e){
+    if(!ready||!yt.getDuration)return; var d=yt.getDuration(); if(!d)return;
+    var r=bar.getBoundingClientRect(); yt.seekTo(((e.clientX-r.left)/r.width)*d,true); tickUI();
+  });
 
   /* 3D tilt that follows the pointer */
   var card=document.querySelector('.card');
