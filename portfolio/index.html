@@ -28,7 +28,7 @@
 :root{
   --bg:#0D0B11; --bg-2:#15121B; --bg-3:#1D1925; --line:#2A2531; --line-2:#3A3344;
   --text:#F3EFEA; --text-2:#BDB5AC; --text-3:#8F8796;
-  --amber:#F5A524; --violet:#A487FF; --live:#4ADE80;
+  --amber:#F5A524; --violet:#A487FF; --pink:#FF5CAD; --live:#4ADE80;
   --f-dis:'Unbounded',system-ui,sans-serif; --f-body:'Instrument Sans',system-ui,sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
   --ease:cubic-bezier(.2,.75,.25,1); --gut:clamp(18px,5vw,56px); --max:1180px;
 }
@@ -92,12 +92,14 @@ img{max-width:100%;display:block}
 .stk img{width:100%;height:100%;object-fit:cover}
 .stk-rys{width:58%;aspect-ratio:1;left:4%;top:4%;transform:rotate(-7deg)}
 .stk-sab{width:52%;aspect-ratio:1;right:2%;bottom:4%;transform:rotate(6deg)}
+.stk-ntf{width:30%;aspect-ratio:1;right:3%;top:0;transform:rotate(11deg)}
 .stk-me{width:26%;aspect-ratio:1;left:44%;top:40%;border-radius:50%;z-index:2;
   box-shadow:0 18px 40px -12px rgba(0,0,0,.8),0 0 0 5px var(--bg)}
 .stickers:hover .stk-rys{transform:rotate(-10deg) translate(-8px,-6px)}
 .stickers:hover .stk-sab{transform:rotate(9deg) translate(8px,6px)}
+.stickers:hover .stk-ntf{transform:rotate(15deg) translate(8px,-8px)}
 @media (max-width:860px){
-  .stk-rys{width:44%;left:2%;top:0} .stk-sab{width:40%;right:4%;bottom:0} .stk-me{width:22%;left:40%;top:34%}
+  .stk-rys{width:44%;left:2%;top:0} .stk-sab{width:40%;right:4%;bottom:0} .stk-me{width:22%;left:40%;top:34%} .stk-ntf{width:26%;right:8%;top:0}
 }
 
 /* numbers */
@@ -147,6 +149,8 @@ img{max-width:100%;display:block}
 .c-rys .role,.c-rys .links a{color:var(--amber)}
 .c-sab .role,.c-sab .links a{color:var(--violet)}
 .c-sas .role,.c-sas .links a{color:var(--live)}
+.c-ntf .role,.c-ntf .links a{color:var(--pink)}
+.shot-ntf{background:#0B0712}
 
 /* also */
 .also{padding-block:0 clamp(64px,9vw,120px)}
@@ -237,6 +241,7 @@ footer a:hover{color:var(--text)}
         <ul class="roles">
           <li><span>Co-owner, <b>Ry's Middleman Services</b></span></li>
           <li><span>Founder, <b>SAB Market</b></span></li>
+          <li><span>Owner, <b>SAB Notifier</b></span></li>
           <li><span>Exploit QA, <b>Steal A Seed</b></span></li>
         </ul>
         <div class="hero-cta">
@@ -246,6 +251,7 @@ footer a:hover{color:var(--text)}
         </div>
       </div>
       <div class="stickers" aria-hidden="true">
+        <div class="stk stk-ntf"><img src="/img/notifier-icon.webp" alt="" width="256" height="256"></div>
         <div class="stk stk-rys"><img src="/img/rys-icon.webp" alt="" width="256" height="256"></div>
         <div class="stk stk-sab"><img src="/img/sab-icon.webp" alt="" width="256" height="256"></div>
         <div class="stk stk-me"><img src="https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=256" alt="" width="256" height="256"></div>
@@ -263,7 +269,7 @@ footer a:hover{color:var(--text)}
 
   <section class="work" id="work">
     <div class="wrap">
-      <div class="sec-title rise"><h2>Work</h2><span class="label">Three things I run or test</span></div>
+      <div class="sec-title rise"><h2>Work</h2><span class="label">What I run and what I test</span></div>
 
       <article class="case c-rys rise">
         <a class="shot" href="https://rysmm.com/" target="_blank" rel="noopener">
@@ -286,24 +292,39 @@ footer a:hover{color:var(--text)}
       </article>
 
       <article class="case c-sab flip rise">
-        <a class="shot" href="https://discord.gg/sabvalue" target="_blank" rel="noopener">
+        <a class="shot" href="https://sabmarketvalue.com/" target="_blank" rel="noopener">
           <img src="/img/sab-banner.webp" alt="SAB Market Values banner art" width="1024" height="575" loading="lazy">
         </a>
         <div>
           <span class="role">Founder</span>
           <h3>SAB Market</h3>
-          <p>A values server for Steal a Brainrot: what every brainrot is worth, kept up to date through every game update, so traders know a fair deal before they make one.</p>
+          <p>Values for Steal a Brainrot: what every brainrot is worth, kept up to date through every game update, so traders know a fair deal before they make one. It runs as a Discord server and as <b>sabmarketvalue.com</b>, with live exist counts and win / fair / loss trade checks.</p>
           <ul class="facts">
             <li><b data-live="mk">20K</b><span>members</span></li>
             <li><b data-live="mk-on">2K</b><span>online now</span></li>
           </ul>
           <div class="links">
             <a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">Join the server <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
           </div>
         </div>
       </article>
 
-      <article class="case c-sas rise">
+      <article class="case c-ntf rise">
+        <a class="shot shot-ntf" href="https://sabnotifier.net/" target="_blank" rel="noopener">
+          <img src="/img/notifier-og.webp" alt="SAB Notifier: every OG claim, live. Track any player, privately." width="1200" height="630" loading="lazy">
+        </a>
+        <div>
+          <span class="role">Owner</span>
+          <h3>SAB Notifier</h3>
+          <p>A live feed of every OG brainrot claim in Steal a Brainrot, free for anyone to browse. On top of that, private player tracking: add a player and get pinged <b>the moment they join</b> the game.</p>
+          <div class="links">
+            <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="case c-sas flip rise">
         <a class="shot" id="sas-shot" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
           <div class="shot-fallback" id="sas-fallback"><span><b>Steal A Seed</b><span class="mono">on Roblox</span></span></div>
           <span class="live-tag"><i aria-hidden="true"></i><span id="sas-live">live</span></span>
@@ -348,6 +369,7 @@ footer a:hover{color:var(--text)}
         <ul class="reach">
           <li><span class="k">Discord</span><a class="v" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">@ohhamza &rarr;</a></li>
           <li><span class="k">User ID</span><button class="v" type="button" data-copy="801691377796120577">801691377796120577 <span class="cl">(copy)</span></button></li>
+          <li><span class="k">Sites</span><span class="v"><a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com</a> &middot; <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net</a></span></li>
           <li><span class="k">Servers</span><span class="v"><a href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">sabmiddleman</a> &middot; <a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">sabvalue</a></span></li>
         </ul>
       </div>
@@ -370,7 +392,7 @@ footer a:hover{color:var(--text)}
 <footer>
   <div class="wrap">
     <span>&copy; 2026 Hamza</span>
-    <span><a href="/">Profile</a> &nbsp;&middot;&nbsp; <a href="https://rysmm.com/" target="_blank" rel="noopener">rysmm.com</a> &nbsp;&middot;&nbsp; <a href="#top">Back to top</a></span>
+    <span><a href="/">Profile</a> &nbsp;&middot;&nbsp; <a href="https://rysmm.com/" target="_blank" rel="noopener">rysmm.com</a> &nbsp;&middot;&nbsp; <a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com</a> &nbsp;&middot;&nbsp; <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net</a> &nbsp;&middot;&nbsp; <a href="#top">Back to top</a></span>
   </div>
 </footer>
 

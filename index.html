@@ -174,8 +174,9 @@ a{color:inherit;text-decoration:none}
   background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   color:var(--text-2);transition:transform .22s var(--ez),color .22s var(--ez),border-color .22s var(--ez),background .22s var(--ez)}
 .soc svg{width:22px;height:22px}
+@media (max-width:440px){.socials{flex-wrap:nowrap;gap:clamp(5px,1.8vw,9px)}.soc{flex:1 1 0;width:auto;height:auto;max-width:48px;min-width:40px;aspect-ratio:1}.soc svg{width:20px;height:20px}}
 .soc:hover{transform:translateY(-4px) scale(1.08);color:#fff;border-color:var(--gc,var(--stroke-2));background:var(--glass-2);box-shadow:0 0 22px -2px var(--gc,rgba(124,92,255,.6)),inset 0 0 12px -4px var(--gc,transparent)}
-.soc:nth-child(1){--gc:#5865F2}.soc:nth-child(2){--gc:#E2231A}.soc:nth-child(3){--gc:#34D399}.soc:nth-child(4){--gc:#7C5CFF}.soc:nth-child(5){--gc:#F472B6}
+.soc:nth-child(1){--gc:#5865F2}.soc:nth-child(2){--gc:#E2231A}.soc:nth-child(3){--gc:#34D399}.soc:nth-child(4){--gc:#7C5CFF}.soc:nth-child(5){--gc:#F5A524}.soc:nth-child(6){--gc:#FF5CAD}
 .soc:hover .tip{opacity:1;transform:translateY(0)}
 .soc .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);opacity:0;
   font-family:var(--f-mono);font-size:10px;white-space:nowrap;padding:4px 8px;border-radius:6px;
@@ -395,9 +396,13 @@ body.sheet-open{overflow:hidden}
         <span class="tip">SAB Middleman</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg>
       </a>
-      <a class="soc" href="https://discord.gg/sabvalue" target="_blank" rel="noopener" aria-label="SAB Market">
-        <span class="tip">SAB Market</span>
+      <a class="soc" href="https://sabmarketvalue.com/" target="_blank" rel="noopener" aria-label="SAB Market Value">
+        <span class="tip">sabmarketvalue.com</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg>
+      </a>
+      <a class="soc" href="https://sabnotifier.net/" target="_blank" rel="noopener" aria-label="SAB Notifier">
+        <span class="tip">sabnotifier.net</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
       </a>
     </div>
 
