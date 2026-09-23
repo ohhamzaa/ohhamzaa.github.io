@@ -3,941 +3,473 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>hamza — exploit QA &amp; Roblox community operator</title>
-<meta name="description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
-<meta name="theme-color" content="#0A0B0D">
+<title>hamza</title>
+<meta name="description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
+<meta name="theme-color" content="#06060A">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://ohhamza.vercel.app/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%230A0B0D'/%3E%3Crect%20x='.5'%20y='.5'%20width='31'%20height='31'%20rx='7.5'%20fill='none'%20stroke='%23282C33'/%3E%3Ctext%20x='16'%20y='22'%20font-family='system-ui,sans-serif'%20font-size='16'%20font-weight='600'%20fill='%23F2F3F5'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
-
-<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='9'%20fill='%23090910'/%3E%3Ctext%20x='16'%20y='23'%20font-family='system-ui,sans-serif'%20font-size='19'%20font-weight='800'%20fill='%23F4F5FA'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="profile">
 <meta property="og:site_name" content="hamza">
 <meta property="og:url" content="https://ohhamza.vercel.app/">
-<meta property="og:title" content="hamza — exploit QA &amp; Roblox community operator">
-<meta property="og:description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
+<meta property="og:title" content="hamza">
+<meta property="og:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
 <meta property="og:image" content="https://ohhamza.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="hamza — I build the servers. Then I break the games.">
-
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="hamza — exploit QA &amp; Roblox community operator">
-<meta name="twitter:description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
+<meta name="twitter:title" content="hamza">
+<meta name="twitter:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
 <meta name="twitter:image" content="https://ohhamza.vercel.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 :root{
   color-scheme: dark;
-
-  /* cool near-black, monochrome — colour only on the live dot */
-  --bg:      #0A0B0D;
-  --surface: #0E1013;
-  --raised:  #131519;
-  --line:    #1C1F24;
-  --line-2:  #282C33;
-  --line-3:  #383D45;
-
-  --text:   #F2F3F5;
-  --text-2: #A6AAAF;
-  --text-3: #7E838A;   /* lightened from #6C7177, which failed WCAG AA (4.0:1) on small labels */
-
-  --live:   #3FD98A;
-
-  --f-dis:  'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
-  --f-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --ink:      #06060A;
+  --glass:    rgba(255,255,255,.055);
+  --glass-2:  rgba(255,255,255,.09);
+  --stroke:   rgba(255,255,255,.12);
+  --stroke-2: rgba(255,255,255,.22);
+  --text:     #F4F5FA;
+  --text-2:   rgba(244,245,250,.66);
+  --text-3:   rgba(244,245,250,.42);
+  --on:       #4ADE80;
+  --idle:     #FACC15;
+  --a1: #7C5CFF;  --a2: #3B82F6;  --a3: #34D399;  --a4: #F472B6;
+  --f-dis: 'Space Grotesk', system-ui, sans-serif;
   --f-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
-
   --ez: cubic-bezier(.22,.8,.3,1);
-  --gut: clamp(18px, 5vw, 32px);
-  --r: 10px;
-  --nav: 62px;
 }
-
 *{box-sizing:border-box}
-
+html,body{height:100%}
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:var(--f-body);font-size:16px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  margin:0;background:var(--ink);color:var(--text);
+  font-family:var(--f-dis);-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;min-height:100%;
 }
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
-
-::selection{background:#F2F3F5;color:#0A0B0D}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--a1);outline-offset:3px;border-radius:8px}
 
-.wrap{width:100%;max-width:1080px;margin-inline:auto;padding-inline:var(--gut)}
-.narrow{max-width:760px;margin-inline:auto}
+/* ── animated background ── */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--ink)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;mix-blend-mode:screen;
+  will-change:transform}
+.b1{width:60vmax;height:60vmax;background:radial-gradient(circle,var(--a1),transparent 66%);
+  top:-18vmax;left:-12vmax;animation:drift1 22s var(--ez) infinite alternate}
+.b2{width:52vmax;height:52vmax;background:radial-gradient(circle,var(--a2),transparent 66%);
+  bottom:-16vmax;right:-10vmax;animation:drift2 26s var(--ez) infinite alternate}
+.b3{width:46vmax;height:46vmax;background:radial-gradient(circle,var(--a3),transparent 66%);
+  bottom:2vmax;left:6vmax;animation:drift3 30s var(--ez) infinite alternate}
+.b4{width:40vmax;height:40vmax;background:radial-gradient(circle,var(--a4),transparent 66%);
+  top:8vmax;right:-6vmax;animation:drift4 24s var(--ez) infinite alternate}
+@keyframes drift1{to{transform:translate(14vmax,10vmax) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-12vmax,-8vmax) scale(1.1)}}
+@keyframes drift3{to{transform:translate(10vmax,-10vmax) scale(1.2)}}
+@keyframes drift4{to{transform:translate(-10vmax,12vmax) scale(1.05)}}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+.bg::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 90% 70% at 50% 40%,transparent 40%,rgba(6,6,10,.55) 100%),
+             linear-gradient(180deg,rgba(6,6,10,.3),transparent 20%,transparent 70%,rgba(6,6,10,.6))}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-h1,h2,h3{font-family:var(--f-dis);margin:0;letter-spacing:-.028em;text-wrap:balance;font-weight:500}
+/* ── layout ── */
+.stage{position:relative;z-index:3;min-height:100%;display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,5vw,44px) 16px}
+.card{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  animation:enter 1s var(--ez) both}
+@keyframes enter{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
 
-/* ───────── nav ───────── */
-.nav{
-  position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
-  height:var(--nav);display:flex;align-items:center;
-  background:rgba(10,11,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid transparent;transition:border-color .3s var(--ez),background .3s var(--ez);
-}
-.nav.stuck{border-bottom-color:var(--line);background:rgba(10,11,13,.9)}
-.nav-in{display:flex;align-items:center;gap:8px;width:100%}
-.brand{display:flex;align-items:center;gap:10px;margin-right:auto;padding-block:8px;
-  font-family:var(--f-dis);font-weight:600;font-size:15.5px;letter-spacing:-.02em}
-.glyph{width:26px;height:26px;border-radius:7px;border:1px solid var(--line-2);background:var(--raised);
-  display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);
-  transition:border-color .3s var(--ez),color .3s var(--ez)}
-.brand:hover .glyph{border-color:var(--line-3);color:var(--text)}
-.nlinks{display:flex;gap:2px;margin-right:10px}
-.nlinks a{padding:8px 12px;border-radius:8px;font-size:14px;color:var(--text-2);transition:color .2s var(--ez),background .2s var(--ez)}
-.nlinks a:hover{color:var(--text);background:var(--raised)}
-@media (max-width:760px){.nlinks{display:none}}
+/* ── avatar ── */
+.ava-wrap{position:relative;margin-bottom:20px}
+.ava{width:104px;height:104px;border-radius:50%;position:relative;display:grid;place-items:center;
+  background:linear-gradient(150deg,#20203a,#0e0e18);border:2px solid transparent;
+  font-family:var(--f-dis);font-weight:700;font-size:44px;color:#fff}
+.ava::before{content:"";position:absolute;inset:-3px;border-radius:50%;padding:3px;
+  background:conic-gradient(from 0deg,var(--a1),var(--a2),var(--a3),var(--a4),var(--a1));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ava-glow{position:absolute;inset:-14px;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(124,92,255,.5),transparent 70%);animation:breathe 4s var(--ez) infinite}
+@keyframes breathe{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.status-dot{position:absolute;right:6px;bottom:6px;width:20px;height:20px;border-radius:50%;
+  background:var(--text-3);border:3px solid #0b0b14;transition:background .3s}
+.status-dot.on{background:var(--on)}
+.status-dot.idle{background:var(--idle)}
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;
-  font-family:var(--f-dis);font-weight:600;font-size:14.5px;letter-spacing:-.01em;
-  padding:11px 18px;border-radius:9px;border:1px solid transparent;position:relative;overflow:hidden;
-  transition:transform .25s var(--ez),background .25s var(--ez),border-color .25s var(--ez),color .25s var(--ez);
-}
-.btn-p{background:#F4F5F7;color:#0A0B0D}
-.btn-p::after{content:"";position:absolute;top:0;bottom:0;width:38%;left:-45%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-18deg)}
-.btn-p:hover{background:#fff;transform:translateY(-1px)}
-.btn-p:hover::after{animation:shine .7s var(--ez)}
-@keyframes shine{to{left:118%}}
-.btn-g{background:var(--raised);color:var(--text);border-color:var(--line-2)}
-.btn-g:hover{border-color:var(--line-3);background:#171A1E;transform:translateY(-1px)}
-.btn .ar{transition:transform .25s var(--ez);opacity:.6}
-.btn:hover .ar{transform:translateX(2px);opacity:1}
-.nav .btn{padding:9px 15px;font-size:13.5px}
+/* ── name ── */
+.name{display:flex;align-items:center;gap:9px;justify-content:center}
+.name h1{font-size:clamp(30px,8vw,42px);font-weight:700;letter-spacing:-.03em;margin:0;line-height:1}
+.caret{display:inline-block;width:3px;height:.95em;background:var(--a1);border-radius:2px;
+  animation:blink 1.05s steps(1) infinite;box-shadow:0 0 12px var(--a1)}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.gem{width:22px;height:22px;color:var(--a2);filter:drop-shadow(0 0 8px rgba(59,130,246,.6))}
+.handle{margin-top:8px;font-family:var(--f-mono);font-size:13px;color:var(--text-3)}
 
-/* ───────── reveal ───────── */
-.rv{opacity:1}
-html.js .rv{opacity:0;transform:translateY(14px)}
-html.js .rv.in{opacity:1;transform:none;transition:opacity .65s var(--ez),transform .65s var(--ez)}
+.bioline{margin-top:16px;font-family:var(--f-mono);font-size:13.5px;color:var(--text-2);
+  line-height:1.6;max-width:34ch;min-height:1.6em}
+.meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;align-items:center;
+  font-family:var(--f-mono);font-size:12px;color:var(--text-3)}
+.meta .pill{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.meta .pill.live{color:var(--on)}
+.meta .d{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+.meta .d.g{background:var(--on);color:var(--on)}
 
-/* ───────── hero ───────── */
-.hero{position:relative;overflow:hidden;padding-block:clamp(64px,10vw,124px) clamp(44px,6vw,64px);text-align:center}
-.grid-bg{
-  position:absolute;inset:0;pointer-events:none;opacity:.6;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(ellipse 72% 58% at 50% 34%,#000,transparent 74%);
-  mask-image:radial-gradient(ellipse 72% 58% at 50% 34%,#000,transparent 74%);
-}
-.spot{position:absolute;width:520px;height:520px;pointer-events:none;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.045),transparent 62%);
-  transform:translate(-50%,-50%);left:50%;top:26%;transition:left .5s var(--ez),top .5s var(--ez)}
-.hero-in{position:relative;z-index:3}
+/* ── glass card base ── */
+.glass{width:100%;background:var(--glass);border:1px solid var(--stroke);border-radius:16px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 8px 40px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
 
-.badge{
-  display:inline-flex;align-items:center;gap:9px;padding:6px 13px 6px 10px;border-radius:999px;
-  border:1px solid var(--line-2);background:var(--raised);
-  font-size:12.5px;color:var(--text-2);transition:border-color .3s var(--ez),background .3s var(--ez)}
-.badge:hover{border-color:var(--line-3);background:#171A1E}
-.badge b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-.badge .ar{opacity:.5;font-size:11px}
-.pdot{width:7px;height:7px;border-radius:50%;background:var(--text-3);flex:none;transition:background .3s var(--ez)}
-.pdot.on{background:var(--live);box-shadow:0 0 0 0 rgba(63,217,138,.5);animation:rip 2.4s var(--ez) infinite}
-@keyframes rip{0%{box-shadow:0 0 0 0 rgba(63,217,138,.45)}70%{box-shadow:0 0 0 7px rgba(63,217,138,0)}100%{box-shadow:0 0 0 0 rgba(63,217,138,0)}}
+/* ── discord presence card ── */
+.presence{margin-top:22px;padding:14px 15px;display:flex;align-items:center;gap:13px;text-align:left}
+.presence .pa{width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(150deg,#2a2a44,#16161f) center/cover no-repeat;border:1px solid var(--stroke);
+  position:relative;font-weight:700;font-size:20px;color:#fff}
+.presence .pa .pa-deco{position:absolute;width:138%;height:138%;left:-19%;top:-19%;pointer-events:none;z-index:2}
+.presence .pa .pa-dot{position:absolute;right:-2px;bottom:-2px;width:16px;height:16px;border-radius:50%;z-index:3;
+  background:var(--text-3);border:3px solid #0d0d17;transition:background .3s}
+.presence .pa .pa-dot.on{background:var(--on)}
+.presence .pa .pa-dot.idle{background:var(--idle)}
+.presence .pa .pa-dot.dnd{background:#F04747}
+.presence .pinfo{min-width:0;flex:1}
+.presence .pn{display:flex;align-items:center;gap:7px;font-weight:600;font-size:15px;flex-wrap:wrap}
+.presence .pn #pname{font-family:var(--f-dis)}
+.presence .pbadge{font-family:var(--f-mono);font-size:9px;font-weight:700;letter-spacing:.06em;
+  padding:2px 6px;border-radius:5px;background:var(--glass-2);border:1px solid var(--stroke);color:var(--text-2)}
+.presence .pcustom{margin-top:4px;font-size:12.5px;color:var(--text-2);display:flex;align-items:center;gap:6px;
+  line-height:1.35}
+.presence .pcustom .cemoji{flex:none;display:inline-flex;width:15px;height:15px}
+.presence .pcustom .cemoji svg{width:15px;height:15px}
+.presence .pcustom .cemoji img{width:15px;height:15px}
+.presence .pact{margin-top:5px;font-family:var(--f-mono);font-size:11.5px;color:var(--text-2);
+  display:flex;align-items:center;gap:7px}
+.presence .pact .rd{width:7px;height:7px;border-radius:2px;background:var(--on);flex:none;box-shadow:0 0 8px var(--on)}
+.presence .pact b{color:var(--text);font-weight:500}
 
-.hero h1{font-size:clamp(34px,6.2vw,62px);line-height:1.06;margin-top:26px;max-width:16ch;margin-inline:auto}
-.hero .sub{margin:22px auto 0;max-width:60ch;color:var(--text-2);font-size:clamp(15px,1.7vw,17.5px);line-height:1.62}
-.hero .sub b{color:var(--text);font-weight:500}
-.hero-cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
-/* inline flow, so the dot rides the first line instead of floating beside a wrapped block */
-.avail-note{display:block;margin:22px auto 0;max-width:34ch;
-  font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);text-align:center}
-.avail-note .pdot{display:inline-block;vertical-align:middle;margin-right:8px}
+/* ── socials ── */
+.socials{margin-top:20px;display:flex;flex-wrap:wrap;gap:11px;justify-content:center}
+.soc{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;position:relative;
+  background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:var(--text-2);transition:transform .22s var(--ez),color .22s var(--ez),border-color .22s var(--ez),background .22s var(--ez)}
+.soc svg{width:22px;height:22px}
+.soc:hover{transform:translateY(-4px) scale(1.06);color:#fff;border-color:var(--stroke-2);background:var(--glass-2)}
+.soc:hover .tip{opacity:1;transform:translateY(0)}
+.soc .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);opacity:0;
+  font-family:var(--f-mono);font-size:10px;white-space:nowrap;padding:4px 8px;border-radius:6px;
+  background:#12121c;border:1px solid var(--stroke);color:var(--text);pointer-events:none;transition:.2s var(--ez)}
 
-.up{animation:up .8s var(--ez) both}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* ── stat chips ── */
+.stats{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stat{padding:11px 16px;border-radius:13px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:88px}
+.stat .v{font-size:18px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .v.live{color:var(--on)}
+.stat .k{font-family:var(--f-mono);font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
 
-/* ───────── live board ───────── */
-.board{
-  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);
-  box-shadow:0 30px 70px -50px #000;
-}
-.b-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--raised)}
-.b-top .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--text-2)}
-.b-top .poll{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--text-3);font-variant-numeric:tabular-nums}
-.b-cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line)}
-@media (max-width:860px){.b-cells{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:460px){.b-cells{grid-template-columns:1fr}}
-.cell{background:var(--surface);padding:22px 20px 20px;transition:background .3s var(--ez)}
-.cell:hover{background:var(--raised)}
-.cell .cv{font-family:var(--f-dis);font-weight:600;font-size:clamp(26px,3.3vw,34px);line-height:1;
-  letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.cell .cv.flash{animation:fl .6s var(--ez)}
-@keyframes fl{0%{opacity:.35}100%{opacity:1}}
-.cell .ck{margin-top:11px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
-.cell .cn{margin-top:7px;font-size:13px;color:var(--text-2);line-height:1.5}
-/* the live cell holds the odometer — no flex gap, or the digits fly apart */
-.cell.livecell .cv{display:inline-flex;align-items:flex-end;gap:0}
+/* ── music player ── */
+.player{margin-top:20px;padding:13px 15px;display:flex;align-items:center;gap:13px}
+.art{width:48px;height:48px;border-radius:11px;flex:none;position:relative;overflow:hidden;
+  background:linear-gradient(140deg,var(--a1),var(--a4));display:grid;place-items:center;color:#fff}
+.art svg{width:22px;height:22px;opacity:.95}
+.pl-main{flex:1;min-width:0;text-align:left}
+.pl-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.pl-t{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-time{font-family:var(--f-mono);font-size:10.5px;color:var(--text-3);flex:none}
+.pl-sub{font-family:var(--f-mono);font-size:11px;color:var(--text-3);margin-top:1px}
+.pl-bar{margin-top:8px;height:4px;border-radius:3px;background:var(--glass-2);overflow:hidden;position:relative}
+.pl-fill{position:absolute;inset:0 auto 0 0;width:14%;border-radius:3px;
+  background:linear-gradient(90deg,var(--a1),var(--a4))}
+.pl-btn{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;cursor:pointer;
+  background:#fff;color:#0a0a12;border:0;transition:transform .18s var(--ez)}
+.pl-btn:hover{transform:scale(1.08)}
+.pl-btn svg{width:16px;height:16px}
+.eq{display:flex;gap:2px;align-items:flex-end;height:14px}
+.eq span{width:3px;background:var(--on);border-radius:2px;height:30%}
+.playing .eq span{animation:eq .9s var(--ez) infinite}
+.playing .eq span:nth-child(2){animation-delay:.15s}
+.playing .eq span:nth-child(3){animation-delay:.3s}
+.playing .eq span:nth-child(4){animation-delay:.45s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.ytwrap{margin-top:10px;padding:7px;overflow:hidden;transition:max-height .4s var(--ez),opacity .3s var(--ez);max-height:0;opacity:0}
+.ytwrap.open{max-height:280px;opacity:1}
+#ytplayer{width:100%;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#000}
+#ytplayer iframe{width:100%;height:100%;border:0;display:block}
 
-/* ───────── sections ───────── */
-.sec{padding-block:clamp(60px,9vw,108px);border-top:1px solid var(--line);scroll-margin-top:calc(var(--nav) + 10px)}
-.sh{text-align:center;margin-bottom:clamp(34px,5vw,54px)}
-.sh h2{font-size:clamp(26px,4.2vw,42px);line-height:1.1}
-.sh p{margin:16px auto 0;max-width:56ch;color:var(--text-2);font-size:clamp(14.5px,1.6vw,16.5px)}
-
-/* ───────── record ───────── */
-.recs{display:flex;flex-direction:column;gap:12px}
-.rec{
-  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;
-  padding:22px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
-  transition:border-color .3s var(--ez),background .3s var(--ez),transform .3s var(--ez);
-}
-.rec:hover{border-color:var(--line-3);background:var(--raised);transform:translateY(-2px)}
-@media (max-width:640px){.rec{grid-template-columns:1fr;gap:14px}}
-.rec-h{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
-.rec-h h3{font-size:19px;font-weight:600;letter-spacing:-.02em}
-.tagx{font-family:var(--f-mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
-  padding:4px 8px;border-radius:5px;border:1px solid var(--line-2);color:var(--text-3)}
-.rec p{margin:8px 0 0;color:var(--text-2);font-size:14px;line-height:1.55;max-width:56ch}
-.rec p code{font-family:var(--f-mono);font-size:12.5px;color:var(--text)}
-.rec-r{display:flex;align-items:center;gap:20px;justify-self:end}
-@media (max-width:640px){.rec-r{justify-self:start}}
-.rec-n{text-align:right;font-family:var(--f-dis);font-weight:600;font-size:22px;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-@media (max-width:640px){.rec-n{text-align:left}}
-.rec-n span{display:block;margin-top:4px;font-family:var(--f-mono);font-size:10px;font-weight:400;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--text-3)}
-.rec-go{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;
-  color:var(--text-3);flex:none;transition:border-color .3s var(--ez),color .3s var(--ez),transform .3s var(--ez)}
-.rec:hover .rec-go{border-color:var(--line-3);color:var(--text);transform:translate(2px,-2px)}
-
-/* ───────── cards ───────── */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:880px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.cards{grid-template-columns:1fr}}
-.card{
-  padding:26px 22px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
-  transition:border-color .3s var(--ez),background .3s var(--ez),transform .3s var(--ez);
-}
-.card:hover{border-color:var(--line-3);background:var(--raised);transform:translateY(-3px)}
-.card .ic{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);background:var(--raised);
-  display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);margin-bottom:16px;
-  transition:border-color .3s var(--ez),color .3s var(--ez)}
-.card:hover .ic{border-color:var(--line-3);color:var(--text)}
-.card h3{font-size:16.5px;font-weight:600;letter-spacing:-.02em}
-.card p{margin:9px 0 0;font-size:13.8px;line-height:1.6;color:var(--text-2)}
-
-/* ───────── marquee ───────── */
-.mq{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding-block:13px;position:relative}
-.mq::before,.mq::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
-.mq::before{left:0;background:linear-gradient(90deg,var(--surface),transparent)}
-.mq::after{right:0;background:linear-gradient(270deg,var(--surface),transparent)}
-.mq-run{display:flex;width:max-content;animation:run 46s linear infinite}
-.mq:hover .mq-run{animation-play-state:paused}
-@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.mq-run span{display:flex;align-items:center;gap:22px;padding-inline:22px;white-space:nowrap;
-  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-3)}
-.mq-run span::after{content:"";width:3px;height:3px;border-radius:50%;background:var(--line-3)}
-
-/* ───────── contact ───────── */
-.talk{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:stretch}
-@media (max-width:880px){.talk{grid-template-columns:1fr}}
-.cta-box{
-  border:1px solid var(--line);border-radius:14px;background:var(--surface);
-  padding:clamp(28px,4vw,40px);position:relative;overflow:hidden;display:flex;flex-direction:column;
-  transition:border-color .3s var(--ez),background .3s var(--ez);
-}
-.cta-box:hover{border-color:var(--line-3)}
-.cta-box .glow{position:absolute;left:50%;top:-55%;width:min(620px,150%);aspect-ratio:1;transform:translateX(-50%);
-  pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.055),transparent 62%)}
-.cta-box > *{position:relative;z-index:2}
-.cta-box h3{font-size:clamp(21px,2.9vw,29px);font-weight:600;letter-spacing:-.03em;margin-top:15px}
-.cta-box p{margin:12px 0 0;max-width:44ch;color:var(--text-2);font-size:15px;line-height:1.6}
-.avail{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;padding:6px 12px;border-radius:999px;
-  border:1px solid var(--line-2);background:var(--raised);font-size:12px;color:var(--text-2)}
-.cta-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:26px}
-.dm{margin-top:14px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;
-  font-size:13.5px;color:var(--text-3)}
-.chipbtn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:9px;
-  padding:7px 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--raised);
-  font-family:var(--f-mono);font-size:12.5px;color:var(--text);max-width:100%;
-  transition:border-color .25s var(--ez),background .25s var(--ez)}
-.chipbtn:hover{border-color:var(--line-3);background:#171A1E}
-.chipbtn .ci{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);
-  flex:none;transition:color .25s var(--ez)}
-.chipbtn.done{border-color:rgba(63,217,138,.45)}
-.chipbtn.done .ci{color:var(--live)}
-.chipbtn .val{overflow:hidden;text-overflow:ellipsis}
-
-/* ───────── footer ───────── */
-footer{border-top:1px solid var(--line);padding-block:clamp(40px,6vw,60px) 28px}
-.f-cols{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:32px 24px}
-/* on phones the bio spans the full width and the link lists pair up, so the footer stays compact */
-@media (max-width:760px){
-  .f-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .f-about{grid-column:1/-1}
-}
-@media (max-width:340px){
-  .f-cols{grid-template-columns:1fr}
-  .f-about{grid-column:auto}
-}
-.f-col h4{margin:0 0 14px;font-family:var(--f-dis);font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
-.f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
-/* padded so each link is a comfortable tap target on a phone, not a 16px sliver */
-.f-col a{display:inline-block;padding-block:10px;font-size:13.5px;color:var(--text-2);
-  transition:color .2s var(--ez)}
-.f-col a:hover{color:var(--text)}
-.f-about p{margin:0;max-width:34ch;font-size:13.5px;color:var(--text-2);line-height:1.6}
-.f-about .brand{margin:0 0 14px}
-.f-base{margin-top:clamp(32px,5vw,48px);padding-top:22px;border-top:1px solid var(--line);
-  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-.status{display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;
-  border:1px solid var(--line-2);background:var(--raised);font-size:12.5px;color:var(--text-2)}
-.status b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-.f-base small{font-size:12.5px;color:var(--text-3)}
-
-/* ───────── motion layer ───────── */
-
-/* film grain */
-.grain{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:.038;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
-/* scroll progress on the nav's bottom edge */
-.nav{position:sticky}
-.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;z-index:2;
-  background:linear-gradient(90deg,var(--line-3),var(--text));transition:width .12s linear}
-
-/* word-by-word reveal */
-/* the mask needs room for descenders (g, y, p) or overflow:hidden slices them;
-   the negative margin keeps the extra padding out of the line box */
-.wr{display:inline-block;overflow:hidden;vertical-align:bottom;
-  padding-bottom:.2em;margin-bottom:-.2em}
-html.js .wr > span{display:inline-block;transform:translateY(108%);opacity:0;
-  transition:transform .9s var(--ez),opacity .6s var(--ez)}
-html.js .wr.go > span{transform:none;opacity:1}
-
-/* staggered children */
-html.js .stg > *{opacity:0;transform:translateY(18px)}
-html.js .stg.in > *{opacity:1;transform:none;
-  transition:opacity .6s var(--ez),transform .7s var(--ez)}
-html.js .stg.in > *:nth-child(2){transition-delay:.07s}
-html.js .stg.in > *:nth-child(3){transition-delay:.14s}
-html.js .stg.in > *:nth-child(4){transition-delay:.21s}
-html.js .stg.in > *:nth-child(5){transition-delay:.28s}
-html.js .stg.in > *:nth-child(6){transition-delay:.35s}
-
-/* cursor-tracking glow inside cards and rows */
-.card,.rec{--mx:50%;--my:50%}
-.card::before,.rec::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;z-index:0;
-  background:radial-gradient(400px circle at var(--mx) var(--my),rgba(255,255,255,.075),transparent 68%);
-  transition:opacity .35s var(--ez)}
-.card:hover::before,.rec:hover::before{opacity:1}
-.card{position:relative}
-.card > *,.rec > *{position:relative;z-index:1}
-
-/* light sweeping the live board's top edge */
-.board{position:relative}
-.board::after{content:"";position:absolute;top:0;left:0;height:1px;width:32%;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
-  animation:sheen 7s var(--ez) infinite}
-@keyframes sheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(430%)}}
-
-/* odometer digits on the live count.
-   Each column holds 0-9, so the visual digits are hidden from assistive tech and
-   the real value is carried by a visually-hidden span — otherwise a screen reader
-   reads "0123456789..." and copying the number returns the same garbage. */
-.odo{display:inline-flex;align-items:flex-end;line-height:1}
-.odo-v{display:inline-flex;align-items:flex-end;user-select:none;-webkit-user-select:none}
-/* if the count can't be fetched at all, drop the clause rather than print nonsense */
-:root[data-live="off"] .cnt{display:none}
-.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
-  overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.odo .dg{display:inline-block;height:1em;overflow:hidden}
-.odo .col{display:flex;flex-direction:column;transition:transform .8s var(--ez)}
-.odo .col b{display:block;height:1em;line-height:1;font-weight:inherit}
+.foot{margin-top:24px;font-family:var(--f-mono);font-size:10.5px;color:var(--text-3);letter-spacing:.04em}
 
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-  html.js .rv{opacity:1;transform:none}
-  html.js .stg > *{opacity:1;transform:none}
-  html.js .wr > span{transform:none;opacity:1}
-  .mq-run,.board::after{animation:none}
-  .grain{display:none}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js');</script>
-
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+  <canvas id="stars"></canvas>
+</div>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="nav" id="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top"><span class="glyph">H</span>hamza</a>
-    <nav class="nlinks">
-      <a href="#record">Record</a>
-      <a href="#work">What I do</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="btn btn-p" href="#contact">Work with me</a>
-  </div>
-  <div class="prog" id="prog"></div>
-</header>
+<div class="stage">
+  <div class="card">
 
-<main id="top">
+    <div class="ava-wrap">
+      <div class="ava-glow"></div>
+      <div class="ava">H<span class="status-dot" id="sdot"></span></div>
+    </div>
 
-  <!-- ───── hero ───── -->
-  <section class="hero">
-    <div class="grid-bg"></div>
-    <div class="spot" id="spot"></div>
-    <div class="wrap hero-in">
-      <a class="badge up" style="animation-delay:.05s" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
-        <span class="pdot" id="hdot"></span>
-        <span>Steal A Seed</span><span class="cnt">&nbsp;—&nbsp;<b id="hccu">—</b>&nbsp;playing</span>
-        <span class="ar">↗</span>
+    <div class="name">
+      <h1><span id="typed"></span><span class="caret"></span></h1>
+      <svg class="gem" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 12L2 9l4-6Zm.6 2L4 8.7 12 18l8-9.3L17.4 5H6.6Z"/><path d="M9 3l3 5 3-5M4 9h16" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/></svg>
+    </div>
+    <div class="handle">@ohhamza</div>
+
+    <div class="bioline" id="bio"></div>
+
+    <div class="meta">
+      <span class="pill live"><span class="d g"></span>Open to work</span>
+      <span class="pill">exploit QA &middot; community operator</span>
+    </div>
+
+    <!-- discord presence (live via Lanyard) -->
+    <div class="glass presence" id="presence">
+      <div class="pa" id="pa"><span id="pa-mono">H</span><span class="pa-dot" id="padot"></span></div>
+      <div class="pinfo">
+        <div class="pn"><span id="pname">ohhamza</span>
+          <span class="pbadge">QA</span><span class="pbadge">OWNER</span>
+        </div>
+        <div class="pcustom" id="pcustom">
+          <span class="cemoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <span id="pcustom-text">there's always another build to break</span>
+        </div>
+        <div class="pact" id="pact"><span class="rd"></span><span id="pacttext">Playing <b>Steal A Seed</b></span></div>
+      </div>
+    </div>
+
+    <!-- socials -->
+    <div class="socials">
+      <a class="soc" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener" aria-label="Discord">
+        <span class="tip">@ohhamza</span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.5a14.6 14.6 0 0 1 4.3 2.2A16.6 16.6 0 0 0 4.5 5.7 14.6 14.6 0 0 1 8.8 3.5L8.6 3a19.8 19.8 0 0 0-4.9 1.4A20.7 20.7 0 0 0 .5 19a19.9 19.9 0 0 0 6 3l.7-1a13 13 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.4 0l.5.4a13 13 0 0 1-2 1l.7 1a19.9 19.9 0 0 0 6-3 20.7 20.7 0 0 0-3.2-14.6ZM8.3 15.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
       </a>
-
-      <h1 class="up" style="animation-delay:.13s">I build the servers. Then I break the games.</h1>
-
-      <p class="sub up" style="animation-delay:.21s">
-        I co-own <b>Ry's Middleman Services</b> — <b><span data-count="mm">70,000</span> members</b> and
-        <b>over $10,000,000</b> in trades moved through it, <b>$1,000,000+</b> of that by me. I run <b>SAB Market</b> for Steal a Brainrot values,
-        write my own <b>Discord bots</b>, vibecode my own tools, and I do exploit
-        <b>QA</b> — on Steal A Seed right now, and taking on more games.
-      </p>
-
-      <div class="hero-cta up" style="animation-delay:.29s">
-        <a class="btn btn-p" href="#contact">Work with me <span class="ar">↓</span></a>
-        <a class="btn btn-g" href="#record">See the record</a>
-      </div>
-
-      <p class="avail-note up" style="animation-delay:.36s">
-        <span class="pdot on"></span>Available for exploit QA — any game, any build
-      </p>
+      <a class="soc" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener" aria-label="Roblox">
+        <span class="tip">Steal A Seed</span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 2.5 21.5 7 17 23.5.5 19 5 2.5Zm4.7 7.2-1 3.8 3.8 1 1-3.8-3.8-1Z"/></svg>
+      </a>
+      <a class="soc" href="https://rysmm.com/" target="_blank" rel="noopener" aria-label="Ry's Middleman">
+        <span class="tip">rysmm.com</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8 8 10 4.6-2 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </a>
+      <a class="soc" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener" aria-label="SAB Middleman">
+        <span class="tip">SAB Middleman</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg>
+      </a>
+      <a class="soc" href="https://discord.gg/sabvalue" target="_blank" rel="noopener" aria-label="SAB Market">
+        <span class="tip">SAB Market</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg>
+      </a>
     </div>
-  </section>
 
-  <!-- ───── live board ───── -->
-  <section class="wrap" style="padding-bottom:clamp(56px,8vw,88px)">
-    <div class="board rv">
-      <div class="b-top">
-        <span class="pdot" id="bdot"></span>
-        <span class="lbl">steal a seed · live</span>
-        <span class="poll">last poll <span id="polltime">—</span></span>
-      </div>
-      <div class="b-cells stg">
-        <div class="cell livecell">
-          <div class="cv odo" id="bccu">—</div>
-          <div class="ck">players in game</div>
-          <div class="cn">Live from the Roblox API, refreshed every minute.</div>
-        </div>
-        <div class="cell">
-          <div class="cv num" data-to="70000" data-fmt="k" data-count="mm" data-cfmt="k">70K</div>
-          <div class="ck">members</div>
-          <div class="cn">Ry's Middleman Services, which I co-own.</div>
-        </div>
-        <div class="cell">
-          <div class="cv num" data-to="10000000" data-fmt="money">$10M+</div>
-          <div class="ck">traded through it</div>
-          <div class="cn">Total moved by the desk. $1,000,000+ of it mine.</div>
-        </div>
-        <div class="cell">
-          <div class="cv num" data-to="48000" data-fmt="k">48K</div>
-          <div class="ck">safe deals</div>
-          <div class="cn">Completed trades held by the middleman team.</div>
-        </div>
-      </div>
+    <!-- stats -->
+    <div class="stats">
+      <div class="glass stat"><span class="v live" id="s-ccu">&mdash;</span><span class="k">playing now</span></div>
+      <div class="glass stat"><span class="v" id="s-mm">69K</span><span class="k">members</span></div>
+      <div class="glass stat"><span class="v">$10M+</span><span class="k">traded</span></div>
     </div>
-  </section>
 
-  <!-- ───── marquee ───── -->
-  <div class="mq" aria-hidden="true"><div class="mq-run" id="run"></div></div>
-
-  <!-- ───── record ───── -->
-  <section class="sec" id="record" style="border-top:0">
-    <div class="wrap">
-      <div class="sh rv">
-        <h2>Everything here is mine.</h2>
-        <p>Two servers I founded and grew myself, and the game I'm testing against today.</p>
+    <!-- music player (official YouTube embed drives the real track) -->
+    <div class="glass player" id="player">
+      <div class="art">
+        <span class="eq"><span></span><span></span><span></span><span></span></span>
       </div>
-
-      <div class="recs stg">
-        <a class="rec" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">
-          <div>
-            <div class="rec-h"><h3>Ry's Middleman Services</h3><span class="tagx">owner</span></div>
-            <p>Co-owned with ry, grown to <span data-count="mm" data-cfmt="k">70K</span> members. Over <b>$10,000,000</b> in trades and 48,000+ safe deals have gone through it; more than <b>$1,000,000</b> of that passed through my hands — <code>discord.gg/sabmiddleman</code> · <code>rysmm.com</code></p>
-          </div>
-          <div class="rec-r">
-            <div class="rec-n"><span data-count="mm">70,000</span><span>members</span></div>
-            <div class="rec-go">↗</div>
-          </div>
-        </a>
-
-        <a class="rec" href="https://discord.gg/sabvalue" target="_blank" rel="noopener">
-          <div>
-            <div class="rec-h"><h3>SAB Market</h3><span class="tagx">founder</span></div>
-            <p>Steal a Brainrot values, kept current through every update — <code>discord.gg/sabvalue</code></p>
-          </div>
-          <div class="rec-r">
-            <div class="rec-n"><span data-count="mk">20,000</span><span>members</span></div>
-            <div class="rec-go">↗</div>
-          </div>
-        </a>
-
-        <a class="rec" href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">
-          <div>
-            <div class="rec-h"><h3>Steal A Seed</h3><span class="tagx">live</span></div>
-            <p>Out now on Roblox, and the game I'm doing exploit QA against today — finding what breaks and writing it down. Looking to do the same on more games.</p>
-          </div>
-          <div class="rec-r">
-            <div class="rec-n" id="recccu">—<span>playing now</span></div>
-            <div class="rec-go">↗</div>
-          </div>
-        </a>
+      <div class="pl-main">
+        <div class="pl-top"><span class="pl-t">Incredible</span><span class="pl-time"><span id="cur">0:00</span> / <span id="dur">—</span></span></div>
+        <div class="pl-sub">Sauce ft. Dave</div>
+        <div class="pl-bar" id="bar"><div class="pl-fill" id="fill"></div></div>
       </div>
+      <button class="pl-btn" id="playbtn" aria-label="Play / pause">
+        <svg id="pi" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
     </div>
-  </section>
+    <div class="glass ytwrap" id="ytwrap" hidden><div id="ytplayer"></div></div>
 
-  <!-- ───── what I do ───── -->
-  <section class="sec" id="work">
-    <div class="wrap">
-      <div class="sh rv">
-        <h2>What I do.</h2>
-        <p>Six things I'm actually good at, built over years of running communities people trust with real value.</p>
-      </div>
-
-      <div class="cards stg">
-        <div class="card">
-          <div class="ic">01</div>
-          <h3>Community growth</h3>
-          <p>Grew a server past <span data-count="mm">70,000</span> members, plus the structure that keeps a community that size alive.</p>
-        </div>
-        <div class="card">
-          <div class="ic">02</div>
-          <h3>Middleman</h3>
-          <p>Neutral party on high-value trades. The desk I co-own has moved $10M+; over $1,000,000 of it mine.</p>
-        </div>
-        <div class="card">
-          <div class="ic">03</div>
-          <h3>Moderation &amp; anti-scam</h3>
-          <p>Automod, raid response and scammer bans across both of the servers I run.</p>
-        </div>
-        <div class="card">
-          <div class="ic">04</div>
-          <h3>Discord bots</h3>
-          <p>I write my own — tickets, automation, value lists and moderation tooling.</p>
-        </div>
-        <div class="card">
-          <div class="ic">05</div>
-          <h3>Vibecoding</h3>
-          <p>Decent, not a pro. I get my own tools built and working.</p>
-        </div>
-        <div class="card">
-          <div class="ic">06</div>
-          <h3>Exploit QA</h3>
-          <p>Reproducing what breaks and reporting it before it ships. Steal A Seed now — open to more games.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───── contact ───── -->
-  <section class="sec" id="contact">
-    <div class="wrap">
-      <div class="sh rv">
-        <h2>Let's talk.</h2>
-        <p>I'm actively looking for more exploit QA work. Both of my servers are open to anyone.</p>
-      </div>
-
-      <div class="talk stg">
-        <div class="cta-box">
-          <div class="glow"></div>
-          <span class="avail"><span class="pdot on"></span>Available for work</span>
-          <h3>Need an exploit QA?</h3>
-          <p>Steal A Seed is what I'm testing now, and I'm taking on more games. Tell me what you're building and I'll go break it before your users do.</p>
-          <div class="cta-btns">
-            <a class="btn btn-p" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">DM me on Discord <span class="ar">↗</span></a>
-          </div>
-          <div class="dm">
-            <button class="chipbtn" type="button" data-copy="ohhamza"><span class="val">@ohhamza</span><span class="ci">copy</span></button>
-            <button class="chipbtn" type="button" data-copy="801691377796120577"><span class="val">801691377796120577</span><span class="ci">user id</span></button>
-          </div>
-        </div>
-
-        <div class="cta-box">
-          <h3>Or join a server.</h3>
-          <p>Trading and middleman in one, Steal a Brainrot values in the other. Both free to join.</p>
-          <div class="cta-btns">
-            <a class="btn btn-g" href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">discord.gg/sabmiddleman <span class="ar">↗</span></a>
-            <a class="btn btn-g" href="https://discord.gg/sabvalue" target="_blank" rel="noopener">discord.gg/sabvalue <span class="ar">↗</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="f-cols">
-      <div class="f-col f-about">
-        <div class="brand"><span class="glyph">H</span>hamza</div>
-        <p>Roblox community operator, Discord bot developer, and exploit QA tester — available for QA work on any game.</p>
-      </div>
-      <div class="f-col">
-        <h4>Communities</h4>
-        <ul>
-          <li><a href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">Ry's Middleman Services</a></li>
-          <li><a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">SAB Market</a></li>
-          <li><a href="https://rysmm.com/" target="_blank" rel="noopener">rysmm.com</a></li>
-        </ul>
-      </div>
-      <div class="f-col">
-        <h4>Work</h4>
-        <ul>
-          <li><a href="#record">Record</a></li>
-          <li><a href="#work">What I do</a></li>
-          <li><a href="#contact">Availability</a></li>
-        </ul>
-      </div>
-      <div class="f-col">
-        <h4>Links</h4>
-        <ul>
-          <li><a href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">@ohhamza</a></li>
-          <li><a href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">Steal A Seed</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="f-base">
-      <span class="status"><span class="pdot" id="fdot"></span>Steal A Seed<span class="cnt">&nbsp;—&nbsp;<b id="fccu">—</b>&nbsp;playing</span></span>
-      <small>© 2026 hamza</small>
-    </div>
+    <div class="foot">ohhamza &middot; available for exploit QA on any game</div>
   </div>
-</footer>
+</div>
 
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canHover = matchMedia('(hover:hover)').matches;
-  var $  = function(s, c){ return (c || document).querySelector(s); };
-  var $$ = function(s, c){ return [].slice.call((c || document).querySelectorAll(s)); };
 
-  /* ═══ nav state, scroll progress, grid parallax ═══ */
-  var nav = $('#nav'), prog = $('#prog'), gridBg = $('.grid-bg');
-  function onScroll(){
-    nav.classList.toggle('stuck', scrollY > 10);
-    var max = document.documentElement.scrollHeight - innerHeight;
-    prog.style.width = (max > 0 ? Math.min(scrollY / max, 1) * 100 : 0) + '%';
-    if (gridBg && !reduce) gridBg.style.transform = 'translateY(' + (scrollY * 0.16) + 'px)';
+  /* ── typewriter name + bio ── */
+  function type(el, text, speed, done){
+    if(reduce){ el.textContent = text; if(done) done(); return; }
+    var i=0; (function tick(){ el.textContent=text.slice(0,++i); if(i<text.length) setTimeout(tick,speed); else if(done) done(); })();
   }
-  onScroll();
-  addEventListener('scroll', onScroll, {passive:true});
-
-  /* ═══ marquee ═══ */
-  var counts = {mm: 70000, mk: 20000};   // replaced by the live figures below
-  function buildMarquee(){
-    var feed = [comma(counts.mm) + ' members', '$10,000,000+ traded', '48,000+ safe deals',
-                '$1,000,000+ middlemanned by me', 'SAB Market — ' + comma(counts.mk),
-                'Discord bot developer','Exploit QA — Steal A Seed','Vibecoder','Trusted middleman',
-                'Steal a Brainrot values','Available for exploit QA','discord.gg/sabmiddleman',
-                'discord.gg/sabvalue','@ohhamza'];
-    var mh = feed.map(function(t){ return '<span>' + t + '</span>'; }).join('');
-    $('#run').innerHTML = mh + mh;
-  }
-  buildMarquee();
-
-  /* ═══ live Discord member counts ═══
-     discord.com/api/v10/invites/<code>?with_counts=true sends CORS headers, so the
-     browser can read it directly — no token, no proxy. On any failure the figures
-     already written into the HTML stand, so the page is never blank or wrong. */
-  var INVITES = {mm: 'sabmiddleman', mk: 'sabvalue'};
-  function applyCount(key, n){
-    counts[key] = n;
-    $$('[data-count="' + key + '"]').forEach(function(el){
-      var txt = el.dataset.cfmt === 'k' ? Math.round(n / 1000) + 'K' : comma(n);
-      el.dataset.to = n;    // a count-up that runs later reads this and lands on the real figure
-      // write it regardless: otherwise a tile that hasn't scrolled into view yet sits on the
-      // static placeholder while the rest of the page already shows the live number
-      el.textContent = txt;
-    });
-    buildMarquee();
-  }
-  function pullDiscord(){
-    if (!('fetch' in window)) return;
-    Object.keys(INVITES).forEach(function(k){
-      // no-store: Discord echoes the requesting origin back in Access-Control-Allow-Origin
-      // rather than sending *, so a cached response can fail CORS on a different origin
-      fetch('https://discord.com/api/v10/invites/' + INVITES[k] + '?with_counts=true',
-            {cache: 'no-store'})
-        .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-        .then(function(j){
-          if (typeof j.approximate_member_count === 'number') applyCount(k, j.approximate_member_count);
-        })
-        .catch(function(){ /* keep whatever the HTML already says */ });
-    });
-  }
-  pullDiscord();
-
-  /* ═══ word-by-word heading reveal ═══ */
-  function splitWords(el){
-    if (el.dataset.split) return;
-    var words = el.textContent.trim().split(/\s+/);
-    el.textContent = '';
-    words.forEach(function(w, i){
-      var outer = document.createElement('span'); outer.className = 'wr';
-      var inner = document.createElement('span'); inner.textContent = w;
-      outer.appendChild(inner);
-      el.appendChild(outer);
-      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
-    });
-    el.dataset.split = '1';
-  }
-  function playWords(el, base){
-    $$('.wr', el).forEach(function(w, i){
-      w.firstChild.style.transitionDelay = (base + i * 0.055).toFixed(3) + 's';
-      w.classList.add('go');
-    });
-  }
-
-  var h1 = $('.hero h1');
-  if (h1 && !reduce){
-    h1.classList.remove('up');
-    h1.style.animationDelay = '';
-    splitWords(h1);
-    requestAnimationFrame(function(){ playWords(h1, 0.18); });
-  }
-  var heads = $$('.sh h2');
-  if (!reduce) heads.forEach(splitWords);
-
-  /* ═══ reveal + stagger ═══ */
-  var targets = $$('.rv, .stg');
-  function show(el){
-    el.classList.add('in');
-    if (!reduce && el.className.indexOf('sh') !== -1){
-      var h = $('h2', el);
-      if (h) playWords(h, 0.05);
-    }
-  }
-  function showAll(){
-    targets.forEach(show);
-    if (!reduce) heads.forEach(function(h){ playWords(h, 0); });
-  }
-  if (reduce || !('IntersectionObserver' in window)) showAll();
-  else {
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting){ show(e.target); io.unobserve(e.target); }
-      });
-    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
-    targets.forEach(function(e){ io.observe(e); });
-    setTimeout(showAll, 2800);
-  }
-
-  /* ═══ odometer for the live count ═══ */
-  function isDigit(c){ return c >= '0' && c <= '9'; }
-  function buildOdo(el, text){
-    el.innerHTML = '';
-
-    // the real value, for screen readers and for copy/paste
-    var sr = document.createElement('span');
-    sr.className = 'sr';
-    sr.textContent = text;
-    el.appendChild(sr);
-
-    // the rolling digits are decorative — each column holds 0-9
-    var vis = document.createElement('span');
-    vis.className = 'odo-v';
-    vis.setAttribute('aria-hidden', 'true');
-
-    for (var i = 0; i < text.length; i++){
-      var ch = text.charAt(i);
-      if (isDigit(ch)){
-        var dg = document.createElement('span'); dg.className = 'dg';
-        var col = document.createElement('span'); col.className = 'col';
-        for (var d = 0; d < 10; d++){
-          var b = document.createElement('b'); b.textContent = d;
-          col.appendChild(b);
-        }
-        col.style.transform = 'translateY(-' + (+ch) * 10 + '%)';
-        dg.appendChild(col);
-        vis.appendChild(dg);
-      } else {
-        var sp = document.createElement('span'); sp.textContent = ch;
-        vis.appendChild(sp);
-      }
-    }
-    el.appendChild(vis);
-    el.dataset.odo = text;
-  }
-  function setOdo(el, text){
-    if (!el) return;
-    if (reduce){ el.textContent = text; el.dataset.odo = text; return; }
-    var prev = el.dataset.odo || '';
-    var cols = el.querySelectorAll('.odo-v .dg .col');
-    var srEl = el.querySelector('.sr');
-    var sameShape = prev.length === text.length && cols.length > 0;
-    if (sameShape){
-      for (var i = 0; i < text.length; i++){
-        if (isDigit(text.charAt(i)) !== isDigit(prev.charAt(i))){ sameShape = false; break; }
-      }
-    }
-    if (!sameShape){ buildOdo(el, text); return; }
-    var ci = 0;
-    for (var j = 0; j < text.length; j++){
-      var c = text.charAt(j);
-      if (isDigit(c)){ cols[ci].style.transform = 'translateY(-' + (+c) * 10 + '%)'; ci++; }
-    }
-    if (srEl) srEl.textContent = text;   // keep the accessible value in step
-    el.dataset.odo = text;
-  }
-
-  /* ═══ live Steal A Seed count, through roproxy ═══
-     Roblox refuses direct browser calls, so the request goes via roproxy.
-     If it fails the counters say so rather than showing a stale number. */
-  var API = 'https://games.roproxy.com/v1/games?universeIds=10764328008';
-  var odo = $('#bccu');
-  var plain = ['#hccu','#recccu','#fccu'].map(function(s){ return $(s); });
-  var dots  = ['#hdot','#bdot','#fdot'].map(function(s){ return $(s); });
-  var pollEl = $('#polltime');
-  var last = null;
-
-  function comma(n){ return n.toLocaleString('en-US'); }
-  function setPlain(text){
-    plain.forEach(function(el){
-      if (!el) return;
-      var cap = $('span', el);          // keep the "playing now" caption
-      el.textContent = text;
-      if (cap) el.appendChild(cap);
-    });
-  }
-  function pull(){
-    if (!('fetch' in window)){ setOdo(odo, 'unavailable'); setPlain('unavailable'); return; }
-    var ctl = ('AbortController' in window) ? new AbortController() : null;
-    var to = setTimeout(function(){ if (ctl) ctl.abort(); }, 9000);
-    fetch(API, {signal: ctl ? ctl.signal : undefined, cache:'no-store'})
-      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-      .then(function(j){
-        var g = j && j.data && j.data[0];
-        if (!g || typeof g.playing !== 'number') throw 0;
-        last = g.playing;
-        var t = comma(g.playing);
-        document.documentElement.removeAttribute('data-live');
-        setOdo(odo, t);
-        setPlain(t);
-        dots.forEach(function(d){ if (d) d.classList.add('on'); });
-        pollEl.textContent = new Date().toLocaleTimeString('en-GB');
-      })
-      .catch(function(){
-        // a later failure keeps the last known figure; only a cold failure degrades,
-        // and then the count clause is dropped instead of printing something false
-        if (last === null){
-          document.documentElement.setAttribute('data-live', 'off');
-          setOdo(odo, 'offline');
-          setPlain('—');
-          dots.forEach(function(d){ if (d) d.classList.remove('on'); });
-          pollEl.textContent = 'unavailable';
-        }
-      })
-      .then(function(){ clearTimeout(to); });
-  }
-  pull();
-  setInterval(function(){ if (!document.hidden) pull(); }, 60000);
-  document.addEventListener('visibilitychange', function(){ if (!document.hidden) pull(); });
-
-  /* ═══ count up ═══ */
-  function fmt(v, kind){
-    if (kind === 'k') return v >= 1000 ? Math.round(v / 1000) + 'K' : Math.round(v).toString();
-    if (kind === 'money') return v >= 1e6 ? '$' + Math.round(v / 1e6) + 'M+' : '$' + Math.round(v / 1000) + 'K';
-    return comma(Math.round(v));
-  }
-  function finalizeCount(el){
-    // resting value must always be the real figure (data-to may have been
-    // updated by a live fetch after the animation captured its start value)
-    var kind = el.dataset.fmt;
-    el.textContent = fmt(parseFloat(el.dataset.to) || 0, kind);
-    el.dataset.counted = '1';
-  }
-  function countUp(el){
-    if (el.dataset.counted === '1') return;
-    var to = parseFloat(el.dataset.to), kind = el.dataset.fmt;
-    if (reduce){ finalizeCount(el); return; }
-    var dur = 1400, t0 = null;
-    function step(t){
-      if (el.dataset.counted === '1') return;   // finalized elsewhere
-      if (t0 === null) t0 = t;
-      var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(to * e, kind);
-      if (p < 1) requestAnimationFrame(step);
-      else finalizeCount(el);
-    }
-    requestAnimationFrame(step);
-    // rAF is paused while the tab is backgrounded, which would freeze the
-    // count mid-way; setTimeout still fires, so it guarantees the final value
-    setTimeout(function(){ if (el.dataset.counted !== '1') finalizeCount(el); }, dur + 400);
-  }
-  var nums = $$('.num[data-to]');
-  if (!('IntersectionObserver' in window)) nums.forEach(countUp);
-  else {
-    var io2 = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting){ countUp(e.target); io2.unobserve(e.target); }
-      });
-    }, {threshold:0.4});
-    nums.forEach(function(e){ io2.observe(e); });
-  }
-
-  /* ═══ pointer-reactive surfaces ═══ */
-  if (canHover && !reduce){
-    $$('.card, .rec').forEach(function(el){
-      el.addEventListener('mousemove', function(e){
-        var r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-    $$('.btn').forEach(function(b){
-      b.addEventListener('mousemove', function(e){
-        var r = b.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5;
-        var y = (e.clientY - r.top) / r.height - 0.5;
-        b.style.transform = 'translate(' + (x * 6).toFixed(2) + 'px,' + (y * 4 - 1).toFixed(2) + 'px)';
-      });
-      b.addEventListener('mouseleave', function(){ b.style.transform = ''; });
-    });
-    var spot = $('#spot'), hero = $('.hero');
-    if (spot && hero){
-      hero.addEventListener('mousemove', function(e){
-        var r = hero.getBoundingClientRect();
-        spot.style.left = (e.clientX - r.left) + 'px';
-        spot.style.top  = (e.clientY - r.top) + 'px';
-      });
-    }
-  }
-
-  /* ═══ copy handle / user id ═══ */
-  function legacyCopy(v, done){
-    try{
-      var t = document.createElement('textarea');
-      t.value = v;
-      t.setAttribute('readonly', '');
-      t.style.position = 'fixed'; t.style.top = '0'; t.style.opacity = '0';
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand('copy');
-      document.body.removeChild(t);
-      done();
-    } catch(e){ /* clipboard unavailable — the value stays on screen to select */ }
-  }
-  $$('.chipbtn[data-copy]').forEach(function(b){
-    b.addEventListener('click', function(){
-      var v = b.dataset.copy, ci = $('.ci', b), was = ci.textContent;
-      function done(){
-        b.classList.add('done');
-        ci.textContent = 'copied';
-        setTimeout(function(){ b.classList.remove('done'); ci.textContent = was; }, 1500);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(v).then(done, function(){ legacyCopy(v, done); });
-      } else legacyCopy(v, done);
-    });
+  var typedEl=document.getElementById('typed'), bioEl=document.getElementById('bio');
+  type(typedEl,'hamza',110,function(){
+    type(bioEl,"breaking builds before your users do.",30);
   });
+
+  /* ── starfield ── */
+  var cv=document.getElementById('stars');
+  if(cv && !reduce){
+    var cx=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,2),ps=[];
+    function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);}
+    function init(){ps=[];for(var i=0;i<70;i++)ps.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,a:Math.random()*.5+.2,v:Math.random()*.25+.05,tw:Math.random()*6});}
+    var raf;
+    function draw(){
+      cx.clearRect(0,0,W,H);
+      for(var i=0;i<ps.length;i++){var p=ps[i];p.tw+=.03;var tw=(Math.sin(p.tw)*.3+.7);
+        cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fillStyle='rgba(255,255,255,'+(p.a*tw)+')';cx.fill();
+        p.y-=p.v;if(p.y<-2){p.y=H+2;p.x=Math.random()*W;}}
+      raf=requestAnimationFrame(draw);
+    }
+    size();init();draw();
+    addEventListener('resize',function(){size();init();});
+    document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(raf);else raf=requestAnimationFrame(draw);});
+  }
+
+  /* ── live Steal A Seed players (roproxy) ── */
+  function comma(n){return n.toLocaleString('en-US');}
+  var ccu=document.getElementById('s-ccu');
+  fetch('https://games.roproxy.com/v1/games?universeIds=10764328008',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(j){var g=j&&j.data&&j.data[0];if(g&&typeof g.playing==='number')ccu.textContent=comma(g.playing);})
+    .catch(function(){ccu.textContent='live';});
+
+  /* ── live Discord member count ── */
+  fetch('https://discord.com/api/v10/invites/sabmiddleman?with_counts=true',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(j){if(typeof j.approximate_member_count==='number')document.getElementById('s-mm').textContent=Math.round(j.approximate_member_count/1000)+'K';})
+    .catch(function(){});
+
+  /* ── live Discord profile via Lanyard (graceful fallback) ──
+     Real avatar, name, status, custom status and activity — but only if the
+     account is in the Lanyard Discord (discord.gg/lanyard). If not, the API
+     404s and the styled fallback card stands. */
+  var DISCORD_ID='801691377796120577';
+  var sdot=document.getElementById('sdot'), padot=document.getElementById('padot'),
+      paEl=document.getElementById('pa'), paMono=document.getElementById('pa-mono'),
+      pname=document.getElementById('pname'), pactText=document.getElementById('pacttext'),
+      pcustom=document.getElementById('pcustom'), pcustomText=document.getElementById('pcustom-text');
+
+  function setStatus(st){
+    [sdot,padot].forEach(function(el){ if(!el)return; el.classList.remove('on','idle','dnd');
+      if(st==='online')el.classList.add('on');
+      else if(st==='idle')el.classList.add('idle');
+      else if(st==='dnd')el.classList.add('dnd'); });
+  }
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+  fetch('https://api.lanyard.rest/v1/users/'+DISCORD_ID)
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(j){
+      if(!j||!j.success||!j.data) return;
+      var d=j.data, u=d.discord_user||{}, st=d.discord_status;
+      setStatus(st);
+
+      // name
+      if(u.global_name||u.username) pname.textContent = u.global_name||u.username;
+
+      // real avatar
+      if(u.avatar){
+        var ext=(u.avatar.indexOf('a_')===0)?'gif':'png';
+        var url='https://cdn.discordapp.com/avatars/'+DISCORD_ID+'/'+u.avatar+'.'+ext+'?size=128';
+        paEl.style.backgroundImage="url('"+url+"')";
+        if(paMono) paMono.style.display='none';
+      }
+      // avatar decoration (the animated frame)
+      if(u.avatar_decoration_data && u.avatar_decoration_data.asset){
+        var deco=document.createElement('img'); deco.className='pa-deco'; deco.alt='';
+        deco.src='https://cdn.discordapp.com/avatar-decoration-presets/'+u.avatar_decoration_data.asset+'.png?size=160';
+        paEl.appendChild(deco);
+      }
+
+      var acts=d.activities||[];
+      // custom status (type 4): emoji + text
+      var custom=acts.filter(function(a){return a.type===4;})[0];
+      if(custom){
+        var txt=custom.state||'';
+        if(txt){ pcustomText.textContent=txt; }
+        if(custom.emoji){
+          var em=custom.emoji, box=pcustom.querySelector('.cemoji');
+          if(em.id){ box.innerHTML='<img alt="" src="https://cdn.discordapp.com/emojis/'+em.id+'.'+(em.animated?'gif':'png')+'?size=32">'; }
+          else if(em.name){ box.textContent=em.name; }
+        }
+      }
+      // playing activity (type 0)
+      var game=acts.filter(function(a){return a.type===0;})[0];
+      if(game){ pactText.innerHTML='Playing <b>'+esc(game.name)+'</b>'; }
+      else if(st==='offline'){ pactText.innerHTML='<b>Offline</b>'; }
+      else if(st){ pactText.innerHTML='<b>'+esc(st.charAt(0).toUpperCase()+st.slice(1))+'</b>'; }
+    })
+    .catch(function(){ /* fallback card already shown */ });
+
+  /* ── music player ──
+     Plays the real track through YouTube's official IFrame player (the licensed
+     way to stream it on a site — the audio is never copied or self-hosted).
+     If YouTube can't load (e.g. blocked by a strict CSP), the card falls back to
+     a visual "now playing" so it never looks broken. */
+  var VIDEO_ID='dzVbKrWvI9Y';
+  var player=document.getElementById('player'), btn=document.getElementById('playbtn'),
+      pi=document.getElementById('pi'), fill=document.getElementById('fill'),
+      cur=document.getElementById('cur'), dur=document.getElementById('dur'),
+      bar=document.getElementById('bar'), ytwrap=document.getElementById('ytwrap');
+  var PLAY='<path d="M8 5v14l11-7z"/>', PAUSE='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+  function fmt(s){s=s||0;var m=Math.floor(s/60),ss=Math.floor(s%60);return m+':'+(ss<10?'0':'')+ss;}
+
+  var yt=null, ytReady=false, poll=null, visualTimer=null, vDUR=210, vt=0, wantPlay=false;
+  function setBtn(on){ pi.innerHTML=on?PAUSE:PLAY; player.classList.toggle('playing',on); }
+
+  /* visual fallback */
+  function visual(on){
+    clearInterval(visualTimer);
+    setBtn(on);
+    if(on && !reduce){ visualTimer=setInterval(function(){ vt=(vt+.25)%vDUR; fill.style.width=(vt/vDUR*100)+'%'; cur.textContent=fmt(vt); },250); }
+  }
+
+  /* YouTube */
+  function startPoll(){ clearInterval(poll); poll=setInterval(function(){
+    if(!yt||!yt.getDuration)return; var d=yt.getDuration(), c=yt.getCurrentTime();
+    if(d){ dur.textContent=fmt(d); fill.style.width=(c/d*100)+'%'; cur.textContent=fmt(c); }
+  },250); }
+  function makePlayer(){
+    yt=new YT.Player('ytplayer',{videoId:VIDEO_ID,
+      playerVars:{playsinline:1,rel:0,modestbranding:1},
+      events:{
+        onReady:function(){ ytReady=true; try{ var d=yt.getDuration(); if(d) dur.textContent=fmt(d); }catch(e){} if(wantPlay){ ytwrap.hidden=false; requestAnimationFrame(function(){ytwrap.classList.add('open');}); yt.playVideo(); } },
+        onStateChange:function(e){
+          if(e.data===1){ setBtn(true); startPoll(); }        // playing
+          else if(e.data===2){ setBtn(false); clearInterval(poll); } // paused
+          else if(e.data===0){ setBtn(false); clearInterval(poll); fill.style.width='0%'; cur.textContent='0:00'; } // ended
+        }
+      }});
+  }
+  var ytFailed=false;
+  function loadYT(){
+    if(window.YT&&window.YT.Player){ makePlayer(); return; }
+    var t=document.createElement('script'); t.src='https://www.youtube.com/iframe_api';
+    t.onerror=function(){ ytFailed=true; visual(true); };
+    window.onYouTubeIframeAPIReady=makePlayer;
+    document.head.appendChild(t);
+    // if the API never initialises (CSP), fall back
+    setTimeout(function(){ if(!ytReady && !yt){ ytFailed=true; if(wantPlay) visual(true); } },3500);
+  }
+
+  var on=false;
+  btn.addEventListener('click',function(){
+    on=!on; wantPlay=on;
+    if(ytFailed){ visual(on); return; }
+    if(!ytReady){ setBtn(on); return; }   // will play/pause once ready (onReady honours wantPlay)
+    if(on){ ytwrap.hidden=false; requestAnimationFrame(function(){ytwrap.classList.add('open');}); yt.playVideo(); }
+    else { yt.pauseVideo(); }
+  });
+
+  // pre-load the player so the first tap plays without waiting on the API
+  loadYT();
 })();
 </script>
 </body>
