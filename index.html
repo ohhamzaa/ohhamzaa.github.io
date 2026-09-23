@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#06060A">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://ohhamza.vercel.app/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='9'%20fill='%23090910'/%3E%3Ctext%20x='16'%20y='23'%20font-family='system-ui,sans-serif'%20font-size='19'%20font-weight='800'%20fill='%23F4F5FA'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=64">
+<link rel="apple-touch-icon" href="https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=180">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="hamza">
 <meta property="og:url" content="https://ohhamza.vercel.app/">
@@ -81,6 +82,9 @@ a{color:inherit;text-decoration:none}
 .card{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center;
   animation:enter 1s var(--ez) both}
 @keyframes enter{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.card>*{animation:rise .8s var(--ez) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.card>*:nth-child(1){animation-delay:150ms}.card>*:nth-child(2){animation-delay:220ms}.card>*:nth-child(3){animation-delay:290ms}.card>*:nth-child(4){animation-delay:360ms}.card>*:nth-child(5){animation-delay:430ms}.card>*:nth-child(6){animation-delay:500ms}.card>*:nth-child(7){animation-delay:570ms}.card>*:nth-child(8){animation-delay:640ms}.card>*:nth-child(9){animation-delay:710ms}.card>*:nth-child(10){animation-delay:780ms}.card>*:nth-child(11){animation-delay:850ms}.card>*:nth-child(12){animation-delay:920ms}.card>*:nth-child(13){animation-delay:990ms}
 
 /* ── avatar ── */
 .ava-wrap{position:relative;margin-bottom:20px}
@@ -483,7 +487,8 @@ body.sheet-open{overflow:hidden}
         shooting stars and parallax mountain ridges — all drawn, no images ── */
   var sky=document.getElementById('sky');
   if(sky){
-    var g=sky.getContext('2d'), W=0, H=0, dpr=Math.min(devicePixelRatio||1,2);
+    var coarse=matchMedia('(pointer:coarse)').matches, STEP=coarse?2:1, frameN=0;
+    var g=sky.getContext('2d'), W=0, H=0, dpr=Math.min(devicePixelRatio||1,coarse?1.5:2);
     var base=null, far=null, near=null, stars=[], shoots=[], mx=0, my=0, tx=0, ty=0, raf=0, nextShoot=0;
     function rnd(a,b){return a+Math.random()*(b-a);}
     function layer(w,h){var c=document.createElement('canvas');c.width=Math.ceil(w*dpr);c.height=Math.ceil(h*dpr);var x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);return [c,x];}
@@ -546,10 +551,11 @@ body.sheet-open{overflow:hidden}
       buildStars();
     }
     function draw(ts){
+      if(STEP>1 && (frameN++ % STEP)){ raf=requestAnimationFrame(draw); return; }
       tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
       g.setTransform(dpr,0,0,dpr,0,0);
       g.drawImage(base,0,0,W,H);
-      for(var i=0;i<stars.length;i++){var s=stars[i];s.tw+=s.sp;
+      for(var i=0;i<stars.length;i++){var s=stars[i];s.tw+=s.sp*STEP;
         var al=s.a*(.55+.45*Math.sin(s.tw)),sx=s.x-tx*14*s.d,sy=s.y-ty*9*s.d;
         g.fillStyle='rgba('+s.c+','+al.toFixed(3)+')';
         if(s.r>1.2){g.beginPath();g.arc(sx,sy,s.r,0,6.283);g.fill();
@@ -557,7 +563,7 @@ body.sheet-open{overflow:hidden}
         else g.fillRect(sx,sy,s.r*1.6,s.r*1.6);}
       if(ts>nextShoot){nextShoot=ts+rnd(2600,6500);
         var dir=Math.random()<.5?-1:1;shoots.push({x:rnd(W*.15,W*.85),y:rnd(H*.04,H*.34),vx:dir*rnd(7,11),vy:rnd(2.6,4.4),life:1});}
-      for(var k=shoots.length-1;k>=0;k--){var sh=shoots[k];sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=.018;
+      for(var k=shoots.length-1;k>=0;k--){var sh=shoots[k];sh.x+=sh.vx*STEP;sh.y+=sh.vy*STEP;sh.life-=.018*STEP;
         if(sh.life<=0){shoots.splice(k,1);continue;}
         var tl=g.createLinearGradient(sh.x,sh.y,sh.x-sh.vx*9,sh.y-sh.vy*9);
         tl.addColorStop(0,'rgba(255,255,255,'+(sh.life*.95).toFixed(3)+')');tl.addColorStop(1,'rgba(201,184,255,0)');
