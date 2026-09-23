@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>hamza — exploit QA &amp; Roblox community operator</title>
-<meta name="description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
+<title>Hamza — exploit QA &amp; Roblox community operator</title>
+<meta name="description" content="Co-owner of Ry's Middleman Services, a 69,000-member Roblox trading server, with $1M+ middlemanned personally. Discord bot developer and exploit QA tester, available for QA work on any game.">
 <meta name="theme-color" content="#0A0B0D">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://ohhamza.vercel.app/portfolio">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%230A0B0D'/%3E%3Crect%20x='.5'%20y='.5'%20width='31'%20height='31'%20rx='7.5'%20fill='none'%20stroke='%23282C33'/%3E%3Ctext%20x='16'%20y='22'%20font-family='system-ui,sans-serif'%20font-size='16'%20font-weight='600'%20fill='%23F2F3F5'%20text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="hamza">
+<meta property="og:site_name" content="Hamza">
 <meta property="og:url" content="https://ohhamza.vercel.app/portfolio">
-<meta property="og:title" content="hamza — exploit QA &amp; Roblox community operator">
-<meta property="og:description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
+<meta property="og:title" content="Hamza — exploit QA &amp; Roblox community operator">
+<meta property="og:description" content="Co-owner of Ry's Middleman Services, a 69,000-member Roblox trading server, with $1M+ middlemanned personally. Discord bot developer and exploit QA tester, available for QA work on any game.">
 <meta property="og:image" content="https://ohhamza.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="hamza — I build the servers. Then I break the games.">
+<meta property="og:image:alt" content="Hamza — I build the servers. Then I break the games.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="hamza — exploit QA &amp; Roblox community operator">
-<meta name="twitter:description" content="Co-owner of a 69,000-member Roblox trading server that has moved over $10,000,000 in trades. Discord bot developer and exploit QA tester, available for QA work on any game.">
+<meta name="twitter:title" content="Hamza — exploit QA &amp; Roblox community operator">
+<meta name="twitter:description" content="Co-owner of Ry's Middleman Services, a 69,000-member Roblox trading server, with $1M+ middlemanned personally. Discord bot developer and exploit QA tester, available for QA work on any game.">
 <meta name="twitter:image" content="https://ohhamza.vercel.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,6 +89,7 @@ h1,h2,h3{font-family:var(--f-dis);margin:0;letter-spacing:-.028em;text-wrap:bala
   display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--text-2);
   transition:border-color .3s var(--ez),color .3s var(--ez)}
 .brand:hover .glyph{border-color:var(--line-3);color:var(--text)}
+img.glyph.av{border-radius:50%;object-fit:cover;padding:0;display:block;box-shadow:0 0 0 1px var(--line-2),0 0 14px -2px rgba(124,92,255,.55)}
 .nlinks{display:flex;gap:2px;margin-right:10px}
 .nlinks a{padding:8px 12px;border-radius:8px;font-size:14px;color:var(--text-2);transition:color .2s var(--ez),background .2s var(--ez)}
 .nlinks a:hover{color:var(--text);background:var(--raised)}
@@ -360,6 +361,28 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   .mq-run,.board::after{animation:none}
   .grain{display:none}
 }
+
+/* ── message form ── */
+.msg-box{margin-top:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:clamp(22px,3.5vw,32px);position:relative}
+.msg-box h3{font-size:clamp(19px,2.6vw,24px);font-weight:600;letter-spacing:-.03em}
+.msg-box > p{margin:8px 0 0;color:var(--text-2);font-size:14.5px}
+.pform{display:grid;gap:12px;margin-top:18px}
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.prow{grid-template-columns:1fr}}
+.pform label{display:grid;gap:6px}
+.pform label span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+.pform input,.pform textarea{width:100%;font:inherit;font-size:14.5px;color:var(--text);resize:vertical;
+  padding:12px 13px;border-radius:10px;background:var(--bg);border:1px solid var(--line-2);outline:none;
+  transition:border-color .2s var(--ez),box-shadow .2s var(--ez)}
+.pform input::placeholder,.pform textarea::placeholder{color:var(--text-3)}
+.pform input:focus,.pform textarea:focus{border-color:var(--text-2);box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.pform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.pstatus{font-size:13px;color:var(--text-2)}
+.pstatus.ok{color:var(--live)} .pstatus.err{color:#FCA5A5}
+.pstatus a{color:var(--text);text-decoration:underline}
+#psend[disabled]{opacity:.6;cursor:default}
 </style>
 </head>
 <body>
@@ -369,8 +392,9 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top"><span class="glyph">H</span>hamza</a>
+    <a class="brand" href="/" aria-label="Hamza, back to profile"><img class="glyph av" src="https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=64" alt="">Hamza</a>
     <nav class="nlinks">
+      <a href="/">&larr; Profile</a>
       <a href="#record">Record</a>
       <a href="#work">What I do</a>
       <a href="#contact">Contact</a>
@@ -433,9 +457,9 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
           <div class="cn">Ry's Middleman Services, which I co-own.</div>
         </div>
         <div class="cell">
-          <div class="cv num" data-to="10000000" data-fmt="money">$10M+</div>
-          <div class="ck">traded through it</div>
-          <div class="cn">Total moved by the desk. $1,000,000+ of it mine.</div>
+          <div class="cv num" data-to="1000000" data-fmt="money">$1M+</div>
+          <div class="ck">traded</div>
+          <div class="cn">Middlemanned by me personally.</div>
         </div>
         <div class="cell">
           <div class="cv num" data-to="48000" data-fmt="k">48K</div>
@@ -569,6 +593,23 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
           </div>
         </div>
       </div>
+
+      <div class="msg-box rv">
+        <h3>Or leave a message</h3>
+        <p>It lands straight in my Discord. Add how to reach you and I'll reply.</p>
+        <form class="pform" id="pform" novalidate>
+          <div class="prow">
+            <label><span>Name</span><input id="p-name" maxlength="60" autocomplete="name" placeholder="optional"></label>
+            <label><span>Your Discord / email</span><input id="p-contact" maxlength="80" placeholder="so I can reply"></label>
+          </div>
+          <label><span>Message</span><textarea id="p-msg" maxlength="1500" rows="4" required placeholder="What do you need tested, traded or built?"></textarea></label>
+          <input class="hp" id="p-company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="pfoot">
+            <span class="pstatus" id="pstatus" role="status"></span>
+            <button class="btn btn-p" id="psend" type="submit">Send message <span class="ar">→</span></button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 </main>
@@ -577,7 +618,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   <div class="wrap">
     <div class="f-cols">
       <div class="f-col f-about">
-        <div class="brand"><span class="glyph">H</span>hamza</div>
+        <a class="brand" href="/"><img class="glyph av" src="https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=64" alt="">Hamza</a>
         <p>Roblox community operator, Discord bot developer, and exploit QA tester — available for QA work on any game.</p>
       </div>
       <div class="f-col">
@@ -602,12 +643,13 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
           <li><a href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">@ohhamza</a></li>
           <li><a href="https://www.roblox.com/games/122216176958450/Steal-A-Seed" target="_blank" rel="noopener">Steal A Seed</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="/">Profile page</a></li>
         </ul>
       </div>
     </div>
     <div class="f-base">
       <span class="status"><span class="pdot" id="fdot"></span>Steal A Seed<span class="cnt">&nbsp;—&nbsp;<b id="fccu">—</b>&nbsp;playing</span></span>
-      <small>© 2026 hamza</small>
+      <small>© 2026 Hamza</small>
     </div>
   </div>
 </footer>
@@ -633,7 +675,7 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
   /* ═══ marquee ═══ */
   var counts = {mm: 70000, mk: 20000};   // replaced by the live figures below
   function buildMarquee(){
-    var feed = [comma(counts.mm) + ' members', '$10,000,000+ traded', '48,000+ safe deals',
+    var feed = [comma(counts.mm) + ' members', '$1M+ traded', '48,000+ safe deals',
                 '$1,000,000+ middlemanned by me', 'SAB Market — ' + comma(counts.mk),
                 'Discord bot developer','Exploit QA — Steal A Seed','Vibecoder','Trusted middleman',
                 'Steal a Brainrot values','Available for exploit QA','discord.gg/sabmiddleman',
@@ -728,6 +770,8 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
     }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
     targets.forEach(function(e){ io.observe(e); });
     setTimeout(showAll, 2800);
+    // failsafe: headline words can't stay hidden if a browser pauses the reveal
+    setTimeout(function(){ document.querySelectorAll('.wr').forEach(function(w){ w.classList.add('go'); }); },3000);
   }
 
   /* ═══ odometer for the live count ═══ */
@@ -938,6 +982,34 @@ html.js .stg.in > *:nth-child(6){transition-delay:.35s}
       } else legacyCopy(v, done);
     });
   });
+
+  /* ═══ message form → /api/contact → Discord webhook ═══ */
+  (function(){
+    var f=document.getElementById('pform'); if(!f) return;
+    var st=document.getElementById('pstatus'), btn=document.getElementById('psend'), opened=0;
+    var DM='<a href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">DM me on Discord</a>';
+    f.addEventListener('focusin',function(){ if(!opened) opened=Date.now(); });
+    function say(h,c){ st.className='pstatus'+(c?' '+c:''); st.innerHTML=h; }
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var msg=document.getElementById('p-msg').value.trim();
+      if(msg.length<5){ say('Write a little more first.','err'); document.getElementById('p-msg').focus(); return; }
+      btn.disabled=true; say('Sending&hellip;');
+      fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:document.getElementById('p-name').value,contact:document.getElementById('p-contact').value,
+          message:msg,company:document.getElementById('p-company').value,t:opened||Date.now()})})
+        .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ return {ok:r.ok,status:r.status,j:j}; }); })
+        .then(function(res){
+          if(res.ok){ say('Sent &mdash; I\'ll get back to you soon.','ok'); f.reset(); opened=0; return; }
+          var code=res.j&&res.j.error;
+          if(res.status===429) say('Too many messages &mdash; try again later or '+DM+'.','err');
+          else if(code==='too_fast') say('Give it a second, then hit Send again.','err');
+          else say('Couldn\'t send right now &mdash; '+DM+' instead.','err');
+        })
+        .catch(function(){ say('Couldn\'t send right now &mdash; '+DM+' instead.','err'); })
+        .then(function(){ btn.disabled=false; });
+    });
+  })();
 })();
 </script>
 </body>
