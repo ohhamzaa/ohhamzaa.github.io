@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>hamza</title>
-<meta name="description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
+<title>Hamza</title>
+<meta name="description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $1M+ traded) · Discord bot dev. Open to work.">
 <meta name="theme-color" content="#06060A">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://ohhamza.vercel.app/">
@@ -12,14 +12,14 @@
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="hamza">
 <meta property="og:url" content="https://ohhamza.vercel.app/">
-<meta property="og:title" content="hamza">
-<meta property="og:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
+<meta property="og:title" content="Hamza">
+<meta property="og:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $1M+ traded) · Discord bot dev. Open to work.">
 <meta property="og:image" content="https://ohhamza.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="hamza">
-<meta name="twitter:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $10M+ traded) · Discord bot dev. Open to work.">
+<meta name="twitter:title" content="Hamza">
+<meta name="twitter:description" content="exploit QA tester · co-owner of Ry's Middleman Services (69K members, $1M+ traded) · Discord bot dev. Open to work.">
 <meta name="twitter:image" content="https://ohhamza.vercel.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,14 +84,22 @@ a{color:inherit;text-decoration:none}
 
 /* ── avatar ── */
 .ava-wrap{position:relative;margin-bottom:20px}
-.ava{width:104px;height:104px;border-radius:50%;position:relative;display:grid;place-items:center;
-  background:linear-gradient(150deg,#20203a,#0e0e18);border:2px solid transparent;
+.ava{width:112px;height:112px;border-radius:50%;position:relative;display:grid;place-items:center;
+  background:#15151f center/cover no-repeat;border:2px solid transparent;
   font-family:var(--f-dis);font-weight:700;font-size:44px;color:#fff}
 .ava::before{content:"";position:absolute;inset:-3px;border-radius:50%;padding:3px;
   background:conic-gradient(from 0deg,var(--a1),var(--a2),var(--a3),var(--a4),var(--a1));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+.ava-deco{position:absolute;width:124%;height:124%;left:-12%;top:-12%;z-index:3;pointer-events:none}
+.ava .status-dot{z-index:4}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;pointer-events:none;box-shadow:0 0 10px 2px rgba(201,184,255,.9);opacity:0;animation:twinkle 3.2s var(--ez) infinite}
+.spark.s1{top:4px;left:-8px}.spark.s2{top:18px;right:-12px;animation-delay:.8s}.spark.s3{bottom:6px;left:-14px;animation-delay:1.6s}.spark.s4{bottom:-4px;right:-4px;animation-delay:2.4s}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3)}40%{opacity:1;transform:scale(1)}60%{opacity:.8}}
+#ytplayer{background:linear-gradient(110deg,#0d0d16 30%,#1c1a2e 50%,#0d0d16 70%);background-size:300% 100%;animation:load 1.6s linear infinite}
+@keyframes load{from{background-position:100% 0}to{background-position:-100% 0}}
+.card{transform-style:preserve-3d;will-change:transform;transition:transform .5s var(--ez)}
 .ava-glow{position:absolute;inset:-14px;border-radius:50%;z-index:-1;
   background:radial-gradient(circle,rgba(124,92,255,.5),transparent 70%);animation:breathe 4s var(--ez) infinite}
 @keyframes breathe{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
@@ -102,7 +110,11 @@ a{color:inherit;text-decoration:none}
 
 /* ── name ── */
 .name{display:flex;align-items:center;gap:9px;justify-content:center}
-.name h1{font-size:clamp(30px,8vw,42px);font-weight:700;letter-spacing:-.03em;margin:0;line-height:1}
+.name h1{font-size:clamp(34px,9vw,48px);font-weight:700;letter-spacing:-.03em;margin:0;line-height:1.05;
+  background:linear-gradient(100deg,#fff 0%,#fff 35%,#C9B8FF 45%,#9EE7FF 52%,#fff 62%,#fff 100%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 5s linear infinite;filter:drop-shadow(0 0 18px rgba(124,92,255,.45))}
+@keyframes shine{from{background-position:120% 0}to{background-position:-130% 0}}
 .caret{display:inline-block;width:3px;height:.95em;background:var(--a1);border-radius:2px;
   animation:blink 1.05s steps(1) infinite;box-shadow:0 0 12px var(--a1)}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
@@ -156,23 +168,33 @@ a{color:inherit;text-decoration:none}
   background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   color:var(--text-2);transition:transform .22s var(--ez),color .22s var(--ez),border-color .22s var(--ez),background .22s var(--ez)}
 .soc svg{width:22px;height:22px}
-.soc:hover{transform:translateY(-4px) scale(1.06);color:#fff;border-color:var(--stroke-2);background:var(--glass-2)}
+.soc:hover{transform:translateY(-4px) scale(1.08);color:#fff;border-color:var(--gc,var(--stroke-2));background:var(--glass-2);box-shadow:0 0 22px -2px var(--gc,rgba(124,92,255,.6)),inset 0 0 12px -4px var(--gc,transparent)}
+.soc:nth-child(1){--gc:#5865F2}.soc:nth-child(2){--gc:#E2231A}.soc:nth-child(3){--gc:#34D399}.soc:nth-child(4){--gc:#7C5CFF}.soc:nth-child(5){--gc:#F472B6}
 .soc:hover .tip{opacity:1;transform:translateY(0)}
 .soc .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);opacity:0;
   font-family:var(--f-mono);font-size:10px;white-space:nowrap;padding:4px 8px;border-radius:6px;
   background:#12121c;border:1px solid var(--stroke);color:var(--text);pointer-events:none;transition:.2s var(--ez)}
 
 /* ── stat chips ── */
-.stats{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.stat{padding:11px 16px;border-radius:13px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:88px}
+.stats{margin-top:20px;width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stats .glass{width:auto}
+.stat{padding:13px 8px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;
+  transition:transform .25s var(--ez),box-shadow .25s var(--ez)}
+.stat:hover{transform:translateY(-3px);box-shadow:0 10px 30px -10px rgba(124,92,255,.55)}
 .stat .v{font-size:18px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stat .v.live{color:var(--on)}
 .stat .k{font-family:var(--f-mono);font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
 
 /* ── music player ── */
 .player{margin-top:20px;padding:13px 15px;display:flex;align-items:center;gap:13px}
-.art{width:48px;height:48px;border-radius:11px;flex:none;position:relative;overflow:hidden;
-  background:linear-gradient(140deg,var(--a1),var(--a4));display:grid;place-items:center;color:#fff}
+.art{width:52px;height:52px;border-radius:50%;flex:none;position:relative;overflow:hidden;
+  background:#111 center/cover no-repeat;display:grid;place-items:center;color:#fff;
+  box-shadow:0 0 0 2px rgba(255,255,255,.08),0 0 20px -4px rgba(244,114,182,.55)}
+.art::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(0,0,0,.55) 0 18%,transparent 19% 60%,rgba(0,0,0,.35));}
+.art::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:#0b0b12;border:1px solid rgba(255,255,255,.25)}
+.art .eq{position:relative;z-index:2;opacity:0;transition:opacity .3s}
+.playing .art{animation:vinyl 4s linear infinite}
+@keyframes vinyl{to{transform:rotate(360deg)}}
 .art svg{width:22px;height:22px;opacity:.95}
 .pl-main{flex:1;min-width:0;text-align:left}
 .pl-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
@@ -193,7 +215,9 @@ a{color:inherit;text-decoration:none}
 .playing .eq span:nth-child(3){animation-delay:.3s}
 .playing .eq span:nth-child(4){animation-delay:.45s}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
-.ytwrap{margin-top:10px;padding:7px;overflow:hidden;transition:max-height .4s var(--ez),opacity .3s var(--ez);max-height:0;opacity:0}
+.ytwrap{margin-top:10px;padding:7px;overflow:hidden;position:relative;
+  background:linear-gradient(var(--glass),var(--glass)) padding-box,linear-gradient(130deg,var(--a1),var(--a2),var(--a3),var(--a4)) border-box;border:1px solid transparent;
+  box-shadow:0 0 40px -10px rgba(124,92,255,.6);transition:max-height .4s var(--ez),opacity .3s var(--ez);max-height:0;opacity:0}
 .ytwrap.open{max-height:280px;opacity:1}
 #ytplayer{width:100%;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#000}
 #ytplayer iframe{width:100%;height:100%;border:0;display:block}
@@ -217,7 +241,7 @@ a{color:inherit;text-decoration:none}
 
     <div class="ava-wrap">
       <div class="ava-glow"></div>
-      <div class="ava">H<span class="status-dot" id="sdot"></span></div>
+      <div class="ava" id="ava" style="background-image:url('https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=256')"><img class="ava-deco" id="ava-deco" alt="" src="https://cdn.discordapp.com/avatar-decoration-presets/a_c07d52db7a61437a2f3d92bcdcad3242.png?size=240"><span class="status-dot" id="sdot"></span></div><span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><span class="spark s4"></span>
     </div>
 
     <div class="name">
@@ -235,7 +259,7 @@ a{color:inherit;text-decoration:none}
 
     <!-- discord presence (live via Lanyard) -->
     <div class="glass presence" id="presence">
-      <div class="pa" id="pa"><span id="pa-mono">H</span><span class="pa-dot" id="padot"></span></div>
+      <div class="pa" id="pa" style="background-image:url('https://cdn.discordapp.com/avatars/801691377796120577/afaca593cbf22e10d726880c419d4b60.png?size=256')"><span id="pa-mono" style="display:none">H</span><img class="pa-deco" alt="" src="https://cdn.discordapp.com/avatar-decoration-presets/a_c07d52db7a61437a2f3d92bcdcad3242.png?size=240"><span class="pa-dot" id="padot"></span></div>
       <div class="pinfo">
         <div class="pn"><span id="pname">ohhamza</span>
           <span class="pbadge">QA</span><span class="pbadge">OWNER</span>
@@ -276,12 +300,12 @@ a{color:inherit;text-decoration:none}
     <div class="stats">
       <div class="glass stat"><span class="v live" id="s-ccu">&mdash;</span><span class="k">playing now</span></div>
       <div class="glass stat"><span class="v" id="s-mm">69K</span><span class="k">members</span></div>
-      <div class="glass stat"><span class="v">$10M+</span><span class="k">traded</span></div>
+      <div class="glass stat"><span class="v">$1M+</span><span class="k">traded</span></div>
     </div>
 
     <!-- music player (official YouTube embed drives the real track) -->
     <div class="glass player" id="player">
-      <div class="art">
+      <div class="art" style="background-image:url('https://i.ytimg.com/vi/dzVbKrWvI9Y/hqdefault.jpg')">
         <span class="eq"><span></span><span></span><span></span><span></span></span>
       </div>
       <div class="pl-main">
@@ -309,7 +333,7 @@ a{color:inherit;text-decoration:none}
     var i=0; (function tick(){ el.textContent=text.slice(0,++i); if(i<text.length) setTimeout(tick,speed); else if(done) done(); })();
   }
   var typedEl=document.getElementById('typed'), bioEl=document.getElementById('bio');
-  type(typedEl,'hamza',110,function(){
+  type(typedEl,'Hamza',110,function(){
     type(bioEl,"breaking builds before your users do.",30);
   });
 
@@ -379,11 +403,12 @@ a{color:inherit;text-decoration:none}
         var ext=(u.avatar.indexOf('a_')===0)?'gif':'png';
         var url='https://cdn.discordapp.com/avatars/'+DISCORD_ID+'/'+u.avatar+'.'+ext+'?size=128';
         paEl.style.backgroundImage="url('"+url+"')";
+        var big=document.getElementById('ava'); if(big) big.style.backgroundImage="url('"+url.replace('size=128','size=256')+"')";
         if(paMono) paMono.style.display='none';
       }
       // avatar decoration (the animated frame)
       if(u.avatar_decoration_data && u.avatar_decoration_data.asset){
-        var deco=document.createElement('img'); deco.className='pa-deco'; deco.alt='';
+        var deco=paEl.querySelector('.pa-deco')||document.createElement('img'); deco.className='pa-deco'; deco.alt='';
         deco.src='https://cdn.discordapp.com/avatar-decoration-presets/'+u.avatar_decoration_data.asset+'.png?size=160';
         paEl.appendChild(deco);
       }
@@ -470,6 +495,16 @@ a{color:inherit;text-decoration:none}
 
   // pre-load the player so the first tap plays without waiting on the API
   loadYT();
+
+  /* 3D tilt that follows the pointer */
+  var card=document.querySelector('.card');
+  if(card && !reduce && matchMedia('(hover:hover)').matches){
+    addEventListener('mousemove',function(e){
+      var x=e.clientX/innerWidth-.5, y=e.clientY/innerHeight-.5;
+      card.style.transform='perspective(1100px) rotateY('+(x*7).toFixed(2)+'deg) rotateX('+(-y*7).toFixed(2)+'deg)';
+    });
+    document.addEventListener('mouseleave',function(){ card.style.transform=''; });
+  }
 })();
 </script>
 </body>
