@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hamza — Portfolio</title>
-<meta name="description" content="Hamza: co-owner of Ry's Middleman Services (69K members), founder of SAB Market, exploit QA tester on Steal A Seed. $1M+ middlemanned through the services I've managed.">
+<meta name="description" content="Hamza: co-owner of Ry's Middleman Services (69K members) and exploit QA tester on Steal A Seed. $1M+ middlemanned through the services I've managed.">
 <meta name="theme-color" content="#0D0B11">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://ohhamza.vercel.app/portfolio">
@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hamza">
 <meta property="og:url" content="https://ohhamza.vercel.app/portfolio">
 <meta property="og:title" content="Hamza — Portfolio">
-<meta property="og:description" content="Co-owner of Ry's Middleman Services (69K members), founder of SAB Market, exploit QA on Steal A Seed. $1M+ middlemanned through the services I've managed.">
+<meta property="og:description" content="Co-owner of Ry's Middleman Services (69K members) and exploit QA on Steal A Seed. $1M+ middlemanned through the services I've managed.">
 <meta property="og:image" content="https://ohhamza.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -151,6 +151,14 @@ img{max-width:100%;display:block}
 .c-sas .role,.c-sas .links a{color:var(--live)}
 .c-ntf .role,.c-ntf .links a{color:var(--pink)}
 .shot-ntf{background:#0B0712}
+/* sold / exited products: muted art, a SOLD badge, no outbound link */
+.case.sold .shot{cursor:default}
+.case.sold .shot img{filter:grayscale(.55) brightness(.8)}
+.case.sold:hover .shot img{transform:none}
+.case.sold h3{color:var(--text-2)}
+.role-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag-sold{font-family:var(--f-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text);background:var(--bg-3);border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;line-height:1}
+.sold-note{margin-top:22px;font-family:var(--f-mono);font-size:13px;color:var(--text-3)}
 
 /* also */
 .also{padding-block:0 clamp(64px,9vw,120px)}
@@ -240,8 +248,7 @@ footer a:hover{color:var(--text)}
         <p class="lead">I run Roblox trading communities &mdash; and I <em>break games</em> before they ship.</p>
         <ul class="roles">
           <li><span>Co-owner, <b>Ry's Middleman Services</b></span></li>
-          <li><span>Founder, <b>SAB Market</b></span></li>
-          <li><span>Owner, <b>SAB Notifier</b></span></li>
+          <li><span>Built &amp; sold, <b>SAB Market</b> + <b>SAB Notifier</b></span></li>
           <li><span>Exploit QA, <b>Steal A Seed</b></span></li>
         </ul>
         <div class="hero-cta">
@@ -291,36 +298,27 @@ footer a:hover{color:var(--text)}
         </div>
       </article>
 
-      <article class="case c-sab flip rise">
-        <a class="shot" href="https://sabmarketvalue.com/" target="_blank" rel="noopener">
+      <article class="case c-sab flip sold rise">
+        <div class="shot">
           <img src="/img/sab-banner.webp" alt="SAB Market Values banner art" width="1024" height="575" loading="lazy">
-        </a>
+        </div>
         <div>
-          <span class="role">Founder</span>
+          <div class="role-row"><span class="role">Founder</span><span class="tag-sold">Sold</span></div>
           <h3>SAB Market</h3>
-          <p>Values for Steal a Brainrot: what every brainrot is worth, kept up to date through every game update, so traders know a fair deal before they make one. It runs as a Discord server and as <b>sabmarketvalue.com</b>, with live exist counts and win / fair / loss trade checks.</p>
-          <ul class="facts">
-            <li><b data-live="mk">20K</b><span>members</span></li>
-            <li><b data-live="mk-on">2K</b><span>online now</span></li>
-          </ul>
-          <div class="links">
-            <a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">Join the server <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-            <a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-          </div>
+          <p>I built SAB Market, a values hub for Steal a Brainrot: what every brainrot is worth, kept current through every game update, with live exist counts and win / fair / loss trade checks on <b>sabmarketvalue.com</b>. I grew it to 20,000 members, then sold it.</p>
+          <p class="sold-note">No longer mine &mdash; sold.</p>
         </div>
       </article>
 
-      <article class="case c-ntf rise">
-        <a class="shot shot-ntf" href="https://sabnotifier.net/" target="_blank" rel="noopener">
+      <article class="case c-ntf sold rise">
+        <div class="shot shot-ntf">
           <img src="/img/notifier-og.webp" alt="SAB Notifier: every OG claim, live. Track any player, privately." width="1200" height="630" loading="lazy">
-        </a>
+        </div>
         <div>
-          <span class="role">Owner</span>
+          <div class="role-row"><span class="role">Owner</span><span class="tag-sold">Sold</span></div>
           <h3>SAB Notifier</h3>
-          <p>A live feed of every OG brainrot claim in Steal a Brainrot, free for anyone to browse. On top of that, private player tracking: add a player and get pinged <b>the moment they join</b> the game.</p>
-          <div class="links">
-            <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-          </div>
+          <p>I built SAB Notifier: a live feed of every OG brainrot claim in Steal a Brainrot, free to browse, plus private player tracking that pinged you <b>the moment a tracked player joined</b> the game. I ran it, then sold it.</p>
+          <p class="sold-note">No longer mine &mdash; sold.</p>
         </div>
       </article>
 
@@ -353,7 +351,7 @@ footer a:hover{color:var(--text)}
         </div>
         <div class="skills">
           <div><h3>Discord bots</h3><p>I write my own: tickets, automation, value lists and moderation tools.</p></div>
-          <div><h3>Moderation &amp; anti-scam</h3><p>Automod, raid response and scammer bans across both servers.</p></div>
+          <div><h3>Moderation &amp; anti-scam</h3><p>Automod, raid response and scammer bans across the servers I run.</p></div>
           <div><h3>Growing communities</h3><p>Grew a server past 69,000 members and kept it running smoothly.</p></div>
           <div><h3>Vibecoding</h3><p>Decent, not a pro. I get my own tools built and working.</p></div>
         </div>
@@ -369,8 +367,7 @@ footer a:hover{color:var(--text)}
         <ul class="reach">
           <li><span class="k">Discord</span><a class="v" href="https://discord.com/users/801691377796120577" target="_blank" rel="noopener">@ohhamza &rarr;</a></li>
           <li><span class="k">User ID</span><button class="v" type="button" data-copy="801691377796120577">801691377796120577 <span class="cl">(copy)</span></button></li>
-          <li><span class="k">Sites</span><span class="v"><a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com</a> &middot; <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net</a></span></li>
-          <li><span class="k">Servers</span><span class="v"><a href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">sabmiddleman</a> &middot; <a href="https://discord.gg/sabvalue" target="_blank" rel="noopener">sabvalue</a></span></li>
+          <li><span class="k">Server</span><span class="v"><a href="https://discord.gg/sabmiddleman" target="_blank" rel="noopener">sabmiddleman</a></span></li>
         </ul>
       </div>
       <form class="form rise" id="form" novalidate>
@@ -392,7 +389,7 @@ footer a:hover{color:var(--text)}
 <footer>
   <div class="wrap">
     <span>&copy; 2026 Hamza</span>
-    <span><a href="/">Profile</a> &nbsp;&middot;&nbsp; <a href="https://rysmm.com/" target="_blank" rel="noopener">rysmm.com</a> &nbsp;&middot;&nbsp; <a href="https://sabmarketvalue.com/" target="_blank" rel="noopener">sabmarketvalue.com</a> &nbsp;&middot;&nbsp; <a href="https://sabnotifier.net/" target="_blank" rel="noopener">sabnotifier.net</a> &nbsp;&middot;&nbsp; <a href="#top">Back to top</a></span>
+    <span><a href="/">Profile</a> &nbsp;&middot;&nbsp; <a href="https://rysmm.com/" target="_blank" rel="noopener">rysmm.com</a> &nbsp;&middot;&nbsp; <a href="#top">Back to top</a></span>
   </div>
 </footer>
 
@@ -417,7 +414,7 @@ footer a:hover{color:var(--text)}
   }
 
   /* live Discord counts (members + online) */
-  [['sabmiddleman','mm'],['sabvalue','mk']].forEach(function(p){
+  [['sabmiddleman','mm']].forEach(function(p){
     fetch('https://discord.com/api/v10/invites/'+p[0]+'?with_counts=true',{cache:'no-store'})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(j){
